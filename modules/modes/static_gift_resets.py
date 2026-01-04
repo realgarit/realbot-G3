@@ -30,8 +30,8 @@ from .util import (
     wait_until_task_is_not_active,
     wait_for_no_script_to_run,
 )
-from ..battle_state import EncounterType
-from ..memory import get_event_var
+from modules.battle.battle_state import EncounterType
+from modules.game.memory import get_event_var
 
 
 def _get_targeted_encounter() -> tuple[MapFRLG | MapRSE, tuple[int, int], str] | None:

@@ -10,9 +10,9 @@ from modules.pokemon.pokemon_party import get_party, get_party_size
 from . import BattleAction
 from ._interface import BotMode, BotModeError
 from .util import navigate_to, wait_for_player_avatar_to_be_standing_still
-from ..battle_strategies import BattleStrategy
-from ..battle_strategies.lose_on_purpose import LoseOnPurposeBattleStrategy
-from ..encounter import EncounterInfo
+from modules.battle.battle_strategies import BattleStrategy
+from modules.battle.battle_strategies.lose_on_purpose import LoseOnPurposeBattleStrategy
+from modules.pokemon.encounter import EncounterInfo
 
 
 class NuggetBridgeMode(BotMode):

@@ -32,8 +32,8 @@ from .util import (
     repel_is_active,
     wait_for_no_script_to_run,
 )
-from ..battle_strategies import BattleStrategy
-from ..encounter import handle_encounter, EncounterInfo
+from modules.battle.battle_strategies import BattleStrategy
+from modules.pokemon.encounter import handle_encounter, EncounterInfo
 
 
 @debug.track

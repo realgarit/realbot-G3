@@ -10,15 +10,15 @@ from ._interface import BotMode, BotModeError
 from .util import change_lead_party_pokemon
 from .util.map import map_has_pokemon_center_nearby
 from .util.pokecenter_loop import PokecenterLoopController
-from ..battle_state import BattleOutcome
-from ..battle_strategies import BattleStrategy
-from ..battle_strategies.level_balancing import LevelBalancingBattleStrategy
-from ..battle_strategies.level_up import LevelUpLeadBattleStrategy
-from ..encounter import EncounterInfo
-from ..gui.multi_select_window import ask_for_choice, Selection, ask_for_confirmation
-from ..pokemon import pokemon_has_usable_damaging_move
-from ..runtime import get_sprites_path
-from ..sprites import get_sprite
+from modules.battle.battle_state import BattleOutcome
+from modules.battle.battle_strategies import BattleStrategy
+from modules.battle.battle_strategies.level_balancing import LevelBalancingBattleStrategy
+from modules.battle.battle_strategies.level_up import LevelUpLeadBattleStrategy
+from modules.pokemon.encounter import EncounterInfo
+from modules.gui.multi_select_window import ask_for_choice, Selection, ask_for_confirmation
+from modules.pokemon.pokemon import pokemon_has_usable_damaging_move
+from modules.core.runtime import get_sprites_path
+from modules.game.sprites import get_sprite
 
 
 class LevelGrindMode(BotMode):

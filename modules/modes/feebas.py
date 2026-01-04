@@ -18,9 +18,9 @@ from .util import (
     navigate_to,
     register_key_item,
 )
-from ..clock import ClockTime, get_clock_time
-from ..encounter import EncounterInfo
-from ..memory import get_event_flag
+from modules.game.clock import ClockTime, get_clock_time
+from modules.pokemon.encounter import EncounterInfo
+from modules.game.memory import get_event_flag
 
 # How many times the bot tries to fish on the same tile before it deems it
 # a non-Feebas tile and moves on.

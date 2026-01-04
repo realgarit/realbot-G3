@@ -20,7 +20,7 @@ from .util import (
     wait_for_unique_rng_value,
     wait_until_task_is_active,
 )
-from ..battle_state import EncounterType
+from modules.battle.battle_state import EncounterType
 
 
 class GameCornerMode(BotMode):

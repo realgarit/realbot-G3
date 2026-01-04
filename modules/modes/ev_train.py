@@ -13,11 +13,11 @@ from modules.pokemon.pokemon_party import get_party
 from ._interface import BotMode, BotModeError
 from .util import navigate_to, heal_in_pokemon_center, spin
 from .util.map import map_has_pokemon_center_nearby, find_closest_pokemon_center
-from ..battle_state import BattleOutcome
-from ..battle_strategies import BattleStrategy, DefaultBattleStrategy
-from ..console import console
-from ..encounter import handle_encounter, EncounterInfo
-from ..gui.ev_selection_window import ask_for_ev_targets
+from modules.battle.battle_state import BattleOutcome
+from modules.battle.battle_strategies import BattleStrategy, DefaultBattleStrategy
+from modules.core.console import console
+from modules.pokemon.encounter import handle_encounter, EncounterInfo
+from modules.gui.ev_selection_window import ask_for_ev_targets
 
 _list_of_stats = ("hp", "attack", "defence", "special_attack", "special_defence", "speed")
 

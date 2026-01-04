@@ -1,6 +1,7 @@
 # Copyright (c) 2026 realgarit
 from collections import deque
-from tkinter import Button, PhotoImage, Tk
+from tkinter import Button, PhotoImage, Tk, Canvas, ttk
+from typing import Union
 
 import PIL.Image
 import PIL.ImageTk
@@ -17,6 +18,7 @@ from modules.gui.debug_tabs import *
 from modules.gui.emulator_controls import DebugEmulatorControls, EmulatorControls
 from modules.game.sprites import generate_placeholder_image
 from modules.core.version import realbot_name, realbot_version
+from modules.core.context import context
 
 
 # Defines how many frames can be reverted at the most in stepping mode.
@@ -33,7 +35,7 @@ class EmulatorScreen:
             )
 
         self.window = window
-        self.frame: Union[ttk.Frame, None] = None
+
         self.canvas: Union[Canvas, None] = None
         self.current_canvas_image: Union[PhotoImage, None] = None
         self._current_canvas_image_id: int | None = None

@@ -17,9 +17,9 @@ from ._asserts import (
 )
 from ._interface import BotMode, BotModeError
 from .util import ensure_facing_direction, navigate_to, mount_bicycle, follow_waypoints
-from ..battle_strategies import BattleStrategy
-from ..battle_strategies.lose_on_purpose import LoseOnPurposeBattleStrategy
-from ..map_path import calculate_path, Direction
+from modules.battle.battle_strategies import BattleStrategy
+from modules.battle.battle_strategies.lose_on_purpose import LoseOnPurposeBattleStrategy
+from modules.map.map_path import calculate_path, Direction
 
 
 class KecleonMode(BotMode):

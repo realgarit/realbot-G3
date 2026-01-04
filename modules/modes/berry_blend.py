@@ -9,10 +9,10 @@ from modules.core.context import context
 from . import BotModeError
 from ._interface import BotMode
 from .util import scroll_to_item_in_bag
-from ..gui.multi_select_window import Selection, ask_for_choice_scroll
-from ..map_data import MapRSE
-from ..memory import get_game_state, GameState, get_game_state_symbol, read_symbol, unpack_uint32, unpack_uint16
-from ..runtime import get_sprites_path
+from modules.gui.multi_select_window import Selection, ask_for_choice_scroll
+from modules.map.map_data import MapRSE
+from modules.game.memory import get_game_state, GameState, get_game_state_symbol, read_symbol, unpack_uint32, unpack_uint16
+from modules.core.runtime import get_sprites_path
 
 
 class BerryBlendMode(BotMode):

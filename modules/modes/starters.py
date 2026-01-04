@@ -23,7 +23,7 @@ from .util import (
     wait_until_task_is_active,
     wait_until_task_is_not_active,
 )
-from ..battle_state import get_main_battle_callback, EncounterType
+from modules.battle.battle_state import get_main_battle_callback, EncounterType
 
 
 def run_frlg() -> Generator:
