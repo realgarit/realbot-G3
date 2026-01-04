@@ -28,23 +28,17 @@ Visit the [wiki](wiki/Readme.md) for information:
 |-------------------------------------|------------------------------------|
 | ![image](wiki/images/pk3_files.png) | ![image](wiki/images/http_api.png) |
 
-# ❤ Attributions
+# Credits
 
-Based on:
+RealBot G3 uses code, data and libraries from:
 
-- [PokéBot Gen3](https://github.com/40Cakes/pokebot-gen3) by 40_Cakes
-
-Core functionality:
-
+- [PokéBot Gen3](https://github.com/40Cakes/pokebot-gen3)
 - [mGBA](https://github.com/mgba-emu/mgba)
 - [libmgba-py](https://github.com/hanzi/libmgba-py/)
+- [Pokémon Emerald decompilation](https://github.com/pret/pokeemerald)
+- [Pokémon Ruby and Sapphire decompilation](https://github.com/pret/pokeruby)
+- [Pokémon FireRed and LeafGreen decompilation](https://github.com/pret/pokefirered)
 
-Other awesome PokéBot projects:
+## Related Projects
 
 - [PokéBot NDS](https://github.com/wyanido/pokebot-nds/)
-
-Decompiled symbol tables and other various data from the following projects:
-
-- [Pokémon Emerald decompilation](https://github.com/pret/pokeemerald) ([symbols](https://github.com/pret/pokeemerald/tree/symbols))
-- [Pokémon Ruby and Sapphire decompilation](https://github.com/pret/pokeruby) ([symbols](https://github.com/pret/pokeruby/tree/symbols))
-- [Pokémon FireRed and LeafGreen decompilation](https://github.com/pret/pokefirered) ([symbols](https://github.com/pret/pokefirered/tree/symbols))

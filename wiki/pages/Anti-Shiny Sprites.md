@@ -2,7 +2,7 @@
 
 # 💀 Anti Shiny Sprites
 
-**Anti-shinies are not official, they are simply a fan made concept from the original PokéBot Gen3 stream.**
+**Anti-shinies are a fan-made concept implemented in RealBot G3.**
 
 Pokémon that are anti-shiny are the complete opposite of a shiny. Normal shinies have a shiny value (SV) of `0` - `7` (the 8 lowest SV values), while anything with a SV of `65,528` - `65,535` (the 8 highest SV values) is anti-shiny.
 

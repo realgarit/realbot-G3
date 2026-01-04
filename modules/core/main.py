@@ -51,7 +51,7 @@ def main_loop() -> None:
         # loaded at this point where the profile has been loaded and so the full config is
         # available.
         #
-        # Regular (user-provided) plugins need to be loaded in `pokebot.py` as early as possible
+        # Regular (user-provided) plugins need to be loaded in `realbot.py` as early as possible
         # because they might add bot modes.
         load_built_in_plugins()
         plugin_profile_loaded(context.profile)

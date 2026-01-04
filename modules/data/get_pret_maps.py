@@ -7,7 +7,7 @@ So the directory structure should be something like:
 
 ```
 /
-    /pokebot-gen3
+    /realbot-g3
     /pokeemerald
     /pokefirered
 ```

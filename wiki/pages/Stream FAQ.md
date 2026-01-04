@@ -1,6 +1,6 @@
 🏠 [`realbot-g3` Wiki Home](../Readme.md)
 
-**Note:** This page contains historical information from the original PokéBot Gen3 stream by 40 Cakes, which RealBot G3 is based on.
+**Note:** This page contains historical information regarding the challenges this bot was originally built for.
 
 **If you're on desktop, use CTRL+F to search for keywords related to your question!** For example, if you're wondering about something related to breeding, you could search `breed` or `egg`. Many mobile browsers also have search features in their menus.
 
@@ -144,7 +144,7 @@ Repel tricking works with both `spin` and `bunny hop` bot modes, so we can eithe
 **No**, the bot will not check if the eggs are shiny and hatch only those. All eggs will be hatched and the SV will be hidden from viewers.
 
 ### Will the bot breed Mudkip pre-evolutions?
-**Yes**. However, 40 Cakes forgot we needed a female shiny Mudkip to breed Mudkip without Ditto, and this was realised so far in that it was decided we wouldn't reset. Because of this, **Mudkip and Marshtomp will be accuired post-game**, when Ditto is available.
+**Yes**. Mudkip and Marshtomp will be acquired post-game.
 
 ### Will the bot use emulator speedup/throttling?
 **No**. ​Some people in the Discord run the bot unthrottled, but we obey the laws of time and physics in this stream.
@@ -229,5 +229,5 @@ Feebas is a **50% encounter** once you find the tile.
 Tiles change when the Trendy Phrase is changed¹, so once the bot finds a tile it'll have time to stick with it.
   - _¹ There is conflicting information online surrounding Feebas tiles changing without manually changing the Trendy Phrase. No matter when this is, it'll be fine._
 
-### How long until 40 Cakes makes another video?
+### How long until the next video?
 ![](https://cdn.betterttv.net/emote/5d61b1b14932b21d9c332f1b/3x.webp)

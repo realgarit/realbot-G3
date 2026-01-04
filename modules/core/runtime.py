@@ -19,7 +19,7 @@ def is_virtualenv() -> bool:
 
 def get_base_path() -> Path:
     """
-    :return: A `Path` object to the base directory of the bot (where `pokebot.py` or `pokebot.exe`
+    :return: A `Path` object to the base directory of the bot (where `realbot.py` or `realbot.exe`
              are located.)
     """
     if is_bundled_app():

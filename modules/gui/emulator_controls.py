@@ -73,7 +73,7 @@ class EmulatorControls:
             command=lambda: webbrowser.open_new_tab("https://github.com/realgar/realbot-g3/tree/main/wiki"),
         )
         self.help_menu.add_command(
-            label="Discord #pokebot-gen3-support",
+            label="Discord Support",
             command=lambda: webbrowser.open_new_tab(
                 "https://discord.com/channels/1057088810950860850/1139190426834833528"
             ),

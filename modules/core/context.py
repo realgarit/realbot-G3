@@ -7,7 +7,7 @@ from modules.config import Config
 from modules.core.runtime import get_base_path
 
 if TYPE_CHECKING:
-    from modules.gui import PokebotGui
+    from modules.gui import RealbotGui
     from modules.game.libmgba import LibmgbaEmulator
     from modules.modes import BotListener, BotMode
     from modules.core.profiles import Profile
@@ -44,7 +44,7 @@ class BotContext:
         self.config = Config()
 
         self.emulator: Optional["LibmgbaEmulator"] = None
-        self.gui: Optional["PokebotGui"] = None
+        self.gui: Optional["RealbotGui"] = None
         self.profile: Optional["Profile"] = None
         self.stats: Optional["StatsDatabase"] = None
         self.debug: bool = False

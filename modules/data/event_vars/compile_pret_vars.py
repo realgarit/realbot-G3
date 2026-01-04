@@ -4,8 +4,8 @@ This needs to be run inside the pret decomp project, in the `include/constants/`
 Something like:
 ```
     cd /path/to/pokefire/include/constants
-    python /path/to/pokebot-gen3/modules/data/event_vars/compile_pret_vars.py > \
-        /path/to/pokebot-gen3/modules/data/event_vars/pret_frlg.txt
+    python /path/to/realbot-g3/modules/data/event_vars/compile_pret_vars.py > \
+        /path/to/realbot-g3/modules/data/event_vars/pret_frlg.txt
 ```
 Since it's invoking `gcc`, this will probably only work on Linux or in WSL.
 """

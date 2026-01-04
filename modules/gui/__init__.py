@@ -22,7 +22,7 @@ from modules.core.runtime import get_data_path
 from modules.core.version import realbot_name, realbot_version
 
 if TYPE_CHECKING:
-    from pokebot import StartupSettings
+    from realbot import StartupSettings
     from modules.core.profiles import Profile
 
 
