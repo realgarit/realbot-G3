@@ -4,94 +4,57 @@
 
 [`profiles/discord.yml`](../../modules/config/templates/discord.yml)
 
-With Discord integrations, you can receive shiny notifications, phase stats and milestones and more.
+You can use Discord integration to get shiny notifications, phase stats, and milestone updates.
 
-For privacy reasons, rich presence and webhooks are all **disabled** by default.
+For privacy, all webhooks and rich presence features are **disabled** by default.
 
-## Discord rich presence
-`rich_presence` - display information on your Discord profile such as game, route, total encounters, total shinies and encounter rate. Discord must be installed and signed in on the computer that is running the bot, and should only be enabled for a single bot profile.
+## Discord Rich Presence
+- `rich_presence`: Show your bot status on your Discord profile (game, route, encounter count, etc.).
+  - Discord needs to be running on the same PC.
+  - Only enable this for one bot profile at a time to avoid conflicts.
 
-## Discord webhooks
-`global_webhook_url` - global Discord webhook URL, default webhook for all Discord webhooks unless specified otherwise
-- Generate a new webhook: **Edit Channel** > **Integrations** > **Webhooks** > **New Webhook** > **Give it any name such as `RealBot G3` and a picture** > **Copy Webhook URL**
-- ⚠ **Warning**: this webhook is considered sensitive! If you leak your webhook, anyone will be able to post in your channel
+## Discord Webhooks
+- `global_webhook_url`: The main URL for your Discord webhook.
+  - To make one: **Edit Channel** > **Integrations** > **Webhooks** > **New Webhook**.
+  - ⚠ **Warning**: Keep this URL secret so others can't post to your channel.
 
-`delay` - seconds (`int`) to delay Discord webhooks before posting (useful to prevent livestream spoilers)
+- `delay`: Number of seconds to wait before posting. Good for avoiding spoilers on stream.
 
-`bot_id` - set to any string you want, this string is added to the footer of all Discord messages, it can be useful to identify bots if multiple are set to post in the same channel
+- `bot_id`: A custom string added to the footer of messages. Useful if you have multiple bots running and want to tell them apart.
 
-### Webhook parameters
-`enable` - toggle the webhook on/off
+### Webhook Parameters
+- `enable`: Turn the specific webhook on or off.
 
-`webhook_url` - set to post specific message types to different channels, defaults to `global_webhook_url` if not set
-- Commented out in config file by default, remove the leading `#` to uncomment
+- `webhook_url`: Use a different URL for specific message types (overrides the global one).
+  - Uncomment the line in the config file to use it.
 
-Each webhook type also supports pinging @users or @roles.
+- `ping_mode`: Set to `user` or `role` to ping someone. Leave blank to disable pings.
 
-`ping_mode` - set to `user` or `role`
-- Leave blank to disable pings
+- `ping_id`: The ID of the user or role to ping.
+  - You need Developer Mode enabled in Discord to copy this ID (Right click user/role > **Copy ID**).
 
-`ping_id` - set to user/role ID
-- **Settings** > **Advanced** > Enable **Developer Mode** to enable Discord developer mode
-- Right click **user/role** > **Copy ID**
+### Webhook Types
+- `shiny_pokemon_encounter`: Posts when a shiny Pokémon appears.
 
-### Webhook types
-`shiny_pokemon_encounter` - Post shiny Pokémon encounters
+- `blocked_shiny_encounter`: Posts when a shiny appears but is skipped because it's on your block list.
 
-![image](../images/discord_config_shiny_encounter.png)
+- `pokemon_encounter_milestones`: Posts every `interval` encounters (e.g., every 1,000 encounters).
 
-***
+- `shiny_pokemon_encounter_milestones`: Posts every `interval` shiny encounters.
 
-`blocked_shiny_encounter` - Post encounters that are shiny, but have not been caught because they're on the block list
+- `total_encounter_milestones`: Posts when the total encounter count hits a milestone.
 
-***
+- `phase_summary`: Posts a summary of the current phase.
+  - First post at `first_interval`, then every `consequent_interval` after that.
+  - Useful for keeping track of long hunts.
 
-`pokemon_encounter_milestones` - Post Pokémon encounter milestones messages every `interval` encounters
+- `anti_shiny_pokemon_encounter`: Posts "anti-shiny" encounters.
+  - These are Pokémon with an SV that is mathematically the opposite of a shiny (65,528 to 65,535). Just for fun.
 
-![image](../images/discord_config_milestones.png)
+- `custom_filter_pokemon_encounter`: Posts encounters that match your custom catch filters.
 
-***
+- `pickup`: Posts when the Pickup ability grabs an item.
+  - Summarizes items every `interval` new items.
 
-`shiny_pokemon_encounter_milestones` - Post shiny Pokémon encounter milestones every `interval` encounters
-
-![image](../images/discord_config_shiny_milestone.png)
-
-***
-
-`total_encounter_milestones` - Post total encounter milestones every `interval` encounters
-
-![image](../images/discord_config_total_milestone.png)
-
-***
-
-`phase_summary` - Post phase summary, first summary at `first_interval`, then every `consequent_interval` after that
-
-![image](../images/discord_config_phase_summary.png)
-
-***
-
-`anti_shiny_pokemon_encounter` - Post anti-shiny Pokémon encounters
-- Anti-shinies are just a bit of fun, they are mathematically, the complete opposite of a shiny
-- An [SV](https://bulbapedia.bulbagarden.net/wiki/Personality_value#Shininess) of `65,528` to `65,535` is considered anti-shiny
-
-![image](../images/discord_config_anti_shiny.png)
-
-***
-
-`custom_filter_pokemon_encounter` - Custom catch filter encounters
-
-![image](../images/discord_config_custom_filter.png)
-
-***
-
-`pickup` - Post Pickup notification + summary of items every `interval` new items
-
-![image](../images/discord_config_pickup.png)
-
-
-***
-
-`tcg_cards` - Post a copy of new [TCG cards](Console,%20Logging%20and%20Image%20Config.md#tcg-cards)
-
-![image](../images/tcg_example.png)
+- `tcg_cards`: Posts a TCG card image corresponding to the Pokémon you encountered.
 

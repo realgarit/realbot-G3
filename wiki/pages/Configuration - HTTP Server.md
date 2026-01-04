@@ -28,5 +28,3 @@ It also allows remote-controlling the bot.
 The following pages are available if the HTTP server is enabled:
 - Test/example UI: [http://127.0.0.1:8888/](http://127.0.0.1:8888/)
 - Swagger UI (API Documentation): [http://127.0.0.1:8888/docs/](http://127.0.0.1:8888/docs/)
-
-![image](../images/http_api.png)

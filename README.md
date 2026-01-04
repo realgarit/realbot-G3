@@ -1,36 +1,24 @@
 # RealBot G3
 [![Wiki](wiki/images/badge_wiki.svg)](wiki/Readme.md) [![Python 3.12](wiki/images/badge_python.svg)](https://www.python.org/downloads/release/python-3132/) [![Code Formatting](wiki/images/badge_black.svg)](https://github.com/psf/black)
 
-**RealBot G3** is a shiny hunting bot, written in Python that runs `libmgba` + mGBA Python bindings under the hood. Pokémon Ruby, Sapphire, Emerald, FireRed and LeafGreen are supported.
+**RealBot G3** is a shiny hunting bot for Gen 3. It's built with Python and uses `libmgba` under the hood. It supports Ruby, Sapphire, Emerald, FireRed, and LeafGreen.
 
 # ❓ Getting Started
 
-Visit the [wiki](wiki/Readme.md) for information:
+Check out the [wiki](wiki/Readme.md) for the details:
 - ❓ [Getting Started](wiki/pages/Getting%20Started.md)
 - 🎮 [Emulator Input Mapping](wiki/pages/Configuration%20-%20Key%20Mappings.md)
 - 🔎 [Pokémon by Bot Mode](wiki/pages/Pokemon%20By%20Bot%20Mode.md)
 
 # 😎 Showcase
 
-|              Main interface              |              Load save state              |              Debug mode              |
-|:----------------------------------------:|:-----------------------------------------:|:------------------------------------:|
-| ![image](wiki/images/main_interface.png) | ![image](wiki/images/load_save_state.png) | ![image](wiki/images/debug_mode.png) |
+**(Pictures in progress)**
 
-| Shiny encounter GIFs            | 
-|---------------------------------|
-| ![image](wiki/images/shiny.gif) |
-
-|             Discord shiny notifications              |              Discord phase stats              |              Discord milestones              |
-|:----------------------------------------------------:|:---------------------------------------------:|:--------------------------------------------:|
-| ![image](wiki/images/discord_shiny_notification.png) | ![image](wiki/images/discord_phase_stats.png) | ![image](wiki/images/discord_milestones.png) |
-
-| Automatically saves PKHeX .pk3 file | HTTP API                           |
-|-------------------------------------|------------------------------------|
-| ![image](wiki/images/pk3_files.png) | ![image](wiki/images/http_api.png) |
+We're currently reworking the UI, so check back later for new screenshots.
 
 # Credits
 
-RealBot G3 uses code, data and libraries from:
+RealBot G3 uses code and data from:
 
 - [PokéBot Gen3](https://github.com/40Cakes/pokebot-gen3)
 - [mGBA](https://github.com/mgba-emu/mgba)

@@ -2,35 +2,30 @@
 
 # 🎥 OBS and HTTP Server Config
 
+> [!NOTE]
+> 🚧 **Work in Progress**: Stream integrations are currently being reworked. The settings below might change.
+
 [`profiles/obs.yml`](../../modules/config/templates/obs.yml)
 
-This configuration can be used to drive stream overlays and web UIs.
+You can use this to set up stream overlays and web UIs.
 
-## OBS
-### OBS WebSocket Server Settings
-The `obs_websocket` config will allow the bot to send commands to OBS via WebSockets,
-see [here](https://github.com/obsproject/obs-websocket) for more information on OBS WebSockets.
+## OBS Settings
+### OBS WebSocket
+The `obs_websocket` config lets the bot talk to OBS. Check out [obs-websocket](https://github.com/obsproject/obs-websocket) if you need more info on how that works.
 
 Enable WebSockets in **OBS** > **Tools** > **Websocket Server Settings** > **Enable WebSocket Server**
 
-`host` - hostname/IP address OBS WebSockets is listening on
+- `host`: The IP address for OBS WebSockets.
+- `port`: The port it's listening on.
+- `password`: The password you set for the server (**required**).
 
-`port` - TCP port OBS WebSockets is listening on
-
-`password` - password to authenticate to WebSocket server (**required**)
-
-### OBS WebSocket Parameters
-`shiny_delay` - delay catching a shiny encounter by `n` frames, useful to give you viewers some time to react before saving a replay
-
-`discord_delay` - delay Discord webhooks by `n` seconds, prevent spoilers if there is a stream delay
-
-`screenshot` - take OBS screenshot of shiny encounter
-- Screenshot is taken after `shiny_delay` to allow stream overlays to update
-
-`replay_buffer` - save OBS replay buffer after `replay_buffer_delay`
-
-`replay_buffer_delay` - delay saving OBS replay buffer by `n` seconds
-- Runs in a separate thread and will not pause main bot thread
-- If the replay buffer is long enough, it will also capture some encounters after the shiny encounter
-
-`discord_webhook_url` - Discord webhook URL to post OBS `screenshot`, after a shiny encounter
+### WebSocket Options
+- `shiny_delay`: Delays the shiny catch logic by `n` frames. Good for giving viewers a moment to react before you save a replay.
+- `discord_delay`: Delays Discord webhooks by `n` seconds. Helps avoid spoilers if your stream has a delay.
+- `screenshot`: Takes a screenshot of the encounter.
+  - This happens after `shiny_delay` so overlays have time to update.
+- `replay_buffer`: Saves the OBS replay buffer.
+- `replay_buffer_delay`: Delays saving the replay buffer by `n` seconds.
+  - Runs in the background so it won't pause the bot.
+  - If the buffer is long enough, you might catch the moments after the encounter too.
+- `discord_webhook_url`: The URL to post the `screenshot` to after a shiny appearing.

@@ -7,7 +7,7 @@ Welcome to the [`realbot-g3`](https://github.com/realgar/realbot-g3) wiki!
 - 🌍 [Supported Games and Languages](pages/Supported%20Games%20and%20Languages.md)
 - 🔎 [Pokémon by Bot Mode](pages/Pokemon%20By%20Bot%20Mode.md)
 - 🆘 [Report an Issue](pages/Report%20an%20Issue.md)
-- ✨ [Stream FAQ](pages/Stream%20FAQ.md)
+- ❓ [General FAQ](pages/FAQ.md)
 
 ### Shiny Hunting Optimisations
 - [General Tips & Tricks](pages/Optimisations%20-%20General%20Tips%20&%20Tricks.md)
