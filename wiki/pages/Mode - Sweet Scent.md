@@ -1,33 +1,20 @@
-🍂 [`realbot-g3` Wiki Home](../README.md)
+🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 🔄 Sweet Scent Mode
+# 🔄 Sweet Scent
 
-Sweet Scent will make a wild Pokémon automatically appear.
+This mode uses the move **Sweet Scent** to immediately trigger a wild encounter. 
 
-Make sure you have a Pokémon that knows **[Sweet Scent](<https://bulbapedia.bulbagarden.net/wiki/Sweet_Scent_(move)>)** in your party.
+It's one of the fastest ways to hunt because you don't have to spend any time walking or spinning around. It also doesn't count as taking steps, so it's perfect for the Safari Zone.
 
-Start the mode while in the overworld, in any patch of grass/water/cave with encounters.
+## How to use it
+1. Make sure one of the Pokémon in your party knows **Sweet Scent**.
+2. Stand in a patch of grass, on the water, or in a cave.
+3. Start the bot and pick **Sweet Scent** mode.
 
-## Safari Zone
-
-### Ruby / Sapphire / Emerald
-The `auto_catch` Safari strategy for `Ruby` / `Sapphire` / `Emerald` is designed using an in-depth
-[study](https://www.docdroid.net/oiHhrwd/hoenn-safari-zone-research-pdf), which calculate the most effective Pokéblock and Safari ball sequence for catching a Pokémon based on the Pokémon encountered.
-The bot will use your Pokéblock case if you have some available to perform the strategy, or throw balls until the target is captured.
-
-### Fire Red / Leaf Green
-
-The `auto_catch` Safari strategy for `Fire Red` and `Leaf Green` is designed using an in-depth
-[study](https://www.docdroid.net/Tx5NbeU/safari-zone-research-pdf),
-which calculate the most effective sequence for catching a Pokémon based on both the Pokémon encountered and
-the number of Safari Balls remaining at the start of the encounter.
-The bot will use the best possible bait / ball strategy until the target is captured.
-
-The bot uses optimal catch patterns, which are available in these
-[lookup tables](https://www.docdroid.net/g3I5Qtl/frlg-lookup-tables-pdf), to maximize catch rates for each Pokémon.
+## Safari Zone Strategy
+If you use this mode in the Safari Zone, the bot will use its specialized catch strategy to make sure you have the best chance of catching your target. See the [Safari Mode](Mode%20-%20Safari.md) page for more details on how this works.
 
 ## Game Support
-
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald | 🔥 FireRed | 🌿 LeafGreen |
 |:---------|:-------:|:-----------:|:----------:|:----------:|:------------:|
 | English  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
@@ -37,8 +24,4 @@ The bot uses optimal catch patterns, which are available in these
 | French   |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 | Italian  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

@@ -1,75 +1,31 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 💊 EV Train Mode
+# 💊 EV Train
 
-This mode will continuously fight battles in order to EV Train your lead Pokémon.
-If the lead is unable to battle, the mode will swap to another mon in the party if
-that is enabled in the profile battle settings (see
-[⚔ Battling and Pickup config](Configuration%20-%20Battling%20and%20Pickup.md)).
-This is useful for training weak mons, but keep in mind it will alter the EVs of
-the mon switched to. The mode only tracks the lead's EVs and does not switch the
-lead outside of battle.
+This mode automatically fights wild Pokémon to EV train your lead Pokémon.
 
-When the active Pokémon is defeated or gets low on HP, it will heal at the nearest
-Pokémon Center automatically. Likewise, if your entire party gets defeated it will
-just return to the Tall Grass spot you've picked. So this mode should be pretty much
-hands-off.
+The bot tracks the EVs for your lead Pokémon and will automatically run back to the nearest Pokémon Center to heal if your team gets low on HP. It's completely hands-off.
 
-Should this mode encounter a Shiny or a Pokémon that matches your custom catch filters,
-it will **not** battle it but instead either catch it automatically (if auto-catching is
-enabled in your configuration) or put the bot back into manual mode. So you don't have to
-worry about missing out on a Shiny.
+## What about Shinies?
+If the bot runs into a shiny or something that matches your custom filters, it will stop fighting. It'll either catch it for you (if you have auto-catch on) or stop the bot so you can take over. You won't miss out on any shinies while training.
 
+## How to use it
+1. Stand in a patch of tall grass on one of the supported routes (see the list below).
+2. Make sure you can walk directly from that spot to a Pokémon Center without going into any other buildings (like caves or tunnels).
+3. Start the bot and select **EV Train** mode.
+4. Enter the EV numbers you want in the window that pops up.
 
-## Instructions
+If the mode isn't available to select, it just means that specific route isn't supported yet.
 
-Start this mode while standing somewhere in tall grass that has a _direct_ overworld
-connection to a Pokémon Center (i.e. it must be possible to walk to the PC without
-going through any buildings.)
+## Supported Routes
 
-If the mode is not available for selection, that means that this route is not supported.
-Try another route that has an easy overland path to a Pokémon Center.
+### FireRed and LeafGreen
+- Routes 1, 2, 3, 4, 6, 7, 9, 10, 11, 18, 22, and 24.
 
-After selecting the mode, enter the desired EV spread in the GUI window. 
-
-![image](../images/EV_Train.png)
-
-## FireRed and LeafGreen
-
-The following routes are supported:
-
-- Route 1
-- Route 2
-- Route 3
-- Route 4
-- Route 6
-- Route 7
-- Route 9
-- Route 10
-- Route 11
-- Route 18
-- Route 22
-- Route 24
-
-## Emerald
-
-The following routes are supported:
-
-- Route 101
-- Route 102
-- Route 103
-- Route 104
-- Route 110
-- Route 113
-- Route 114
-- Route 116
-- Route 117
-- Route 119
-- Route 120
-- Route 121
+### Emerald
+- Routes 101, 102, 103, 104, 110, 113, 114, 116, 117, 119, 120, and 121.
 
 ## Game Support
-
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald | 🔥 FireRed | 🌿 LeafGreen |
 |:---------|:-------:|:-----------:|:----------:|:----------:|:------------:|
 | English  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
@@ -79,8 +35,4 @@ The following routes are supported:
 | French   |    ❌    |      ❌      |     ✅      |     ✅      |      ✅       |
 | Italian  |    ❌    |      ❌      |     ✅      |     ✅      |      ✅       |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working. ❌ Not supported yet.

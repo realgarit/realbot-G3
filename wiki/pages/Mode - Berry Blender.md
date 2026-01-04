@@ -1,18 +1,15 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 🍓 Berry Blender Mode
+# 🍓 Berry Blender
 
-This mode will play the Berry Blender minigame with 100% accuracy.
+This mode plays the Berry Blender minigame perfectly every time. 
 
-![image](../images/berry_blender_ingame.png)
+## How to use it
+1. Find a Berry Blender table that has 1 to 3 NPCs already standing there. (The empty tables are only for multiplayer, and the bot won't work there.)
+2. Stand right in front of the table.
+3. Start the bot.
 
-To run it, stand in front of one of the Berry Blender tables (must be
-one with 1-3 NPCs around it as the empty ones are for multiplayer only.)
-
-![image](../images/berry_blender_table.png)
-
-It is recommended to use the "L=A" button setting, which allows the bot
-to make more hits in quick succession.
+**Tip**: Go into your game settings and turn on **L=A**. This lets the bot hit the buttons faster, which helps it get a better score.
 
 ## Game Support
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald |
@@ -24,8 +21,4 @@ to make more hits in quick succession.
 | French   |    ✅    |      ✅      |     ✅      |
 | Italian  |    ✅    |      ✅      |     ✅      |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

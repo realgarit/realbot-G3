@@ -1,19 +1,22 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-Bunny hop on the spot with the [Acro Bike](https://bulbapedia.bulbagarden.net/wiki/Acro_Bike), useful for Safari Zone and [repel tricking](https://bulbapedia.bulbagarden.net/wiki/Appendix:Repel_trick) as it doesn't count steps.
+# 🚲 Acro Bike Bunny Hop
 
-Register the Acro Bike and start the mode while in the overworld, in any patch of grass/cave with encounters.
+This mode makes the bot bunny hop in place using the [Acro Bike](https://bulbapedia.bulbagarden.net/wiki/Acro_Bike). 
 
-**Note**: Bunny hopping is slower encounters/h on average when compared to [spin](Mode%20-%20Spin.md) mode.
+It's really useful for hunting in the Safari Zone or using the [repel trick](https://bulbapedia.bulbagarden.net/wiki/Appendix:Repel_trick) because bunny hopping doesn't count as taking steps. This means your Safrai time won't run out and your Repels will last forever.
 
-## Safari Zone
+## How to use it
+1. Register the Acro Bike to your Select button.
+2. Go to a patch of grass or a cave where you want to hunt.
+3. Start the bot on your GBA.
 
-### Ruby / Sapphire / Emerald
-The `auto_catch` Safari strategy for `Ruby` / `Sapphire` / `Emerald` is designed using an in-depth
-[study](https://www.docdroid.net/oiHhrwd/hoenn-safari-zone-research-pdf), which calculate the most effective Pokéblock and Safari ball sequence for catching a Pokémon based on the Pokémon encountered.
-The bot will use your Pokéblock case if you have some available to perform the strategy, or throw balls until the target is captured.
+**Note**: Bunny hopping is usually a bit slower than [spinning](Mode%20-%20Spin.md).
 
-# Game Support
+## Safari Zone Strategy (R/S/E)
+For the Hoenn games, the bot uses a smart strategy to catch Pokémon. It calculates the best moves based on your Pokéblocks and whether you should throw a ball or use food. If you don't have any Pokéblocks, it will just keep throwing balls until it catches the Pokémon.
+
+### Game Support
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald |
 |:---------|:-------:|:-----------:|:----------:|
 | English  |    ✅    |      ✅      |     ✅      |
@@ -23,8 +26,4 @@ The bot will use your Pokéblock case if you have some available to perform the 
 | French   |    ✅    |      ✅      |     ✅      |
 | Italian  |    ✅    |      ✅      |     ✅      |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

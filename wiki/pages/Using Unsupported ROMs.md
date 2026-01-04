@@ -1,38 +1,27 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 💀 Using unsupported ROMs 💀
+# 💀 Using Unsupported ROMs
 
 > [!CAUTION]
-> Even if you follow these instructions, it's possible (and likely) that unsupported
-> (modified) ROMs will **not work at all**, or that at least **some features** of the bot
-> will be **broken**.
-> 
-> **Do not ask for support on GitHub or Discord if you are using this option!**  
-> We cannot help you with modified game ROMs.
+> Even if you follow these steps, there is a very high chance that modified ROMs (like ROM hacks) **will not work at all**, or will have broken features.
+>
+> **Do not ask for help on GitHub or Discord if you are using an unsupported ROM.** We simply cannot support modified games.
 
-By default, the bot will only work with ROMs that match original retail cartridges of
-the mainline Gen3 games (Ruby, Sapphire, Emerald, FireRed, LeafGreen.)
+By default, the bot only works with original, official versions of Ruby, Sapphire, Emerald, FireRed, and LeafGreen. If use a modified ROM or a "bad dump," the bot won't recognize it.
 
-Any modifications to these ROMs, or read errors while dumping the cartridge, will lead
-to the bot not recognising it as a Pokémon game.
+If you still want to try it, you can manually "whitelist" your ROM so the bot lets it run.
 
-If you are **really sure** about it, you can configure the bot to accept additional
-ROM files.
+## How to Whitelist a ROM
 
+1. Go to your `profiles/` folder.
+2. Create a new text file and name it `extra_allowed_roms.txt`.
+3. Open the file and type either the **exact filename** of your ROM or its **SHA1 hash** (see below). 
+4. If you have multiple ROMs, put each one on its own line. Make sure there are no spaces before or after the names/hashes.
+5. Save the file and restart the bot.
 
-## How to whitelist one or more ROM files
+## How to Find Your ROM's Hash
 
-1. In the `profiles/` directory, create a new text file called `extra_allowed_roms.txt`.
-2. Open this file in Notepad or some text editor of your choice.
-3. Paste the SHA1 file hash (see below) or the file name of the ROM. Each hash/file name must be on a
-   separate line without any spaces or tabs before/after.
-4. Save the file and restart the bot.
-
-
-## How to find the file hash for a ROM
-
-The SHA1 hash of a ROM can be calculated with any of the following methods:
-
-- [ROM Hasher](https://www.romhacking.net/utilities/1002/)
-- Windows PowerShell: `Get-FileHash 'rom_name.gba' -Algorithm SHA1`
-- Linux: `sha1sum 'rom_name.gba'`
+To get the SHA1 hash of your ROM file:
+- **Windows**: Use PowerShell and run: `Get-FileHash 'rom_name.gba' -Algorithm SHA1`
+- **Linux**: Run: `sha1sum 'rom_name.gba'`
+- **Online**: You can use a tool like [ROM Hasher](https://www.romhacking.net/utilities/1002/).

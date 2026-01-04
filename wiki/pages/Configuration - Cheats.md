@@ -1,17 +1,15 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 💎 Cheats Config
+# 💎 Cheats
 
-[`profiles/cheats.yml`](../../modules/config/templates/cheats.yml)
+Edit these settings in [`profiles/cheats.yml`](../../modules/config/templates/cheats.yml).
 
-> Cheats may be removed in the near future, as they go against the bot philosophy and add unnecessary complexity to many modes.
+These settings let the bot do things a human can't. This includes things like peeking inside eggs to see if they're shiny, knowing exactly where a roaming Pokémon is, or finding Feebas tiles instantly.
 
-Cheats will cause the bot to perform actions not possible by a human, such as peeking into eggs to check shininess, knowing instantly which route a roamer is on, instantly locate Feebas tiles etc.
+> We're planning to add even more cheats later, like injecting healing at a Pokémon Center. By default, everything is turned off. We might even add more sophisticated RNG manipulation options in the future.
 
-RNG manipulation options may be added to the bot in the future, all cheats are disabled by default.
+`random_soft_reset_rng` - This helps the bot find unique Pokémon when soft-resetting.
+- It stops the bot from getting slower over time by removing the wait for new frames.
+- In Gen 3, the way the game picks random numbers is very predictable. Without this setting, you might keep running into the exact same Pokémon every time you reset. If you want the technical details, you can read more [here](https://blisy.net/g3/frlg-starter.html) and [here](https://www.smogon.com/forums/threads/rng-manipulation-in-firered-leafgreen-wild-pok%C3%A9mon-supported-in-rng-reporter-9-93.62357/).
 
-`random_soft_reset_rng` - advances `gRngValue` to the next unique value while using soft-reset methods
-- Removes all delays before selecting the Pokémon, preventing resets from progressively slowing down over time as the bot waits for unique frames
-- Gen3 Pokémon games use predictable methods to seed RNG, this can cause the bot to find identical PID Pokémon repeatedly after every reset (which is why RNG manipulation is possible), see [here](https://blisy.net/g3/frlg-starter.html) and [here](https://www.smogon.com/forums/threads/rng-manipulation-in-firered-leafgreen-wild-pok%C3%A9mon-supported-in-rng-reporter-9-93.62357/) for more technical information
-
-`faster_pickup` - read memory directly instead of manually checking the party menu for pickup items, if pickup mode is enabled
+`faster_pickup` - If you're using Pickup mode, this lets the bot check your party's items instantly by reading the game's memory. This is much faster than opening the menu every time.

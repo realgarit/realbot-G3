@@ -1,32 +1,36 @@
-# RealBot G3
-[![Wiki](wiki/images/badge_wiki.svg)](wiki/README.md) [![Python 3.12](wiki/images/badge_python.svg)](https://www.python.org/downloads/release/python-3132/) [![Code Formatting](wiki/images/badge_black.svg)](https://github.com/psf/black)
+# 🤖 RealBot G3
 
-**RealBot G3** is a shiny hunting bot for Gen 3. It's built with Python and uses `libmgba` under the hood. It supports Ruby, Sapphire, Emerald, FireRed, and LeafGreen.
+[![Wiki](wiki/images/badge_wiki.svg)](wiki/README.md) [![Python 3.12](wiki/images/badge_python.svg)](https://www.python.org/downloads/release/python-3132/)
 
-# ❓ Getting Started
+**RealBot G3** is a Python-based shiny hunting bot for Generation 3 Pokémon games (Ruby, Sapphire, Emerald, FireRed, and LeafGreen). It uses `libmgba` to control the game and check for shinies automatically.
 
-Check out the [wiki](wiki/Readme.md) for the details:
-- ❓ [Getting Started](wiki/pages/Getting%20Started.md)
-- 🎮 [Emulator Input Mapping](wiki/pages/Configuration%20-%20Key%20Mappings.md)
-- 🔎 [Pokémon by Bot Mode](wiki/pages/Pokemon%20By%20Bot%20Mode.md)
+---
 
-# 😎 Showcase
+## ❓ Getting Started
 
-**(Pictures in progress)**
+If you're new here, head over to our [Wiki](wiki/README.md) for everything you need to know:
+- 🚀 [Getting Started Guide](wiki/pages/Getting%20Started.md)
+- 🌎 [Supported Games](wiki/pages/Supported%20Games%20and%20Languages.md)
+- 🔎 [Find Your Pokémon](wiki/pages/Pokemon%20By%20Bot%20Mode.md)
 
-We're currently reworking the UI, so check back later for new screenshots.
+---
 
-# Credits
+## 📸 Showcase
 
-RealBot G3 uses code and data from:
+**(New GIFs and Screenshots Coming Soon!)**
 
-- [PokéBot Gen3](https://github.com/40Cakes/pokebot-gen3)
-- [mGBA](https://github.com/mgba-emu/mgba)
-- [libmgba-py](https://github.com/hanzi/libmgba-py/)
-- [Pokémon Emerald decompilation](https://github.com/pret/pokeemerald)
-- [Pokémon Ruby and Sapphire decompilation](https://github.com/pret/pokeruby)
-- [Pokémon FireRed and LeafGreen decompilation](https://github.com/pret/pokefirered)
+We're currently updating the app's interface (UI), so check back later for updated screenshots.
 
-## Related Projects
+---
 
-- [PokéBot NDS](https://github.com/wyanido/pokebot-nds/)
+## 🤝 Credits
+
+RealBot G3 wouldn't be possible without these amazing projects and communities:
+
+- [mGBA](https://github.com/mgba-emu/mgba) - The emulator powering the bot.
+- [PokéBot Gen3](https://github.com/40Cakes/pokebot-gen3) - The original inspiration for this project.
+- [pret](https://github.com/pret) - For the incredible Gen 3 decompilation projects.
+- [libmgba-py](https://github.com/hanzi/libmgba-py/) - Python bindings for `libmgba`.
+
+### Related Projects
+- [PokéBot NDS](https://github.com/wyanido/pokebot-nds/) - Shiny hunting for the DS games.

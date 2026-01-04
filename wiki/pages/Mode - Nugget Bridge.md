@@ -1,43 +1,31 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 🟡 Nugget Bridge Mode
+# 🟡 Nugget Bridge
 
-Nugget Bridge mode takes advantage of a coding oversight in Generation 3 Kanto games.     
-The oversight allows infinite Nuggets to be obtained from the rocket at the end of Nugget Bridge. See [here](https://bulbapedia.bulbagarden.net/wiki/List_of_glitches_(Generation_III)#Nugget_Bridge_script_oversight) for more information.
+This mode takes advantage of a glitch in the Kanto games to get infinite Nuggets. 
 
-The bot will repeatedly battle and white-out to the Rocket trainer, so any money you have will be lost, however each nugget nets ₽5,000 profit.
-
-<img src="../images/nugget.png" style="max-width: 80px">
+Basically, the Rocket member at the end of the bridge will give you a Nugget every time you talk to him, as long as you haven't defeated him yet. The bot will talk to him, get the Nugget, lose the battle on purpose, and then run back to do it all over again.
 
 ## Requirements
-- Defeated all Nugget Bridge trainers _except_ the Rocket trainer at the end
-- 1 Pokémon in your party
-- Low level Pokémon (level 6 or below)
-    - Obtain level 6 Pokémon on [Route 4](https://bulbapedia.bulbagarden.net/wiki/Kanto_Route_4)
+- You must have defeated the other trainers on Nugget Bridge, but **not** the Rocket member at the end.
+- Have only **one Pokémon** in your party.
+- Your Pokémon should be a **very low level** (level 6 or lower) so you lose the battle quickly. You can catch one on Route 4.
 
-## Instructions
-- Start mode either outside Cerulean City Poké Center, or on Nugget Bridge
-- ???
-- Profit!
+## How to use it
+1. Stand either on Nugget Bridge or right outside the Cerulean City Pokémon Center.
+2. Start the bot and pick **Nugget Bridge** mode.
+3. Watch the Nuggets pile up!
 
-<img src="../images/cerulean.png" width="450px">
-<img src="../images/nugget_bridge.png" height="400px">
+**Note**: Since you lose every battle, you will lose some of your in-game money. But since each Nugget sells for ₽5,000, you'll still make a huge profit.
 
-# Game Support
+## Game Support
+|          | 🔥 FireRed | 🌿 LeafGreen |
+|:---------|:----------:|:------------:|
+| English  |     ✅      |      ✅       |
+| Japanese |     ✅      |      ✅       |
+| German   |     🚫      |      🚫       |
+| Spanish  |     🚫      |      🚫       |
+| French   |     🚫      |      🚫       |
+| Italian  |     🚫      |      🚫       |
 
-|          | 🔥 Fire Red | 🌿 Leaf Green |
-|:---------|-------------|---------------|
-| English  | ✅           | ✅             |
-| Japanese | ✅           | ✅             |
-| German   | 🚫          | 🚫            |
-| Spanish  | 🚫          | 🚫            |
-| French   | 🚫          | 🚫            |
-| Italian  | 🚫          | 🚫            |
-
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
-
-🚫 Patched in this language, not working
+✅ Tested and working. 🚫 This glitch was patched in these languages, so it won't work.

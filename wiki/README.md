@@ -1,19 +1,25 @@
-Welcome to the [`realbot-g3`](https://github.com/realgar/realbot-g3) wiki!
+# 📚 realbot-g3 Wiki
 
-[Report an issue](pages/Report%20an%20Issue.md) or [raise a pull request](https://github.com/realgar/realbot-g3/pulls) if you find any missing/incorrect information in these docs.
+Welcome to the [`realbot-g3`](https://github.com/realgar/realbot-g3) wiki! This is where you'll find everything you need to know about setting up and using the bot.
 
-### General
-- ❓ [Getting Started](pages/Getting%20Started.md)
-- 🌍 [Supported Games and Languages](pages/Supported%20Games%20and%20Languages.md)
+If you find something missing or wrong, feel free to [report an issue](pages/Report%20an%20Issue.md) or [open a pull request](https://github.com/realgar/realbot-g3/pulls).
+
+---
+
+### 🏁 Getting Started
+- ❓ [Getting Started Guide](pages/Getting%20Started.md)
+- 🌍 [Supported Games & Languages](pages/Supported%20Games%20and%20Languages.md)
 - 🔎 [Pokémon by Bot Mode](pages/Pokemon%20By%20Bot%20Mode.md)
-- 🆘 [Report an Issue](pages/Report%20an%20Issue.md)
-- ❓ [General FAQ](pages/FAQ.md)
+- 🆘 [How to Report an Issue](pages/Report%20an%20Issue.md)
+- ❓ [FAQ](pages/FAQ.md)
 
-### Shiny Hunting Optimisations
+### ⚡ Shiny Hunting Tips
 - [General Tips & Tricks](pages/Optimisations%20-%20General%20Tips%20&%20Tricks.md)
 - [Battle Transitions](pages/Optimisations%20-%20Battle%20Transitions.md)
 
-### Bot Modes
+---
+
+### 🕹️ Bot Modes
 
 - 🔧 [Manual](pages/Mode%20-%20Manual.md)
 - 🚲 [Acro Bike Bunny Hop](pages/Mode%20-%20Acro%20Bike%20Bunny%20Hop.md)
@@ -39,19 +45,23 @@ Welcome to the [`realbot-g3`](https://github.com/realgar/realbot-g3) wiki!
 - 🥦 [Sudowoodo](pages/Mode%20-%20Sudowoodo.md)
 - 🍂 [Sweet Scent](pages/Mode%20-%20Sweet%20Scent.md)
 
-### Bot Configuration
+---
+
+### 🛠️ Bot Configuration
 
 - 🛠 [Configuration Overview](pages/Configuration%20-%20Overview.md)
-- 🎮 [Emulator Input Mapping](pages/Configuration%20-%20Key%20Mappings.md)
-- ⚔ [Battling and Pickup](pages/Configuration%20-%20Battling%20and%20Pickup.md)
-- 📄 [Console, Logging and Image Config](pages/Console,%20Logging%20and%20Image%20Config.md)
-- 📢 [Discord](pages/Configuration%20-%20Discord.md)
+- 🎮 [Key Mapping (Controls)](pages/Configuration%20-%20Key%20Mappings.md)
+- ⚔ [Battling & Pickup](pages/Configuration%20-%20Battling%20and%20Pickup.md)
+- 📄 [Console, Logging & Images](pages/Console,%20Logging%20and%20Image%20Config.md)
+- 📢 [Discord Integration](pages/Configuration%20-%20Discord.md)
 - ❌ [Catch Block List](pages/Configuration%20-%20Catch%20Block%20List.md)
 - 🥅 [Custom Catch Filters](pages/Configuration%20-%20Custom%20Catch%20Filters.md)
 - 💎 [Cheats](pages/Configuration%20-%20Cheats.md)
 - 📡 [HTTP Server](pages/Configuration%20-%20HTTP%20Server.md)
 
-### Customisation
+---
+
+### 🛠️ Advanced Customization
 
 - 🧩 [Bot Plugins](pages/Customisation%20-%20Plugins.md)
-- 📊 [Statistics Database](pages/Customisation%20-%20Statistics%20Database.md)
+- 📊 [Stats Database](pages/Customisation%20-%20Statistics%20Database.md)

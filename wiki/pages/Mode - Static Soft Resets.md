@@ -1,57 +1,22 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# ♻ Static Soft Reset Mode
+# ♻ Static Soft Resets
 
-![](../../modules/web/static/sprites/pokemon/shiny/Snorlax.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Articuno.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Zapdos.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Moltres.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Mewtwo.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Lugia.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Ho-Oh.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Regirock.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Regice.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Registeel.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Rayquaza.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Latios.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Latias.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Deoxys.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Kyogre.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Groudon.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Kecleon.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Hypno.png)
+This mode is for hunting legendary Pokémon (like Mewtwo, Rayquaza, or Snorlax) using soft-resets. The bot will talk to the Pokémon, check if it's shiny, and then reset if it isn't.
 
-> For modes that use soft resets such as starters, the bot will track RNG to ensure a unique frame is hit after every reset, this is to prevent repeatedly generating an identical Pokémon, this will cause soft resets to take progressively longer over time
->
-> If resets begin to take too long, it is recommended to start a new save file with a different TID to reset this delay or check out [💎 Cheats](Configuration%20-%20Cheats.md) (`random_soft_reset_rng`)
+The bot tracks the game's internal timer (RNG) to make sure you're hitting a different "frame" every time. This prevents you from seeing the same Pokémon over and over. Because of this, resets will get slightly longer as you do more of them.
 
-Static soft reset mode targets static Pokémon by simply spamming the A button until a battle starts, it is not useful for static Pokémon that require extra menuing (see [static gift reset mode](Mode%20-%20Static%20Gift%20Resets.md)).
+**Tip**: If resets are taking too long, consider starting a new save to change your Trainer ID, or look at the `random_soft_reset_rng` option in [Cheats](Configuration%20-%20Cheats.md).
 
-- Place the player, facing any static Pokémon
-- Save the game (**in-game, not a save state**)
-- Start mode
+## How to use it
+In most cases, just stand facing the Pokémon and start the bot. Make sure you **save your game** (in-game, not a save state) first.
 
-### Kyogre (Sapphire Only)
+### Specific Locations
+- **Kyogre (Sapphire Only)**: Stand in the Cave of Origin, facing the tile *just before* the fight starts.
+- **Groudon (Ruby Only)**: Stand in the Cave of Origin, facing the tile *just before* the fight starts.
+- **Latias/Latios (Southern Island)**: Stand in front of the egg on the island.
 
-- Place the Player in the Cave of Origin facing the tile _before_ the encounter triggers.
-
-![image](../images/kyogre_sapphire.png)
-
-### Groudon (Ruby Only)
-
-- Place the Player in the Cave of Origin facing the tile _before_ the encounter triggers.
-
-![image](../images/groudon_ruby.png)
-
-### Latios/Latias (Ruby/Sapphire)
-
-- Place the player in front of the egg on [Southern Island](https://bulbapedia.bulbagarden.net/wiki/Southern_Island)
-- Start mode
-
-![image](../images/Lati_SSR.png)
-
-# Game Support
-
+## Game Support
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald | 🔥 FireRed | 🌿 LeafGreen |
 |:---------|:-------:|:-----------:|:----------:|:----------:|:------------:|
 | English  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
@@ -61,8 +26,4 @@ Static soft reset mode targets static Pokémon by simply spamming the A button u
 | French   |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 | Italian  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

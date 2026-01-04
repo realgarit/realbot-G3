@@ -1,60 +1,63 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 📢 Discord Config
+# 📢 Discord
 
-[`profiles/discord.yml`](../../modules/config/templates/discord.yml)
+Edit these settings in [`profiles/discord.yml`](../../modules/config/templates/discord.yml).
 
-You can use Discord integration to get shiny notifications, phase stats, and milestone updates.
+You can connect the bot to Discord to get pings for shinies, see your stats, or get updates on how your hunt is going.
 
-For privacy, all webhooks and rich presence features are **disabled** by default.
+For privacy, everything is **turned off** by default.
 
 ## Discord Rich Presence
-- `rich_presence`: Show your bot status on your Discord profile (game, route, encounter count, etc.).
-  - Discord needs to be running on the same PC.
-  - Only enable this for one bot profile at a time to avoid conflicts.
+
+- `rich_presence`: This shows what the bot is doing on your Discord profile (like what route it's on or how many encounters it's at).
+  - You need to have Discord open on the same computer.
+  - Only turn this on for one bot at a time, or Discord might get confused.
 
 ## Discord Webhooks
-- `global_webhook_url`: The main URL for your Discord webhook.
-  - To make one: **Edit Channel** > **Integrations** > **Webhooks** > **New Webhook**.
-  - ⚠ **Warning**: Keep this URL secret so others can't post to your channel.
 
-- `delay`: Number of seconds to wait before posting. Good for avoiding spoilers on stream.
+- `global_webhook_url`: This is the main link for your Discord channel.
+  - To get one: Go to **Channel Settings** > **Integrations** > **Webhooks** > **New Webhook**.
+  - ⚠ **Careful**: Don't share this URL with anyone. If they have it, they can post whatever they want to your channel.
 
-- `bot_id`: A custom string added to the footer of messages. Useful if you have multiple bots running and want to tell them apart.
+- `delay`: How many seconds to wait before posting. This is handy if you're streaming and don't want to spoil a shiny before it shows up on screen.
 
-### Webhook Parameters
-- `enable`: Turn the specific webhook on or off.
+- `bot_id`: A name for your bot that shows up at the bottom of messages. This helps if you're running a few bots and want to know which one is talking.
 
-- `webhook_url`: Use a different URL for specific message types (overrides the global one).
-  - Uncomment the line in the config file to use it.
+### Setting up Webhooks
 
-- `ping_mode`: Set to `user` or `role` to ping someone. Leave blank to disable pings.
+- `enable`: Switch this to `true` or `false` to turn the webhook on or off.
 
-- `ping_id`: The ID of the user or role to ping.
-  - You need Developer Mode enabled in Discord to copy this ID (Right click user/role > **Copy ID**).
+- `webhook_url`: If you want a specific update (like shinies) to go to a different channel, put that URL here. It'll ignore the global one.
 
-### Webhook Types
-- `shiny_pokemon_encounter`: Posts when a shiny Pokémon appears.
+- `ping_mode`: Set this to `user` or `role` if you want the bot to ping you. Leave it blank if you want it to stay quiet.
 
-- `blocked_shiny_encounter`: Posts when a shiny appears but is skipped because it's on your block list.
+- `ping_id`: The ID for the person or role you want to ping.
+  - To get this, you'll need Developer Mode on in Discord. Then just right-click a user or role and hit **Copy ID**.
 
-- `pokemon_encounter_milestones`: Posts every `interval` encounters (e.g., every 1,000 encounters).
+### Message Types
 
-- `shiny_pokemon_encounter_milestones`: Posts every `interval` shiny encounters.
+- `shiny_pokemon_encounter`: Pings you when a shiny shows up.
 
-- `total_encounter_milestones`: Posts when the total encounter count hits a milestone.
+- `blocked_shiny_encounter`: Pings you when the bot hits a shiny that's on your [block list](Configuration%20-%20Catch%20Block%20List.md).
 
-- `phase_summary`: Posts a summary of the current phase.
-  - First post at `first_interval`, then every `consequent_interval` after that.
-  - Useful for keeping track of long hunts.
+- `pokemon_encounter_milestones`: Updates you every few encounters (like every 1,000).
 
-- `anti_shiny_pokemon_encounter`: Posts "anti-shiny" encounters.
-  - These are Pokémon with an SV that is mathematically the opposite of a shiny (65,528 to 65,535). Just for fun.
+- `shiny_pokemon_encounter_milestones`: Updates you after a certain number of shinies.
 
-- `custom_filter_pokemon_encounter`: Posts encounters that match your custom catch filters.
+- `total_encounter_milestones`: Updates you when your total count hits a big number.
 
-- `pickup`: Posts when the Pickup ability grabs an item.
-  - Summarizes items every `interval` new items.
+- `phase_summary`: Gives you a recap of the current hunt.
+  - You can set it to post once after a while, and then regularly after that.
+  - It's great for keeping track of those long, painful hunts.
 
-- `tcg_cards`: Posts a TCG card image corresponding to the Pokémon you encountered.
+- `anti_shiny_pokemon_encounter`: Pings you for "anti-shinies."
+  - These are just the mathematical opposite of a shiny. We added this just for fun.
+
+- `custom_filter_pokemon_encounter`: Pings you when the bot finds something that matches your [custom filters](Configuration%20-%20Custom%20Catch%20Filters.md).
+
+- `pickup`: Tells you when your Pokémon find items with the Pickup ability.
+  - It'll give you a summary after they've found a few things.
+
+- `tcg_cards`: The bot will find a TCG card image for the Pokémon it just ran into and post it.
 

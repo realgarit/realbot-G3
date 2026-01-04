@@ -2,138 +2,72 @@
 
 # ❓ Getting Started
 
-## Supported Operating Systems
-
-<img src="../images/os_windows.png" alt="Windows" style="max-width: 80px"> <img src="../images/os_apple.png" alt="MacOS" style="max-width: 80px"> <img src="../images/os_ubuntu.png" alt="Ubuntu" style="max-width: 80px"> <img src="../images/os_debian.png" alt="Debian" style="max-width: 80px"> <img src="../images/os_pop.png" alt="PopOS" style="max-width: 80px"> <img src="../images/os_arch.png" alt="Arch Linux" style="max-width: 80px">
-
-- Windows
-- MacOS (see: [macOS Installation](/wiki/pages/MacOS%20Installation.md))
-- Linux, tested and confirmed working on the following distros:
-  - Ubuntu 24.04
-  - Debian 12
-  - Pop!\_OS 22.04 LTS
-  - Arch Linux
-
-## Requirements
+## What You'll Need
 
 ### Windows
+- [Python 3.13](https://www.python.org/downloads/windows/) (Download the **64-bit installer**).
+- **Important**: Make sure you check the box that says `Add Python to PATH` when you install it.
 
-- [Python 3.13](https://www.python.org/downloads/windows/) **Windows installer 64-bit**
-  - Tick `Add Python to PATH` when installing Python
+### macOS
+- [Python 3.13](https://www.python.org/downloads/macos/) (Download the **universal2 installer**) or run `brew install python@3.13`.
+- mGBA 0.10.x. You can install it with `brew install mgba`. 
+- For more details, see the [macOS Installation guide](/wiki/pages/MacOS%20Installation.md).
 
-### MacOS
+### Linux (Ubuntu/Debian/Arch)
+- Python 3.13. Run `sudo apt install python3.13` (or use your package manager).
+- You'll also need these packages: `sudo apt install python3-distutils python3-tk libmgba0.10 portaudio19-dev`.
+- If your distro doesn't have `libmgba0.10`, you can download the `.deb` file from [mgba.io](https://mgba.io/downloads.html).
 
-- [Python 3.13](https://www.python.org/downloads/macos/) **macOS 64-bit universal2 installer** or `brew install python@3.13`
-- mGBA 0.10.x `brew install mgba`
-
-Note: `brew` requires [Homebrew](https://brew.sh/) to be installed.
-
-### Linux
-
-- [Python 3.13](https://www.python.org/downloads/source/) or `sudo apt install python3.13`
-- Install the following packages with `apt` or appropriate package manager: `sudo apt install python3-distutils python3-tk libmgba0.10 portaudio19-dev`
-- If `libmgba0.10` is not available on your distro, you can manually install the [mGBA 0.10.x .deb package](https://mgba.io/downloads.html) which includes `libmgba0.10`
+---
 
 ## Download the Bot
 
-### Stable Releases
+### Stable Version (Recommended)
+Go to the [releases page](https://github.com/realgar/realbot-g3/releases) and download the **realbot-DATE.zip** file. The bot has an auto-updater, so it'll check for new versions once a day.
 
-Visit the [releases](https://github.com/realgar/realbot-g3/releases) page for the latest stable releases, download the **realbot-DATE.zip** file.
+### Dev Version (Latest Features)
+If you want the absolute latest code, you can download the ZIP from the main [GitHub page](https://github.com/realgar/realbot-g3). 
 
-The bot has an auto-updater that will check for new stable releases, once a day.
+If you know how to use Git, you can also clone the repo:
+`git clone https://github.com/realgar/realbot-g3.git`
 
-### Dev Releases
+---
 
-<details>
-<summary>Expand</summary>
+## How to Run It
 
-To download the latest dev releases, go to the top of the repo page > click the green **Code** button > **Download ZIP**.
+1. Put your **official** Pokémon GBA ROMs into the `roms/` folder.
+2. Double-click `realbot.py` or run `python realbot.py` in your terminal.
+3. The bot will automatically check and install any missing requirements the first time you run it.
+4. Follow the steps on the screen to create your profile.
 
-Alternatively, if you'd like to be able to easily pull the latest dev releases, use git:
+### Tips
+- **Key Mappings**: The bot uses default mGBA keys. You can see them [here](pages/Configuration%20-%20Key%20Mappings.md).
+- **Running Away**: Make sure your lead Pokémon can escape from battles 100% of the time, or the bot might get stuck. Using a Smoke Ball or a fast Pokémon is a good idea.
+- **Backups**: We're still working on the bot, so things might change. Always back up your `profiles/` folder before you update!
 
-- Install [GitHub Desktop](https://desktop.github.com/) (you don't need an account)
-- Click **Clone a repository from the Internet...**
-- Use repository URL `https://github.com/realgar/realbot-g3.git` and choose a save location on your PC
-- Click **Clone**
-- Any time there's a new update, you can pull the latest changes by clicking **Fetch origin**, then **Pull origin**
+---
 
-</details>
+## Importing a Save
 
-### Optional
+If you already have a save file from mGBA:
+1. Open the game in mGBA and load your save.
+2. Go to **File** > **Save State File...** and save it somewhere.
+3. Run the bot (`realbot.py`), type a name for your profile, and click **Load Existing Save**.
+4. Pick the save state file you just made. The bot will create a new profile and start running.
 
-- [Windows Terminal](https://github.com/microsoft/terminal/releases) - recommended for full 🌈<span style="color:#FF0000">c</span><span style="color:#FF7F00">o</span><span style="color:#FFFF00">l</span><span style="color:#00FF00">o</span><span style="color:#00FFFF">u</span><span style="color:#CF9FFF">r</span>🌈 and ✨emoji support✨ in the console output
-- [Notepad++](https://notepad-plus-plus.org/) - recommended for syntax highlighting while editing `.yml` config files
+---
 
-### Use a `venv` (optional)
+## Advanced Options
 
-<details>
-<summary>Expand</summary>
-If you're using Python for any other projects, it is **highly recommended** to use a virtual environment (`venv`) to isolate these packages from your base environment.
+If you want to run the bot with specific settings from the terminal:
 
-Once Python is installed, set up a `venv`, open a shell in the bot directory and enter the following command:
-
-`python -m venv .`
-
-A `venv` may be “activated” using a script in its binary directory (`bin` on POSIX; `Scripts` on Windows). This will prepend that directory to your PATH, so that running python will invoke the environment’s Python interpreter and you can run installed scripts without having to use their full path. The invocation of the activation script is platform-specific (`<venv>` must be replaced by the path to the directory containing the virtual environment):
-
-| Platform | Shell                                         | Command to activate virtual environment                                                                                                       |
-| -------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| POSIX    | bash/zsh<br/>fish<br/>csh/tcsh<br/>PowerShell | `$ source <venv>/bin/activate`<br/>`$ source <venv>/bin/activate.fish`<br/>`$ source <venv>/bin/activate.csh`<br/>`$ <venv>/bin/Activate.ps1` |
-| Windows  | cmd.exe<br/>PowerShell                        | `C:\> <venv>\Scripts\activate.bat`<br/>`PS C:\> <venv>\Scripts\Activate.ps1`                                                                  |
-
-Once activated, run the bot (your shell should show `(venv)` if activated correctly):
-
-`(venv)$ python ./realbot.py` (POSIX)
-
-`(venv) PS C:\> python ./realbot.py` (Windows)
-
-</details>
-
-## Run the Bot
-
-- Place some **official** Pokémon .gba ROMs into the `./roms/` folder
-- Double click `realbot.py` or run `python realbot.py` in a terminal and follow the on-screen steps to create and/or select a profile
-
-The bot ships with the default mGBA input mapping, see [here](pages/Configuration%20-%20Key%20Mappings.md) for the default mapping, or customise them to your preference.
-
-You **must** ensure you are able to escape battle **100% of the time**, otherwise the bot will get stuck.
-If you have a save from mGBA that you'd like to import and use with the bot, then you will need to import the save state.
-
-This bot is still in development, as such, functionality is subject to change - always make sure you back up your `./profiles/` folder before updating your bot!
-
-## Import a Save
-
-- In mGBA (standalone), run a game and load into the save file
-- **File** > **Save State File...** > **Save**
-- Double click `realbot.py` or run `python realbot.py` in a terminal > type a profile **name** > click **Load Existing Save**
-- Open the save state file you just saved
-- A new bot profile will be created in the `./profiles/` folder, and launched
-
-## Debugging (advanced)
-
-<details>
-<summary>Expand</summary>
-
-The bot supports auto-starting a profile and can also be launched into a "debug" mode which will open an extra pane next to the emulator to aid bot development.
-
-The debug tabs includes information such as currently running game tasks and callbacks, emulator inputs, as well as information about recent battles, player status, current map, daycare and event flags.
-
-```
-positional arguments:
-  profile               Profile to initialize. Otherwise, the profile selection menu will appear.
-
-options:
-  -h, --help            show this help message and exit
-  -m {MODE_NAME}, --bot-mode {MODE_NAME}
-                        Initial bot mode (default: Manual)
-  -s {0,1,2,3,4,8,16,32}, --emulation-speed {0,1,2,3,4,8,16,32}
-                        Initial emulation speed (0 for unthrottled; default: 1)
-  -nv, --no-video       Turn off video output by default
-  -na, --no-audio       Turn off audio output by default
-  -t, --always-on-top   Keep the bot window always on top of other windows
-  -d, --debug           Enable extra debug options and a debug menu
+```text
+python realbot.py [profile_name] [options]
 ```
 
-Use environment variable `REALBOT_UNTHEMED=1` with debug mode as `ttkthemes` causes major lag with complex UIs.
-
-</details>
+### Common Options:
+- `-d` or `--debug`: Opens a debug menu with extra info.
+- `-m [MODE]`: Starts the bot in a specific mode (like `Spin` or `Fishing`).
+- `-s [SPEED]`: Sets the initial speed (1x, 2x, etc.). Use `0` for unthrottled speed.
+- `-nv`: Starts with video turned off.
+- `-na`: Starts with audio turned off.

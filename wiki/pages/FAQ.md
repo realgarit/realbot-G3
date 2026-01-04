@@ -2,75 +2,58 @@
 
 # ❓ General FAQ
 
-Frequently asked questions about RealBot G3, key terms, and game mechanics.
+Here are the most common questions about the bot, how it works, and basic game terms.
 
 ## Glossary
 
 ### Phase
-A term used by shiny hunters to refer to the number of Pokémon encountered since the last shiny.
-- For example, if you found a shiny Wurmple after 8,931 encounters, you have now ‘**phased**’, and the counter resets to zero.
+Shiny hunters use this term to describe how many Pokémon they've seen since their last shiny. If you found a shiny Wurmple after 8,000 encounters, you "phased," and your counter starts over at zero.
 
 ### SV (Shiny Value)
-A number between `0` and `65,535` calculated from a Pokémon's Personality ID (PID).
-- In Gen 3, if this number is **less than `8`**, the Pokémon is shiny.
-- See the [Bulbapedia page](https://bulbapedia.bulbagarden.net/wiki/Personality_value#Shininess) for more.
+This is a number between `0` and `65,535`. In Gen 3, if this number is **8 or lower**, the Pokémon is shiny.
 
-### TID and SID
-Your **Trainer ID** and **Secret ID**. These are assigned at the start of the game and are used to determine if a wild Pokémon is shiny.
-- See the [Bulbapedia Page](https://bulbapedia.bulbagarden.net/wiki/Trainer_ID_number) for more.
+### TID and SID (Trainer ID and Secret ID)
+These are your hidden IDs. The game uses them along with a Pokémon's data to decide if it's shiny.
 
 ### PID (Personality ID)
-A number the game assigns when generating a Pokémon. It determines properties like gender, nature, ability, and shininess.
-- See the [Bulbapedia Page](https://bulbapedia.bulbagarden.net/wiki/Personality_value) for more.
+Every Pokémon has a unique PID. It determines everything from its gender and nature to whether it's shiny.
+
+---
 
 ## Bot Mechanics
 
-### Why does the bot lead with specific Pokémon?
-- **Cry Length**: The bot may prioritize Pokémon with shorter cries (like Lotad) to save fractions of a second per encounter.
-- **Run Success**: In caves, the battle transition is shorter if your lead Pokémon is lower level than the opponent. To ensure escape, we use a low-level Pokémon with high speed (like Taillow) or a Smoke Ball.
+### Why does the bot use specific Pokémon in the lead?
+- **Speed**: Pokémon with short cries (like Lotad) save a tiny bit of time on every encounter.
+- **Running Away**: In caves, the bot can run faster if your lead Pokémon is a lower level than the wild one. For example, using a low-level Pokémon with a Smoke Ball to make sure we never get stuck.
 
 ### What are 'Illuminate' and 'White Flute'?
-- **Illuminate**: An ability that doubles the encounter rate for every step.
-- **White Flute**: An item that doubles encounter odds when used.
-Using both reduces the number of steps/spins needed to find a Pokémon.
+- **Illuminate**: This ability doubles how many Pokémon you run into.
+- **White Flute**: An item that does the same thing.
+Using both together means you find Pokémon much faster.
 
 ### Does the bot catch every shiny?
-**Yes**, the bot is designed to catch every shiny it encounters.
-
-### How does the bot hunt for static encounters (e.g. Rayquaza)?
-It uses the standard run-away or soft-reset method depending on the mode selected.
+**Yes.** The bot is built to catch every shiny it sees.
 
 ### Will the bot use the Repel Trick?
-**Yes**, where possible.
-The Repel Trick works with both `spin` and `bunny hop` modes. By using a lead Pokémon of a specific level (e.g., Level 7), you can filter out lower-level spawns (e.g., Level 4-6) to increase the odds of encountering specific higher-level targets.
+**Yes.** If you have a lead Pokémon at a certain level and use a Repel, the game will only spawn Pokémon at that level or higher. This is a great way to target specific rare spawns. It works in both `spin` and `bunny hop` modes.
 
-## Random Stats
+---
 
-### What is the chance of a shiny Pokémon in Emerald?
-**1 in 8,192** (Standard Gen 3 odds).
-Rates cannot be increased by Shiny Charm or Masuda Method in this generation.
+## Random Odds
 
-### What is the chance of Pokérus?
-**1 in 21,845**
+- **Shiny Odds**: 1 in 8,192. (There’s no Shiny Charm in Gen 3!)
+- **Pokérus**: 1 in 21,845.
+- **6 Perfect IVs**: 1 in 1,073,741,824.
+- **Shiny with 6 Perfect IVs**: 1 in 8,796,093,000,000.
 
-### What is the chance of 6 perfect IVs?
-**1 in 1,073,741,824**
-
-### What is the chance of a shiny with 6 perfect IVs?
-**1 in 8,796,093,000,000**
+---
 
 ## Seedot Facts
-People ask about this a lot.
 
-### What are the odds?
-Seedot is a **1% encounter**. That means the chance of finding a shiny one is **1 in 819,200**.
+People ask about this all the time.
 
-### Can't you go somewhere else?
-Nope. It's a **1% encounter** everywhere it appears in the game. Same thing for Nuzleaf. We're stuck with these odds.
+### How rare is it?
+Seedot is a **1% encounter**. Your chance of finding a shiny one is **1 in 819,200**. It's just as rare everywhere it spawns, so there's no way to make it easier.
 
 ### What about the in-game trade?
-That trade gives you DOTS. He's never shiny.
-
-**The details:** The game sets everything about DOTS before you even trade. His stats and shininess are locked. Since the trader's ID helps determine shininess and it's fixed, DOTS will always be the exact same non-shiny Pokémon.
-
-**For nerds:** DOTS is always Male, Level 4, Relaxed nature. PID `00000084`. OT `KOBE` (TID `38726`, SID `00000`).
+The Seedot you get in the trade is called DOTS. He is **never shiny**. His stats and PID are locked by the game, so he will always be the exact same non-shiny Pokémon.

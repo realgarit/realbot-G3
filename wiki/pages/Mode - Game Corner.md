@@ -1,31 +1,33 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 🎰 Game Corner Mode
+# 🎰 Game Corner
 
-![](../../modules/web/static/sprites/pokemon/shiny/Abra.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Clefairy.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Dratini.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Pinsir.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Scyther.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Porygon.png)
+This mode automatically buys Pokémon from the Celadon Game Corner and soft resets until it finds a shiny.
 
-Soft resets for a Pokémon purchased from the [Celadon Game Corner](https://bulbapedia.bulbagarden.net/wiki/Celadon_Game_Corner).
+## How to use it
+1. Make sure you have enough coins to buy at least one of the Pokémon you want.
+2. Stand right in front of the NPC who sells the Pokémon.
+3. **Save your game** (use the in-game save menu, not a save state).
+4. Start the bot and select **Game Corner** mode.
+5. Choose which Pokémon you want to hunt from the menu.
 
-- Place the player facing NPC that sells Pokémon
-- Save the game (**in-game, not a save state**)
-- Select `Game Corner` mode
-- Select a Pokémon from the selection menu
+The bot will buy as many as it can, check them for shininess, and then soft reset if none of them are shiny.
 
-## Prices
+## Coin Prices
+
 ### FireRed
-| [Abra](https://bulbapedia.bulbagarden.net/wiki/Abra_(Pok%C3%A9mon)) | [Clefairy](https://bulbapedia.bulbagarden.net/wiki/Clefairy_(Pok%C3%A9mon)) | [Dratini](https://bulbapedia.bulbagarden.net/wiki/Dratini_(Pok%C3%A9mon)) | [Scyther](https://bulbapedia.bulbagarden.net/wiki/Scyther_(Pok%C3%A9mon)) | [Porygon](https://bulbapedia.bulbagarden.net/wiki/Porygon_(Pok%C3%A9mon)) |
-|---------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| 180 coins                                                           | 500 coins                                                                                                                                       | 2,800 coins                                                                                                                                   | 5,500 coins                                                                                                                                   | 9,999 coins                                                                                                                                   |
+- **Abra**: 180 coins
+- **Clefairy**: 500 coins
+- **Dratini**: 2,800 coins
+- **Scyther**: 5,500 coins
+- **Porygon**: 9,999 coins
 
 ### LeafGreen
-| [Abra](https://bulbapedia.bulbagarden.net/wiki/Abra_(Pok%C3%A9mon)) | [Clefairy](https://bulbapedia.bulbagarden.net/wiki/Clefairy_(Pok%C3%A9mon)) | [Pinsir](https://bulbapedia.bulbagarden.net/wiki/Pinsir_(Pok%C3%A9mon)) | [Dratini](https://bulbapedia.bulbagarden.net/wiki/Dratini_(Pok%C3%A9mon)) | [Porygon](https://bulbapedia.bulbagarden.net/wiki/Porygon_(Pok%C3%A9mon)) |
-|---------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| 120 coins                                                           | 750 coins                                                                                                                                       | 2,500 coins                                                                                                                                 | 4,600 coins                                                                                                                                   | 6,500 coins                                                                                                                                   |
+- **Abra**: 120 coins
+- **Clefairy**: 750 coins
+- **Pinsir**: 2,500 coins
+- **Dratini**: 4,600 coins
+- **Porygon**: 6,500 coins
 
 ## Game Support
 |          | 🔥 FireRed | 🌿 LeafGreen |
@@ -37,8 +39,4 @@ Soft resets for a Pokémon purchased from the [Celadon Game Corner](https://bulb
 | French   |     ✅      |      ✅       |
 | Italian  |     ✅      |      ✅       |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

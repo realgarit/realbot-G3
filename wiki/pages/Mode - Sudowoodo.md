@@ -1,15 +1,18 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 🥦 Sudowoodo Mode
+# 🥦 Sudowoodo
 
-![](../../modules/web/static/sprites/pokemon/shiny/Sudowoodo.png)
+This mode helps you hunt for a shiny Sudowoodo at the Battle Frontier.
 
-- Register the [Wailmer Pail](https://bulbapedia.bulbagarden.net/wiki/Wailmer_Pail) to the `Select` button
-- Face [Sudowoodo](https://bulbapedia.bulbagarden.net/wiki/Sudowoodo_(Pok%C3%A9mon)) at the [Battle Frontier](https://bulbapedia.bulbagarden.net/wiki/Battle_Frontier_(Generation_III))
-- Save the game (**in-game, not a save state**)
-- Start mode
+## How to use it
+1. Register the **Wailmer Pail** to your `Select` button.
+2. Stand right in front of Sudowoodo.
+3. **Save your game** (in-game, not a save state).
+4. Start the bot and pick **Sudowoodo** mode.
 
-# Game Support
+The bot will automatically water the tree, check if the Pokémon is shiny, and soft-reset if it isn't.
+
+## Game Support
 |          | 🟢 Emerald |
 |:---------|:----------:|
 | English  |     ✅      |
@@ -19,8 +22,4 @@
 | French   |     ✅      |
 | Italian  |     ✅      |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

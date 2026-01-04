@@ -2,81 +2,40 @@
 
 # 🏞️ Safari Mode
 
-The **Safari Mode** allows you to continuously hunt Pokémon in the **Safari Zone**.
+This mode makes hunting in the Safari Zone easy. You pick a Pokémon you want to find, and the bot will navigate to the right area and start hunting using the best method (spinning, surfing, or fishing).
 
 ---
 
-## How Safari Mode Works
+## How to use it
 
-Safari Mode lets you select a specific Pokémon to hunt in the Safari Zone. The bot navigates to a predefined tile and uses the best strategy to locate and catch the target Pokémon.
+1. **Save your game** at the Safari Zone entrance (Route 121 for R/S/E, or Fuchsia City for FR/LG).
+2. Make sure you have at least ₽500.
+3. Start the bot and pick **Safari Mode**.
+4. Choose the Pokémon you want to hunt from the list.
 
-Safari Mode uses the appropriate hunting strategy based on the target Pokémon and its environment:
-
-- **Spin**
-- **Surf**
-- **Fish**
-
----
-
-## Requirements
-
-Before starting Safari Mode, ensure you meet the following criteria:
-
-1. **Save your game** at the Safari Zone entrance building at **Route 121** (`Ruby`/`Sapphire`/`Emerald`) or in **Fuchsia City** (`FireRed`/`LeafGreen`).
-
-![Safari Mode Start Screen](../images/safari_mode_start_rse.png)
-![Safari Mode Start Screen](../images/safari_mode_start_frlg.png)
-
-2. **Have enough money**: You need more than ₽500 to start the hunt.
-3. **Choose a Pokémon** to hunt from the available Safari Zone list.
-
-![Safari Mode Start Screen](../images/safari_target_rse.png)
-![Safari Mode Start Screen](../images/safari_target.png)
-
-- `Ruby` / `Sapphire` / `Emerald`
-4. **Decide whether to use Feeder**, this option becomes available for most Pokémon once you have at least two Pokéblocks of the same flavor (Spicy, Sour, Bitter, etc.). You can then select which type of Pokéblock you want to place in the feeder.
-
-![Safari Mode Start Screen](../images/feeder_prompt_windows.png)
-![Safari Mode Start Screen](../images/pokeblock_prompt_windows.png)
-
-5. **Decide whether to use Repel**, especially for Pokémon not hunted by Fishing. Since some targets are located far from the Safari entrance, ensure you have enough repels to do a full cycle (4 re-entries) before a soft reset.
-
-![Safari Mode Start Screen](../images/repel_prompt_windows.png)
+### Extra Options
+- **Pokéblock Feeder (R/S/E)**: If you have at least two Pokéblocks of the same flavor, you can tell the bot to use them in a feeder. This helps attract specific Pokémon.
+- **Repels**: You can choose to use Repels during the hunt. This is great for getting to far-off areas without running into common Pokémon along the way.
 
 ---
 
-## Mode Behavior
+## Catch Strategy
 
-1. The bot navigates to the predefined tile for your selected target.
-2. If a Pokémon of interest (e.g., Shiny or meeting a custom catch filter) appears, the bot will attempt to catch it.
+The bot doesn't just throw balls randomly. It uses researchers' "optimal catch patterns" to give you the best chance of catching your target.
 
-- `Ruby` / `Sapphire` / `Emerald`
+- **In Hoenn (R/S/E)**: The bot will use your Pokéblocks (if you have them) to help calm the Pokémon before throwing balls.
+- **In Kanto (FR/LG)**: The bot calculates the best move (Bait, Mud, or Ball) based on the Pokémon and how many Safari Balls you have left.
 
-The `auto_catch` Safari strategy for `Ruby` / `Sapphire` / `Emerald` is designed using an in-depth
-[study](https://www.docdroid.net/oiHhrwd/hoenn-safari-zone-research-pdf), which calculate the most effective Pokéblock and Safari ball sequence for catching a Pokémon based on the Pokémon encountered.
-The bot will use your Pokéblock case if you have some available to perform the strategy, or throw balls until the target is captured.
+### Managing Your Cash
+The bot will keep track of how much money you've spent. After about 30 runs (around ₽15,000), it will soft reset to get your money back and start over. 
 
-- `Fire Red` / `Leaf Green`
-
-The `auto_catch` Safari strategy for `Fire Red` and `Leaf Green` is designed using an in-depth
-[study](https://www.docdroid.net/Tx5NbeU/safari-zone-research-pdf),
-which calculate the most effective sequence for catching a Pokémon based on both the Pokémon encountered and
-the number of Safari Balls remaining at the start of the encounter.
-The bot will use the best possible bait / ball strategy until the target is captured.
-
-The bot uses optimal catch patterns, which are available in these
-[lookup tables](https://www.docdroid.net/g3I5Qtl/frlg-lookup-tables-pdf), to maximize catch rates for each Pokémon.
-
-3. If you used atleast one safari ball, the bot will exit the Safari and re-entry if you have enough money or soft reset. Since some Pokémon catching can take 20+ Safari balls, you might want to have a full bag when finding that Shiny Chansey.
-4. After spending ₽15.000 without catching a Pokémon in the last 30 Safari runs, the bot will:
-    - Perform a soft reset to save cash.
-    - Or exit Safari Mode and switch to manual control for you to save your game if a Pokémon was captured during these 30 Safari runs.
+If you actually caught your target Pokémon during those runs, the bot will stop and switch to manual mode so you can save your game before it resets.
 
 ---
 
 ## Game Support
 
-> ⚠️ **Warning**: The feeder feature doesn't work for other languages than English
+> ⚠️ **Note**: The Pokéblock feeder feature only works in English right now.
 
 |              | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald | 🔥 FireRed | 🌿 LeafGreen |
 |:-------------|:-------:|:-----------:|:----------:|:----------:|:------------:|
@@ -87,8 +46,4 @@ The bot uses optimal catch patterns, which are available in these
 | **French**   |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 | **Italian**  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

@@ -2,46 +2,29 @@
 
 # 🧩 Plugins
 
-If you know Python and want to customise the behaviour of the bot, you can create a plugin.
+If you know Python and want to change how the bot works, you can create a plugin.
 
-Plugins are little scripts that get called for specific events during the game (such as a
-battle starting, an egg hatching, etc.) Take a look at
-[modules/plugin_interface.py](../../modules/plugin_interface.py) for a list of events that
-a plugin may be called for.
+Plugins are small scripts that run when certain things happen in the game—like when a battle starts or an egg hatches. You can find a full list of these events in [modules/plugin_interface.py](../../modules/plugin_interface.py).
 
+## Making a Plugin
 
-## Creating a plugin
+To make a plugin, just create a `.py` file inside the `plugins/` folder. Make sure it's directly in that folder and not in a subfolder.
 
-To make a plugin, create a Python file inside the `plugins/` directory. This must have the
-`.py` file extension and it must be placed directly in the `plugins/` directory, not in a
-subdirectory.
-
-In this file, create a class that inherits from `BotPlugin`. So the most basic implementation
-of a plugin would be:
+Your file needs a class that uses `BotPlugin`. Here's the simplest setup:
 
 ```python
 from modules.plugin_interface import BotPlugin
 
-class MyFirstPlugin(BotPlugin):
+class MyPlugin(BotPlugin):
     pass
 ```
 
-Of course, this doesn't do anything yet. You can choose some method from the parent `BotPlugin`
-class to overwrite (see [modules/plugin_interface.py](../../modules/plugin_interface.py) for
-a list.)
+This doesn't do anything yet, but you can add your own code by overiding methods from the `BotPlugin` class. Check [modules/plugin_interface.py](../../modules/plugin_interface.py) to see what you can change.
 
+## Why Use Plugins?
 
-## Why write a plugin and not just edit the bot's code?
+The `plugins/` folder is ignored by Git and the bot's auto-updater. This means your code won't get deleted or overwritten when you update the bot. If you edit the bot's main code directly, you might lose your changes during an update.
 
-The `plugins/` directory is excluded from the Git repository and will also not be touched by
-the automatic updater. So code in that directory won't fall victim to future updates --
-whereas if you edit the bot's code directly, this might get removed again when the bot updates
-and you're not careful.
+## Examples
 
-
-## Example plugins
-
-While not meant to be just an example, there are some features that use the bot's plugin
-infrastructure to work.
-
-You can find those 'default plugins' in [modules/built_in_plugins/](../../modules/built_in_plugins/).
+The bot actually uses plugins for some of its own features. You can see how those work in the [modules/built_in_plugins/](../../modules/built_in_plugins/) folder.

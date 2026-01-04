@@ -1,54 +1,32 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 🔄️ Level Grind Mode
+# 🔄️ Level Grind
 
-This mode will continuously fight battles in order to level up your Pokémon.
+This mode automatically fights wild Pokémon to level up your team.
 
-When starting the mode, you have a choice between only levelling up your current lead
-Pokémon, or levelling your entire team. In the latter case, the mode will always use
-the lowest-level Pokémon to battle and rotate them as necessary.
+You can choose to focus only on your lead Pokémon or level up your entire party. If you pick your whole team, the bot will always send out your lowest-level Pokémon to battle and swap them as they grow.
 
-![image](../images/level_grind_prompt.png)
+The bot is completely hands-off. It will automatically walk back to the nearest Pokémon Center to heal when your party gets low on HP.
 
-When the active Pokémon is defeated or gets low on HP, it will heal at the nearest
-Pokémon Center automatically. Likewise, if your entire party gets defeated it will
-just return to the Tall Grass spot you've picked. So this mode should be pretty much
-hands-off.
+## What about Shinies?
+The bot will never accidentally knock out a shiny. If it finds one (or something that matches your custom filters), it will either catch it automatically or stop the bot so you can take over.
 
-Should this mode encounter a Shiny or a Pokémon that matches your custom catch filters,
-it will **not** battle it but instead either catch it automatically (if auto-catching is
-enabled in your configuration) or put the bot back into manual mode. So you don't have to
-worry about missing out on a Shiny.
+## How to use it
+1. Stand in a patch of tall grass on a supported route (see the list below).
+2. Make sure you can walk directly from that spot to a Pokémon Center without going into any other buildings.
+3. Start the bot and select **Level Grind** mode.
 
+If the mode isn't available, it means that specific route isn't supported yet.
 
-## Instructions
+## Supported Routes
 
-Start this mode while standing somewhere in tall grass that has a _direct_ overworld
-connection to a Pokémon Center (i.e. it must be possible to walk to the PC without
-going through any buildings.)
+### FireRed and LeafGreen
+- Routes 1, 2, 3, 4, 6, 7, 9, 10, 11, 18, 19, 20, 21, 22, and 24.
 
-If the mode is not available for selection, that means that this route is not supported.
-Try another route that has an easy overland path to a Pokémon Center.
-
-## FireRed and LeafGreen
-
-### Supported Routes
-- **Routes 1–4**: Route 1, Route 2, Route 3, Route 4
-- **Routes 6–11**: Route 6, Route 7, Route 9, Route 10, Route 11
-- **Routes 18–24**: Route 18, Route 19, Route 20, Route 21 (North and South), Route 22, Route 24
-
----
-
-## Emerald
-
-### Supported Routes
-- **Routes 101–109**: Route 101, Route 102, Route 103, Route 104, Route 105, Route 106, Route 107, Route 108, Route 109
-- **Routes 110–119**: Route 110, Route 111, Route 112, Route 113, Route 114, Route 115, Route 116, Route 117, Route 118, Route 119
-- **Routes 120–134**: Route 120, Route 121, Route 122, Route 123, Route 124, Route 125, Route 126, Route 127, Route 128, Route 129, Route 130, Route 131, Route 132, Route 133, Route 134
-
+### Emerald
+- Routes 101 through 134.
 
 ## Game Support
-
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald | 🔥 FireRed | 🌿 LeafGreen |
 |:---------|:-------:|:-----------:|:----------:|:----------:|:------------:|
 | English  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
@@ -58,8 +36,4 @@ Try another route that has an easy overland path to a Pokémon Center.
 | French   |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 | Italian  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

@@ -1,37 +1,38 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 🛠 Configuration Overview
+# 🛠 Configuration
 
-The bot stores all profile information, such as save games, screenshots, statistics, etc. in the profile `./profiles/<profile name>/`) folder, which is automatically created once you create a new profile.
+Everything specific to your bot—like save games, screenshots, and stats—lives in its own folder under `./profiles/<profile name>/`. The bot creates this folder for you when you make a new profile.
 
-Encounter statistics are saved into a sub-folder of your profile as `./profiles/<profile name>/stats/totals.json`.
+You can find your encounter stats in `./profiles/<profile name>/stats/totals.json`.
 
-Default configurations can be overridden by creating a copy of config files inside a profile folder.
+## How Settings Work
 
-Most configuration files are in `yml` format and are loaded and validated against a schema at bot launch. Changes made while the bot is running must be reloaded (default mapping is `Ctrl + C`.
+If you want to change how a specific profile works, just copy the config file into that profile's folder. If a file isn't in your profile folder, the bot just uses the default one from the main `profiles` folder.
 
-The wiki page for each configuration file will describe all options that are available, examples and defaults will also be shown.
+Most settings use `yml` files. The bot checks these when it starts up to make sure everything looks right. If you change a file while the bot is running, you'll need to reload it (the default key is `Ctrl + C`).
 
-Example:
-```
+Each config page in this wiki goes into detail about what every setting does and what the defaults are.
+
+### Example Folder Structure:
+
+```text
 ├── /profiles
     │
     ├── /emerald-profile
     │     current_save.sav
     │     current_state.ss1
-    │     discord.yml          <-- config loaded for 'emerald-profile'
-    │     logging.yml          <-- config loaded for 'emerald-profile'
+    │     discord.yml          <-- Settings just for 'emerald-profile'
+    │     logging.yml          <-- Settings just for 'emerald-profile'
     │
     ├── /firered-profile
     │     current_save.sav
     │     current_state.ss1
-    │     logging.yml          <-- config loaded for 'firered-profile'
+    │     logging.yml          <-- Settings just for 'firered-profile'
     │
-    │ catch_block.yml          <-- config loaded for all profiles
-    │ cheats.yml               <-- config loaded for all profiles
-    │ customcatchfilters.py    <-- config loaded for all profiles
-    │ customhooks.py           <-- config loaded for all profiles
-    │ discord.yml              <-- config loaded for all profiles except 'emerald-profile'
-    │ logging.yml              <-- config loaded for all profiles except 'emerald-profile' and 'firered-profile'
-    │ http.yml                  <-- config loaded for all profiles
+    │ catch_block.yml          <-- Settings used by everyone
+    │ cheats.yml               <-- Settings used by everyone
+    │ customcatchfilters.py    <-- Settings used by everyone
+    │ discord.yml              <-- Settings used by everyone except 'emerald-profile'
+    │ logging.yml              <-- Settings used by everyone except 'emerald' and 'firered'
 ```

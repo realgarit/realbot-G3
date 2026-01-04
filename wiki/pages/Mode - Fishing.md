@@ -1,37 +1,20 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 🎣 Fishing Mode
+# 🎣 Fishing
 
-![](../../modules/web/static/sprites/pokemon/shiny/Tentacool.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Corsola.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Relicanth.png)
+This mode lets the bot fish for you. Many rare Pokémon can only be found with a fishing rod.
 
-Fishing is a way to use a fishing rod to catch wild Pokémon in the water. Some Pokémon can only be caught by using a fishing rod.
+## Tips for better fishing
+- **Sticky Hold / Suction Cups**: Put a Pokémon with one of these abilities in your first slot (it's fine if it's fainted). This will make Pokémon bite much more often.
+- **Set it up**: Face the water, register a fishing rod to your `Select` button, and start the mode.
 
-- (Recommended) The first Pokémon in the party (can be fainted) should have the ability [Sticky Hold](https://bulbapedia.bulbagarden.net/wiki/Sticky_Hold_(Ability)) or [Suction Cups](https://bulbapedia.bulbagarden.net/wiki/Suction_Cups_(Ability)) to increase the bite rate while fishing
-- Register any fishing rod and start the mode while facing water
+## Safari Zone Strategy
+If you're fishing in the Safari Zone, the bot uses a special strategy based on research to maximize your catch rate.
 
-## Safari Zone
+- **Hoenn (R/S/E)**: The bot will use your Pokéblock case if you have one to help calm the Pokémon down before throwing balls.
+- **Kanto (FR/LG)**: The bot will use the most effective bait and ball sequence based on how many Safari Balls you have left. 
 
-### Ruby / Sapphire / Emerald
-The `auto_catch` Safari strategy for `Ruby` / `Sapphire` / `Emerald` is designed using an in-depth
-[study](https://www.docdroid.net/oiHhrwd/hoenn-safari-zone-research-pdf), which calculate the most effective Pokéblock and Safari ball sequence for catching a Pokémon based on the Pokémon encountered.
-The bot will use your Pokéblock case if you have some available to perform the strategy, or throw balls until the target is captured.
-
-### Fire Red / Leaf Green
-
-The `auto_catch` Safari strategy for `Fire Red` and `Leaf Green` is designed using an in-depth
-[study](https://www.docdroid.net/Tx5NbeU/safari-zone-research-pdf),
-which calculate the most effective sequence for catching a Pokémon based on both the Pokémon encountered and
-the number of Safari Balls remaining at the start of the encounter.
-The bot will use the best possible bait / ball strategy until the target is captured.
-
-The bot uses optimal catch patterns, which are available in these
-[lookup tables](https://www.docdroid.net/g3I5Qtl/frlg-lookup-tables-pdf), to maximize catch rates for each Pokémon.
-
-### Note
-Since a high number of Safari Balls is essential for shiny hunting, the bot will automatically switch to manual mode
-if your Safari Ball count drops below `15`.
+**Note**: To make sure you don't run out of balls while on a hunt, the bot will stop and switch to manual mode if you have fewer than **15 Safari Balls** left.
 
 ## Game Support
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald | 🔥 FireRed | 🌿 LeafGreen |
@@ -43,8 +26,4 @@ if your Safari Ball count drops below `15`.
 | French   |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 | Italian  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

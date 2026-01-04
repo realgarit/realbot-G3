@@ -2,9 +2,10 @@
 
 # 🔧 Manual Mode
 
-Manual mode simply disables all automatic bot control, allowing you to play the game normally while continuing to log encounters and increment stats.
+Manual mode turns off the bot's controls so you can play the game yourself. Even while you're playing, the bot will keep track of your encounters and update your stats in the background.
 
-Press `Tab` at any time to switch between manual mode and the most recently selected mode.
+## How to use it
+You can press **Tab** at any time to switch between manual mode and whatever bot mode you were using last.
 
 ## Game Support
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald | 🔥 FireRed | 🌿 LeafGreen |
@@ -16,8 +17,4 @@ Press `Tab` at any time to switch between manual mode and the most recently sele
 | French   |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 | Italian  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

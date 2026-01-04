@@ -1,24 +1,27 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# Battle Transitions
+# ⚡ Battle Transitions
 
-This page attempts to document possible wild encounter battle transitions and their duration in frames for each game, these can be useful to ensure maximum encounters per hour for a given hunt. 
+The little animation that plays before a fight starts actually takes up a lot of time. If you're trying to get the absolute most encounters per hour, you should pay attention to which animation is playing.
 
-The battle transition animation that plays before a battle is usually different depending on the level of your party's lead Pokémon and the opponent.
+The game picks a transition based on where you are and the level of your lead Pokémon compared to the wild one.
 
-These were measured with the bot in debug mode, measuring the duration in frames that the task `Task_BattleTransition` is active.
+## How to save time
+In many cases, if your lead Pokémon is a lower level than the wild one, the animation plays faster. This is why many hunters use a fast, low-level Pokémon in their first slot.
 
-**Note**: the gifs exported by the bot, displayed below are not exactly 60 fps due to a limitation with PIL.
+---
 
 ## Emerald
 
-| Scenario                                                              | Duration       | Battle Transition                        |
-|-----------------------------------------------------------------------|----------------|------------------------------------------|
-| Poorly lit cave, encounter lower level than party lead                | **123** frames | ![](../images/e_battle_transition_1.gif) |
-| Poorly lit cave, encounter equal or higher level than party lead      | **106** frames | ![](../images/e_battle_transition_2.gif) |
-| Cave, encounter lower level than party lead                           | **123** frames | ![](../images/e_battle_transition_3.gif) |
-| Cave, encounter equal or higher level than party lead                 | **106** frames | ![](../images/e_battle_transition_4.gif) |
-| Surfing or diving, encounter lower level than party lead              | **85** frames  | ![](../images/e_battle_transition_5.gif) |
-| Surfing or diving, encounter equal or higher level than party lead    | **145** frames | ![](../images/e_battle_transition_6.gif) |
-| Overworld or fishing, encounter lower level than party lead           | **88** frames  | ![](../images/e_battle_transition_7.gif) |
-| Overworld or fishing, encounter equal or higher level than party lead | **152** frames | ![](../images/e_battle_transition_8.gif) |
+Here's how many frames each transition takes:
+
+| Scenario | Time (Frames) |
+|----------|---------------|
+| Overworld/Fishing (Wild Pokémon is lower level) | **88** |
+| Overworld/Fishing (Wild Pokémon is same/higher level) | **152** |
+| Surfing/Diving (Wild Pokémon is lower level) | **85** |
+| Surfing/Diving (Wild Pokémon is same/higher level) | **145** |
+| Caves (Wild Pokémon is lower level) | **123** |
+| Caves (Wild Pokémon is same/higher level) | **106** |
+
+**Note**: In caves, it's actually faster if the wild Pokémon is a higher level. In most other places, you want a low-level lead Pokémon.

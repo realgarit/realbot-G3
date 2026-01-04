@@ -2,32 +2,21 @@
 
 # 🔄 Spin Mode
 
-Spins clockwise on a single tile as fast as possible, useful for Safari Zone and [repel tricking](https://bulbapedia.bulbagarden.net/wiki/Appendix:Repel_trick) as it doesn't count steps.
+This mode makes the bot spin in a clockwise circle on a single tile. 
 
-Start the mode while in the overworld, in any patch of grass/water/cave with encounters.
+It's perfect for hunting in the Safari Zone or using the [repel trick](https://bulbapedia.bulbagarden.net/wiki/Appendix:Repel_trick). Because spinning doesn't count as taking steps, your Safari time won't run out and your Repels will last forever.
 
-## Safari Zone
+## How to use it
+1. Go to a patch of grass, water, or a cave where you want to hunt.
+2. Start the bot and pick **Spin** mode.
 
-### Ruby / Sapphire / Emerald
-The `auto_catch` Safari strategy for `Ruby` / `Sapphire` / `Emerald` is designed using an in-depth
-[study](https://www.docdroid.net/oiHhrwd/hoenn-safari-zone-research-pdf), which calculate the most effective Pokéblock and Safari ball sequence for catching a Pokémon based on the Pokémon encountered.
-The bot will use your Pokéblock case if you have some available to perform the strategy, or throw balls until the target is captured.
+## Safari Zone Strategy
+If you're hunting in the Safari Zone, the bot uses a smart strategy to catch Pokémon.
 
-### Fire Red / Leaf Green
+- **Hoenn (R/S/E)**: The bot uses a specific sequence of Pokéblocks and balls to give you the best catch rate.
+- **Kanto (FR/LG)**: The bot decides when to use bait, mud, or a ball based on the Pokémon you find and how many balls you have left. 
 
-The `auto_catch` Safari strategy for `Fire Red` and `Leaf Green` is designed using an in-depth
-[study](https://www.docdroid.net/Tx5NbeU/safari-zone-research-pdf),
-which calculate the most effective sequence for catching a Pokémon based on both the Pokémon encountered and
-the number of Safari Balls remaining at the start of the encounter.
-The bot will use the best possible bait / ball strategy until the target is captured.
-
-The bot uses optimal catch patterns, which are available in these 
-[lookup tables](https://www.docdroid.net/g3I5Qtl/frlg-lookup-tables-pdf), to maximize catch rates for each Pokémon.
-
-### Note
-Since a high number of Safari Balls is essential for shiny hunting, the bot will automatically switch to manual mode 
-if your Safari Ball count drops below `15`.
-
+**Note**: To make sure you don't run out of balls on a shiny, the bot will stop and switch to manual mode if you have fewer than **15 Safari Balls** left.
 
 ## Game Support
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald | 🔥 FireRed | 🌿 LeafGreen |
@@ -39,8 +28,4 @@ if your Safari Ball count drops below `15`.
 | French   |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 | Italian  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

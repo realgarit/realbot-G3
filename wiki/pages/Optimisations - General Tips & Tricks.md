@@ -1,15 +1,15 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# General Tips & Tricks
+# 💡 General Tips & Tricks
 
-The following tips are generally applicable to most shiny hunts, an enormous amount of time will be saved over a long period hunting:
+If you're shiny hunting for a long time, even saving a few seconds per encounter adds up to hours of saved time. Here are some simple ways to speed things up:
 
-- Set in-game **TEXT SPEED** to **FAST**
-- Set in-game **BATTLE SCENE** to **OFF**
-- Utilise [repel tricks](https://bulbapedia.bulbagarden.net/wiki/Appendix:Repel_trick) to boost encounter rates of target Pokémon
-- Using modes [Spin](Mode%20-%20Spin.md) or [Bunny Hop](Mode%20-%20Acro%20Bike%20Bunny%20Hop.md), repels will become effectively infinite + steps won't be counted in Safari Zone
-- Use a lead Pokémon with encounter rate boosting [abilities](https://bulbapedia.bulbagarden.net/wiki/Category:Abilities_that_affect_appearance_of_wild_Pok%C3%A9mon), such as **[Illuminate](https://bulbapedia.bulbagarden.net/wiki/Illuminate_(Ability))**
-- Use a lead Pokémon with a [short cry](https://docs.google.com/spreadsheets/d/1rmtNdlIXiif1Sz20i-9mfhFdoqb1VnAOIntlr3tnPeU)
-- Use a lead Pokémon with a single character nickname
-- Don't use a shiny lead Pokémon (shiny animations take a few frames at the start of every battle)
-- Minimise the usage of lead Pokémon in a [Smoke Ball](https://bulbapedia.bulbagarden.net/wiki/Smoke_Ball), or with an ability such as [Run Away](https://bulbapedia.bulbagarden.net/wiki/Run_Away_(Ability)) while not repel tricking, as these will add additional text at the end of every encounter
+- **Game Settings**: Set your **Text Speed** to **Fast** and turn **Battle Scene** to **Off** in the game menu.
+- **Lead Pokémon**:
+    - Don't use a shiny Pokémon in your first slot. The shiny animation at the start of every battle wastes time.
+    - Give your lead Pokémon a very short nickname (like a single letter).
+    - Use a Pokémon with a short "cry" (like Lotad).
+    - Use the **Illuminate** ability to double your encounter rate.
+- **Save Your Repels**: If you use [Spin](Mode%20-%20Spin.md) or [Bunny Hop](Mode%20-%20Acro%20Bike%20Bunny%20Hop.md) modes, your Repels will last forever because the bot isn't actually taking steps. This also works to stay in the Safari Zone indefinitely.
+- **Repel Trick**: Use the [Repel Trick](https://bulbapedia.bulbagarden.net/wiki/Appendix:Repel_trick) to target specific, higher-level Pokémon and ignore the common low-level spawns.
+- **Skip the Text**: Try not to use a Smoke Ball or the "Run Away" ability unless you really need to. They add extra text at the end of every battle which slows you down.

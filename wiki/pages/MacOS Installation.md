@@ -1,135 +1,51 @@
-# MacOS Installation Guide
+🏠 [`realbot-g3` Wiki Home](../README.md)
+
+# macOS Installation Guide
 
 <img src="../images/os_apple.png" alt="MacOS" style="max-width: 80px">
 
-> All of these instructions are assuming you are using Apple Silicon.
+> This guide is for Macs with Apple Silicon (M1, M2, M3, etc.).
 
-#### Install Brew
+We’ve updated the bot to use **Python 3.13** and **Tkinter 9**. This is a big improvement because it fixes the visual gliches and weird button alignments that used to happen on macOS. It also means you **no longer have to manually compile** Tcl/Tk or follow those long, complicated setup steps!
 
-Navigate to [HomeBrew](https://brew.sh/)'s website and use the command provided.
+### 1. Install Homebrew
+If you don't have it yet, go to [brew.sh](https://brew.sh/) and follow the instructions on their homepage to install it.
 
-#### Update and upgrade brew
-
+### 2. Update Homebrew
+Open your terminal and make sure everything is up to date:
 `brew update && brew upgrade`
 
-#### Install pyenv, and mgba
+### 3. Install the Essentials
+Run this command to install the emulator, Python 3.13, and the other tools the bot needs:
+`brew install mgba python@3.13 tcl-tk portaudio`
 
-`brew install pyenv`
-`brew install mgba`
+### 4. Set up your Bot Folder
+Download the bot's code and move the folder to wherever you want to keep it on your Mac.
 
-#### RealBot Folder
-
-Download the latest version of the RealBot (either release or dev), and move it to the directory you want to store it in.
-
-#### Terminal
-
-Close your existing terminal, and open a new one.
-Create a `.zshrc` file for your user by running:
-`touch ~/.zshrc`
-
-#### .zshrc
-
-Edit this new file with textedit, nano, vim, or a text editor of your choice.
-If using a GUI editor, ensure you save it as **Plain Text** format.
-Insert the following text into .zshrc file:
+### 5. Create a Virtual Environment (Recommended)
+It's always better to keep the bot's packages separate from your main system. Open your terminal, go into the bot's folder, and run:
 
 ```bash
-eval "$(pyenv init -)"
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -))"; fi
+/opt/homebrew/bin/python3.13 -m venv venv
+source venv/bin/activate
 ```
 
-Close and re-open the terminal again.
+### 6. Run the Bot!
+Now you just need to start the program. The first time you run it, the bot will automatically download and install all the Python libraries it needs (it handles the `requirements.py` stuff for you):
+`python realbot.py`
 
-#### Install tcl/tk version 8.6.16 for your local user
+If you'd rather install the requirements yourself first, you can run:
+`python requirements.py`
 
-Unfortuantely, Brew does not have 8.6.16 (at the time of writing this), so we have to do this ourselves.
+---
 
-- Make a new directory `mkdir ~/local-tcltk-src`
-- Download tcl 8.6.16 source and tk 8.6.16 source files - the `.tar.gz` files for both from https://www.tcl-lang.org/software/tcltk/download.html
-- Move both files to the `~/local-tcltk-src` folder we just created.
-- Navigate to ~/local-tcltk-src and run the following commands:
-  `tar xzf tcl8.6.16-src.tar.gz`
-  `tar xzf tcl8.6.16-src.tar.gz`
-- You should now have to files: `tcl8.6.16` and `tk8.6.16`
-- Create a dedicated install directory (aka 'Prefix') so Tcl/Tk does not interfere with system-wide or homebrew versions.
-- In a new terminal, `mkdir -p ~/local-tcltk`
-- Navigate to `~/local-tcltk-src/tcl8.6.16/unix` in the terminal, and enter:
+## 💡 Troubleshooting
 
-```bash
-./configure --prefix="$HOME/local-tcltk" \
-            --enable-threads \
-            --enable-64bit
-make
-make install
-```
+**"The buttons look off or the window is glitchy"**
+Check your Python version by typing `python --version`. It must be at least **3.13** to use the new Tkinter 9 features. If you see 3.12 or older, the bot won't look right on macOS.
 
-- Navigate to `~/local-tcltk-src/tck8.6.16/unix` in the terminal, and enter:
+**"I get a portaudio error"**
+Make sure you didn't skip the `brew install portaudio` step. It's required for the bot to handle the game's audio correctly.
 
-```bash
-./configure --prefix="$HOME/local-tcltk" \
-            --enable-aqua \
-            --without-x \
-            --with-tcl="$HOME/local-tcltk/lib" \
-            --enable-threads \
-            --enable-64bit
-make
-make install
-```
-
-- Close and re-open the terminal
-
-#### Export linker/compiler flags, so Python build process uses your local Tcl/Tk:
-
-```bash
-export LDFLAGS="-L$HOME/local-tcltk/lib"
-export CPPFLAGS="-I$HOME/local-tcltk/include"
-export PKG_CONFIG_PATH="$HOME/local-tcltk/lib/pkgconfig"
-export TCL_LIBRARY="$HOME/local-tcltk/lib/tcl8.6"
-export TK_LIBRARY="$HOME/local-tcltk/lib/tk8.6"
-```
-
-#### Use PYTHON_CONFIGURE_OPTS when installing via pyenv
-
-```bash
-env \
-PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I$HOME/local-tcltk/inc
-lude' \
---with-tcltk-libs='-L$HOME/local-tcltk/lib -ltcl8.6 -ltk8.6'" \
-pyenv install 3.12.8
-```
-
-#### Verify dependencies:
-
-```bash
-pyenv shell 3.12.8
-python -V
-```
-
-- You should see `3.12.8`
-
-```bash
-python -m tkinter
-```
-
-- You should see a small window open
-
-#### Create your pyenv and activate it
-
-> Replace `myproject` with anything you like such as `pokebot`
-
-```bash
-pyenv virtualenv 3.12.8 myproject
-pyenv local myproject
-```
-
-#### Finished!
-Now your prompt should start with `(myproject)` (or whatever you named it).
-If it does, you are safe to go ahead and run the command:
-```python
-python /path-to/realbot-g3/realbot.py
-```
-
-You should now see the bot window open as expected.
-
-#### Credits
-Thanks to **.orch** in the discord for figuring these steps out and creating a guide for future MacOS users!
+**"I can't see (venv) in my terminal"**
+Make sure you ran the `source venv/bin/activate` command. You'll need to run this every time you open a new terminal window to start the bot.

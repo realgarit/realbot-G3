@@ -1,68 +1,41 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 🗿 Rock Smash Mode
+# 🗿 Rock Smash
 
-Rock smash mode will continuously farm Rock Smash encounters in Granite Cave (Nosepass) and Safari Zone (Shuckle).
+This mode automatically smashes rocks to find rare Pokémon like Nosepass (in Granite Cave) and Shuckle (in the Safari Zone).
 
-## Granite Cave
-![](../../modules/web/static/sprites/pokemon/shiny/Nosepass.png)
+---
 
-You can use this mode either with or without Repel.  
-If using Repel, the bot will use up any Repel items in your inventory and then reset once it ran out.
+## Granite Cave (Nosepass)
 
-Using Repel on its own give a minor boost to encounter rates (around +5%), but there are two ways to
-boost encounter rates significantly (that both require Repel to be used):
+You can hunt either with or without Repels. Using Repels is much faster because it filters out the low-level Pokémon you don't want.
 
-1. If you have a **White Flute** in your inventory, the bot will use that as well and in combination
-   that can boost encounters by **up to 40%**.
-2. If you have a Pokémon with the ability **Vital Spirit** or **Pressure** as the first Pokémon in
-   your party, that can give you **another 35% boost** to Nosepass encounters.
+### How to get the best odds
+To get the most Nosepass encounters, you should use the **Repel Trick**:
+1. **White Flute**: Having this in your bag can boost your encounters by **40%**.
+2. **Abilities**: Put a Pokémon with **Vital Spirit** or **Pressure** (like Vigoroth) in your first slot.
+3. **The Level Trick**: Repel works based on your first *non-fainted* Pokémon. Put a level 13 Pokémon in your second slot, and make sure your lead Pokémon (with the special ability) is fainted. This gives you the absolute best rates.
 
-A good candidate for a Pokémon with such an ability would be Vigoroth -- which you can get by catching
-a Slakoth in Petalburg Woods and evolving it at level 18. Because that level would be too high for the
-Repel strategy, you should _make it faint_ (its ability will still work) and put it in the first slot
-of your party, and then put a non-fainted level-13 Pokémon in the second slot (because Repel works with
-the level of the first _non-fainted_ Pokémon.)
+### How to use it
+- **With Repel**: Have at least a few dozen Max Repels, save your game on B2F of Granite Cave, and start the bot. Pick "Use Repel" in the menu.
+- **Without Repel**: Just stand on B2F and start the bot.
 
-If you have any Repel items in your inventory, the game will offer you this choice:
+---
 
-![](../images/repel_prompt.png)
+## Safari Zone (Shuckle)
 
-### Without Repel
+*This is for Emerald only.*
 
-- Go to the bottom floor of Granite Cave (B2F)
-- Start mode
+The bot will pay the entrance fee, run to the rocks, smash them, and then leave when your time is up. It will use all your money on entrance fees and then soft reset to get your money back and start over.
 
-### With Repel
+### How to use it
+1. Stand at the entrance to the Safari Zone.
+2. Make sure you have some cash.
+3. (Optional) Register your Mach Bike to the `Select` button to make the run faster.
+4. **Save your game** (in-game, not a save state).
+5. Start the bot.
 
-- Make sure you have some Repel in your inventory (Max Repel works best, but Super Repel or Repel will do.)  
-  While the bot can work with as few as 1 Repel, having a few dozen will improve rates by spending less time resetting.
-- Optional, but highly recommended: Get the White Flute.
-- Optional, but highly recommended: Get a Pokémon with the ability Vital Spirit or Pressure as the first Pokémon.
-- Make sure the first non-fainted Pokémon in your party has level 13. The bot will accept Pokémon up to level 16, but
-  13 gives you the best rates.
-- Go to the bottom floor of Granite Cave (B2F)
-- **Save the game**
-- Start mode and select 'Use Repel'
-
-![image](../images/granite_cave.png)
-
-
-## Safari Zone
-![](../../modules/web/static/sprites/pokemon/shiny/Shuckle.png)
-
-(This area only exists in Emerald.)
-
-The mode will continuously try to enter the Safari Zone, so make sure you have some cash. The bot will first **use up all the player's cash in Safari Zone entrance fees** and then soft reset to start over.
-
-- Go to the _entrance_ of the Safari Zone (see image below)
-- Make sure you have some cash on you
-- (Optional) Register the Mach Bike to the Select button (this is not required, but it will be a bit faster.)
-- Save the game (**in-game, not a save state**)
-- Start mode
-
-![image](../images/safari_zone.png)
-
+---
 
 ## Game Support
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald |
@@ -74,8 +47,4 @@ The mode will continuously try to enter the Safari Zone, so make sure you have s
 | French   |    ✅    |      ✅      |     ✅      |
 | Italian  |    ✅    |      ✅      |     ✅      |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

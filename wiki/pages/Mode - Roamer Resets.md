@@ -1,57 +1,54 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 🏃 Roamer Reset Mode
-Roamer reset mode helps with finding shiny roaming Pokémon via soft-resetting.
+# 🏃 Roamer Resets
 
-## Emerald
-![](../../modules/web/static/sprites/pokemon/shiny/Latias.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Latios.png)
+This mode helps you hunt for shiny roaming Pokémon (like Latios, Latias, Entei, or Raikou). These Pokémon have their stats and shininess determined the moment you finish a specific cutscene, so you have to save *before* that cutscene and soft reset after checking them.
 
-On Emerald, this mode needs some preparation **before defeating the Elite Four for the first time!**
+## General Tips
+- **Lead Pokémon**: Put a Pokémon between level 5 and 40 (for R/S/E) or 5 and 50 (for FR/LG) in your first slot. This lets you use Repels to filter out everything except the roamer.
+- **Abilities**: If your lead Pokémon has **Illuminate** or **Arena Trap**, you'll find them about 18% faster.
+- **Stock Up**: Bring lots of Repels (at least 50-100). The bot will soft-reset if you run out, but it's much faster if you have enough to keep going for a while.
+- **Fly**: Make sure someone in your party knows **Fly**.
 
-- Make sure you have a Pokémon that knows **Fly** in your party
-- Make sure you have a Pokémon **between level 14 and 40** in your party (in order for Repel to work properly)
-   - If this Pokémon has the ability **Illuminate** or **Arena Trap**, it will speed up the hunt by about 18%. But this is not strictly necessary
-- Make your you have some **repels** in your inventory. The mode will soft reset when it runs out of repels, but that makes it less efficient
-   - To all but ensure you never run out of them, make sure to pack at least **40 Max Repels**, or **50 Super Repels**, or **100 Repels**, or a combination thereof
-- After defeating the Elite Four for the first time, you will be sent back to your house in Littleroot Town. **Do not leave the upper floor of that house or you will not be able to use this mode with that save game!**
-- Move a Pokémon between level 14 and 40 (see step 2) to the front of your party
-- Save the game (**in-game, not a save state**)
-- Start mode
+---
 
+## Emerald (Latios/Latias)
+You need to set this up **before you beat the Champion**.
+1. Beat the Elite Four and the Champion.
+2. The game will send you back to your house in Littleroot Town.
+3. **Stop!** Do not leave the upstairs room of your house.
+4. Put your level 14–40 Pokémon in the lead.
+5. **Save your game** (in-game, not a save state).
+6. Start the bot.
 
-## FireRed/LeafGreen
-![](../../modules/web/static/sprites/pokemon/shiny/Raikou.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Entei.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Suicune.png)
+The bot will leave the room, watch the TV cutscene, and then fly around to find the roamer.
 
-- Make sure you have a Pokémon that knows **Fly** in your party
-- Make sure you have a Pokémon **between level 5 and 50** in your party (in order for Repel to work properly)
-   - If this Pokémon has the ability **Illuminate**, it will speed up the hunt by about 18%, but this is not strictly necessary
-   - Move that Pokémon **to the front of your party**
-- Make your you have some **repels** in your inventory
-  - The mode will soft reset when it runs out of repels, but that makes it less efficient 
-  - To all but ensure you never run out of them, make sure to pack at least **40 Max Repels**, or **50 Super Repels**, or **100 Repels**, or a combination thereof
-- After obtaining the sapphire go to the [**Pokémon Net Center**](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Network_Center) on [**One Island**](https://bulbapedia.bulbagarden.net/wiki/One_Island_(town)) and stand on the **left** side of Celio who is facing a big machine to the right. **Do not give the sapphire to Celio or you will not be able to use this mode with that save game!**
-- Save the game (**in-game, not a save state**)
-- Start mode
+---
 
+## FireRed/LeafGreen (Entei/Raikou/Suicune)
+You'll need the Ruby and Sapphire items for this. 
+1. Get the Sapphire from the Sevii Islands.
+2. Go to the **Net Center** on One Island.
+3. Stand on the **left side** of Celio (the guy in front of the big machine).
+4. **Stop!** Do not talk to him or give him the Sapphire yet.
+5. Put your level 5–50 Pokémon in the lead.
+6. **Save your game** (in-game, not a save state).
+7. Start the bot.
 
-## Ruby/Sapphire
+The bot will give the Sapphire to Celio, which triggers the roamer, and then go find it.
 
-![](../../modules/web/static/sprites/pokemon/shiny/Latias.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Latios.png)
+---
 
-Unlike Emerald version, Ruby and Sapphire are not restricted by the sequence that happens in your house immediately after defeating the Elite Four. After defeating the Elite Four for the first time, you will be sent back to your house in Littleroot Town. Walking to the first floor will trigger a cutscene in which Norman gives you the S.S. Ticket. The TV will be flashing; you can interact with the TV at any time after returning to your house, giving you time to prepare as follows:
+## Ruby/Sapphire (Latios/Latias)
+This is similar to Emerald but a bit more flexible.
+1. Beat the Elite Four and return home.
+2. Go downstairs and watch the cutscene with Norman.
+3. **Stop!** The TV will be flashing, but don't interact with it yet.
+4. Put your level 14–40 Pokémon in the lead.
+5. **Save your game** right in front of the TV.
+6. Start the bot.
 
-- Make sure you have a Pokémon that knows **Fly** in your party
-- Make sure you have a Pokémon **between level 14 and 40** in your party (in order for Repel to work properly)
-   - If this Pokémon has the ability **Illuminate**, it will speed up the hunt by about 18%. But this is not strictly necessary
-- Make your you have some **repels** in your inventory. The mode will soft reset when it runs out of repels, but that makes it less efficient
-   - To all but ensure you never run out of them, make sure to pack at least **40 Max Repels**, or **50 Super Repels**, or **100 Repels**, or a combination thereof
-- Move a Pokémon between level 14 and 40 (see step 2) to the front of your party
-- Save the game on the first floor of your player character's house (**in-game, not a save state**; in front of the TV is most efficient)
-- Start mode
+The bot will talk to the TV to trigger the roamer and then start the search.
 
 ## Game Support
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald | 🔥 FireRed | 🌿 LeafGreen |
@@ -63,8 +60,4 @@ Unlike Emerald version, Ruby and Sapphire are not restricted by the sequence tha
 | French   |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 | Italian  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

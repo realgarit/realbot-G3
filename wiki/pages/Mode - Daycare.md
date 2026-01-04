@@ -1,38 +1,23 @@
 🏠 [`realbot-g3` Wiki Home](../README.md)
 
-# 🥚 Daycare Mode
+# 🥚 Daycare
 
-![](../../modules/web/static/sprites/pokemon/shiny/Pichu.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Cleffa.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Igglybuff.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Togepi.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Tyrogue.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Smoochum.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Elekid.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Magby.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Wynaut.png)
-![](../../modules/web/static/sprites/pokemon/shiny/Azurill.png)
+This mode automates breeding and hatching eggs. It will collect up to five eggs, hatch them, and then release them if they aren't shiny.
 
-## Requirements
+## What You'll Need
+- A pair of Pokémon that can breed already in the Daycare.
 
-- A compatible breeding couple in the Daycare
+### Helpful Tips
+- **Flame Body or Magma Armor**: In Emerald, having a Pokémon with one of these abilities in your party will cut the hatching time in half.
+- **Bicycle**: Register your bike to the `Select` button so the bot can move much faster.
 
-### Optional, but recommended
-- (Emerald only) Having a Pokémon with [Flame Body](https://bulbapedia.bulbagarden.net/wiki/Flame_Body_(Ability)) or [Magma Armor](https://bulbapedia.bulbagarden.net/wiki/Magma_Armor_(Ability)) ability in your
-  party (even if it's fained) halves the number of steps required. 
-- [Mach Bike](https://bulbapedia.bulbagarden.net/wiki/Mach_Bike) (R/S/E) or [Bicycle](https://bulbapedia.bulbagarden.net/wiki/Bicycle) (FR/LG) registered to `Select` will help getting
-  those steps in quicker.
+## How to use it
+1. Go to Route 117 (if you're playing R/S/E) or Four Island in the Sevii Islands (if you're playing FR/LG).
+2. Start the bot.
 
-## Instructions
-
-Start this mode while being on Route 117 (in R/S/E) or Sevii Island Four (FR/LG), the bot will
-collect up to five eggs, and once all have hatched, release them in the Daycare PC if they're
-not Shiny.
-
-![image](../images/daycare.png)
+The bot will automatically check the old man for eggs, ride back and forth to hatch them, and manage your PC box.
 
 ## Game Support
-
 |          | 🟥 Ruby | 🔷 Sapphire | 🟢 Emerald | 🔥 FireRed | 🌿 LeafGreen |
 |:---------|:-------:|:-----------:|:----------:|:----------:|:------------:|
 | English  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
@@ -42,8 +27,4 @@ not Shiny.
 | French   |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 | Italian  |    ✅    |      ✅      |     ✅      |     ✅      |      ✅       |
 
-✅ Tested, working
-
-🟨 Untested, may not work
-
-❌ Untested, not working
+✅ Tested and working.

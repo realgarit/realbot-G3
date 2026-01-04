@@ -1,95 +1,53 @@
 # 💾 Save Modification
 
-> ⚠️ **Warning**: This feature is only available using debug mode (use `--debug` option when running the bot)
+> ⚠️ **Warning**: You can only use this feature in debug mode. Start the bot with the `--debug` option to see it.
 
-The **Save Modification** feature allows users to export and import event flags and variables for the emulator. 
-
-Below is a detailed guide to use this feature.
+Save modification lets you export and import your "event flags" and "variables." These are a way to keep track of your progress in the game.
 
 ---
 
-## ❓ Why Is This Useful?
+## Why Use This?
 
-This feature is particularly useful to transfer event flags and variables across different save files. For example:
-- If you are playing a **US or European save file** and want to switch to a **Japanese ROM**, you cannot directly load the save file due to incompatibilities. However, with this feature, you can:
-    - Export event flags and variables from your non-Japanese save.
-    - Start the bot on your Japanese ROM save.
-    - Import the event flags and variables into the new save to recreate progress from your previous game.
+This is really handy if you need to move your progress between different save files. For example:
+- If you're switching from a US save to a Japanese ROM, you can't just copy the save file. Instead, you can:
+    - Export your progress flags and variables from the US save.
+    - Start a new game on the Japanese ROM.
+    - Import your flags and variables to jump back to where you were.
 
-### ⚠️ Warnings and Potential Issues
-1. **Limited Data Transfer**:
-    - The feature only copies **event flags** and **variables**. It does **NOT** transfer:
-        - Pokémon party
-        - Items, Pokémons in inventory or storage
-        - TMs, HMs, or Pokéballs
-    - As a result, some progress may be incomplete or inconsistent in the new save.
+### Things to Watch Out For
 
-2. **Soft Lock Risks**:
-    - Using this feature in a **fresh save** with **endgame flags and variables** may result in a **soft lock**.  
-      Example: Unlocking endgame content without having any HMs or Pokémon in your party may prevent progress as the game will consider you already chose a starter and received all the TMs.
+1. **It Doesn't Copy Everything**:
+    - This only copies your **game progress**. It won't move your Pokémon, items, TM/HMs, or Poké Balls. You'll need to use a save editor like PKHeX for those.
 
-3. **Manual Editing**:
-    - The generated files (`event_flags.txt` and `event_vars.txt`) can be manually edited if necessary.
-    - This allows for fine-tuning the game state to help avoiding soft locks.
+2. **Soft Lock Risk**:
+    - If you import endgame progress into a brand new save, you might get stuck (a "soft lock"). For example, if the game thinks you've finished the story but you don't have a Pokémon or any HMs, you won't be able to go anywhere.
 
-4. **Editing for Fresh Saves**:
-    - If you wish to start from a fresh save and use endgame flags and variables, you may need to edit your save to inject:
-        - Items (e.g., HMs, Poké Balls)
-        - Pokémon in your party or storage
-        - Other essentials required for progress (Bikes, Rod...).
-    
----
-
-## 🚀 Features and Functionality
-
-### Export Events and Variables
-- **Description**: Exports the current event flags and variables from the emulator to text files.
-- **How to Use**:
-    1. Open the **Data Manipulation** menu in the application.
-    2. Select the **Export events and ears** option.
-    3. The event flags and variables will be saved to the paths specified above.
-
-### Import Events and Variables
-- **Description**: Imports event flags and variables from the saved text files into the emulator.
-- **How to Use**:
-    1. Open the **Data Manipulation** menu in the application.
-    2. Select the **Import events and vars** option.
-    3. The emulator will load the data from the files and apply the changes.
-    4. Save your game.
-    5. Reset the game in **Emulator** -> **Reset** or restart the bot.
+3. **Editing the Files**:
+    - You can manually edit the exported `event_flags.txt` and `event_vars.txt` files if you need to fine-tune things or fix a soft lock.
 
 ---
 
-## 📂 Files Generated
+## How to Use It
 
-When you use the **Save Modification** feature, the following files are created or used:
+### Exporting Your Progress
+1. Open the **Data Manipulation** menu in the bot.
+2. Choose **Export events and vars**.
+3. Your progress will be saved into text files in your profile folder.
 
-1. **Event Flags File**
-    - **Path**: `profiles/event_flags.txt`
-    - **Purpose**: Stores event flag data as key-value pairs in the format:
-      ```
-      flag_name = 1  # Enabled
-      flag_name = 0  # Disabled
-      ```
-
-2. **Event Variables File**
-    - **Path**: `profiles/event_vars.txt`
-    - **Purpose**: Stores event variable data as key-value pairs in the format:
-      ```
-      var_name = <value>
-      ```
+### Importing Your Progress
+1. Open the **Data Manipulation** menu.
+2. Choose **Import events and vars**.
+3. The bot will load the data into the current game.
+4. **Save your game** in the menu.
+5. Reset the game or restart the bot to make sure everything updates.
 
 ---
 
-## 🛠️ Developer Use Cases
+## The Files
 
-This feature is also valuable for developers and testers. By exporting and importing flags and variables, you can:
+When you export your progress, the bot creates these files:
 
-1. **Generate Specific Game States**:
-    - Create custom states to simulate particular moments in the game.
-
-2. **Efficient Debugging**:
-    - Quickly toggle event flags or variables to isolate and test specific features.
-
-3. **Cross-Save Compatibility Testing**:
-    - Test the bot’s behavior across different save files, regions, or ROM versions
+1. **event_flags.txt** (`profiles/event_flags.txt`)
+    - These are simple "on/off" switches for things you've done in the game (like beating a gym).
+2. **event_vars.txt** (`profiles/event_vars.txt`)
+    - These are numbers that track things like how many times you've talked to someone or where you are in a specific quest.
