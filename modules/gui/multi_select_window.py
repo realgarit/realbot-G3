@@ -41,7 +41,7 @@ def ask_for_choice(choices: list[Selection], window_title: str = "Choose...") ->
 
     maximum_number_of_lines = 1 + max(choice.button_label.count("\n") for choice in choices)
 
-    window_geometry = (len(choices) * 164, 160 + (maximum_number_of_lines * 20))
+    window_geometry = (len(choices) * 200, 160 + (maximum_number_of_lines * 20))
     window.title(window_title)
     window.geometry(f"{window_geometry[0]}x{window_geometry[1]}")
     window.protocol("WM_DELETE_WINDOW", remove_window)
@@ -166,7 +166,7 @@ def ask_for_choice_scroll(
     choices: list[Selection],
     window_title: str = "Choose...",
     options_per_row: int = 3,
-    button_width: int = 165,
+    button_width: int = 200,
     button_height: int = 165,
     visible_rows: int = 2,
 ) -> str | None:

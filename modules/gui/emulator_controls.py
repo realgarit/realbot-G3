@@ -39,7 +39,7 @@ class EmulatorControls:
         self.debug_menu: Menu | None = None
 
     def get_additional_width(self) -> int:
-        return 0
+        return 5
 
     def get_additional_height(self) -> int:
         return 200
