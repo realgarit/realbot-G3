@@ -15,11 +15,8 @@ OS_NAME = platform.system()
 gui = None
 
 
-# On Windows, the bot can be started by clicking this Python file. In that case, the terminal
-# window is only open for as long as the bot runs, which would make it impossible to see error
-# messages during a crash.
-# For those cases, we register an `atexit` handler that will wait for user input before closing
-# the terminal window.
+# If you're on Windows and just double-click this file, the terminal usually closes right away if things crash.
+# That makes it hard to see what went wrong. So we'll wait for a key press before it shuts down.
 def on_exit() -> None:
     if OS_NAME == "Windows":
         import psutil
@@ -52,9 +49,8 @@ class StartupSettings:
 
 
 def directory_arg(value: str) -> pathlib.Path:
-    """Determine if the value is a valid readable directory.
-
-    :param value: Directory to verify.
+    """
+    Checks if a string is a valid, readable directory.
     """
     path_obj = pathlib.Path(value)
     if not path_obj.is_dir() or not path_obj.exists():
@@ -65,7 +61,9 @@ def directory_arg(value: str) -> pathlib.Path:
 
 
 def parse_arguments(bot_mode_names: list[str]) -> StartupSettings:
-    """Parses command-line arguments."""
+    """
+    Pulls settings from the command line.
+    """
     parser = argparse.ArgumentParser(description=f"{realbot_name} {realbot_version}")
     parser.add_argument(
         "profile",
@@ -129,9 +127,8 @@ if __name__ == "__main__":
     register_exception_hook()
     load_plugins()
 
-    # This catches the signal Windows emits when the underlying console window is closed
-    # by the user. We still want to save the emulator state in that case, which would not
-    # happen by default!
+    # This catches when someone closes the console window on Windows.
+    # We need to make sure the emulator saves everything before it's gone.
     if OS_NAME == "Windows":
         import win32api
 
@@ -154,9 +151,8 @@ if __name__ == "__main__":
     else:
         from modules.gui import RealbotGui
 
-        # Previously, theming could _only_ be disabled through an environment flag. Now, it can
-        # be disabled using a command-line argument but for backward-compatibility reasons we
-        # accept either.
+        # You used to only be able to turn off themes with an environment variable.
+        # Now there's a command line flag for it, but we still support both to keep things simple.
         no_theme = os.getenv("REALBOT_UNTHEMED") == "1" or startup_settings.no_theme
         gui = RealbotGui(main_loop, on_exit, no_theme=no_theme, use_opengl=startup_settings.use_opengl)
     context.gui = gui

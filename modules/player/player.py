@@ -111,10 +111,9 @@ class PlayerAvatar:
     @property
     def map_location_in_front(self) -> MapLocation | None:
         """
-        Returns the map tile in front of the player i.e. the tile the player avatar
-        is looking at.
-        This only works if that tile is on the same map, otherwise `None` will be
-        returned.
+        Shows the map tile right in front of the player.
+        
+        This only works if the tile is on the same map; otherwise, we return `None`.
         """
         targeted_coordinates = calculate_targeted_coords(self.local_coordinates, self.facing_direction)
         open_map = self.map_location
@@ -277,8 +276,8 @@ def player_avatar_is_controllable() -> bool:
     ):
         return False
 
-    # When exiting a door in RSE, there is a single frame where the game erroneously reports
-    # the player as controllable even though it's still in the exiting animation.
+    # RSE has a tiny quirk: when you exit a door, there's one frame where the game says you're
+    # controllable while the exit animation is still finishing up.
     if task_is_active("Task_ExitDoor") or task_is_active("sub_8080B9C"):
         return False
 
@@ -305,10 +304,9 @@ def get_player_location() -> tuple[MapFRLG | MapRSE, tuple[int, int]]:
     try:
         location = get_location_or_raise_runtime_error()
     except RuntimeError:
-        # Very occasionally, the player avatar's location data might be corrupt during a map change.
-        # As far as I have been able to observe it, the data has been correct again in the next frame,
-        # so in those rare circumstances we just peek ahead by one frame and try again, rather than
-        # throwing the error immediately.
+        # Every once in a while, the player's location data gets a bit glitchy during map changes.
+        # It usually fixes itself by the next frame, so we'll just peek ahead instead of 
+        # crashing right away.
         #
         # If the location in the peek-ahead frame is still invalid, the error would be propagated to
         # the bot mode.

@@ -31,9 +31,8 @@ def _load_symbols(symbols_file: str, language: ROMLanguage) -> None:
                 length = int(length, 16)
                 label = label.strip()
 
-                # This label sometimes appear for the same memory address as others,
-                # blocking the names we're actually interested in. Thus, we just
-                # ignore those.
+                # This label sometimes pops up for the same address as others, hiding 
+                # the names we actually want.
                 if label == ".gcc2_compiled" or label == ".gcc2_compiled.":
                     continue
 
@@ -232,26 +231,26 @@ def get_symbol(symbol_name: str) -> tuple[int, int]:
 
 def get_symbol_name(address: int, pretty_name: bool = False) -> str:
     """
-    Get the name of a symbol based on the address
+    Finds the symbol name for a specific address.
 
-    :param address: address of the symbol
+    :param address: Address of the symbol.
     :param pretty_name: Whether to return the symbol name all-uppercase (False) or
-                        with 'natural' case (True)
+                        with 'natural' case (True).
 
-    :return: name of the symbol (str)
+    :return: Name of the symbol.
     """
     return _reverse_symbols.get(address, ("", ""))[(1 if pretty_name else 0)]
 
 
 def get_symbol_name_before(address: int, pretty_name: bool = False) -> str:
     """
-    Looks up the name of the symbol that comes at or before a memory address (i.e.
-    the name of the symbol that this address supposedly belongs to.)
+    Finds the symbol that comes at or just before an address—basically 
+    identifying which symbol this address belongs to.
 
-    :param address: Address to look up
+    :param address: Address to look up.
     :param pretty_name: Whether to return the symbol name all-uppercase (False) or
-                        with 'natural' case (True)
-    :return: name of the symbol (str)
+                        with 'natural' case (True).
+    :return: Name of the symbol.
     """
     maximum_lookahead = 1024
     return next(
@@ -288,15 +287,14 @@ def decode_string(
     character_set: Literal["international", "japanese", "rom_default"] = "rom_default",
 ) -> str:
     """
-    Generation III Pokémon games use a proprietary character encoding to store text data.
-    The Generation III encoding is greatly different from the encodings used in previous generations, with characters
-    corresponding to different bytes.
-    See for more information:  https://bulbapedia.bulbagarden.net/wiki/Character_encoding_(Generation_III)
+    Gen 3 games use a custom character encoding. It's totally different from previous 
+    games, so we have to map the bytes ourselves. You can find more details on Bulbapedia:
+    https://bulbapedia.bulbagarden.net/wiki/Character_encoding_(Generation_III)
 
-    :param encoded_string: bytes to decode to string
-    :param replace_newline: Whether a newline should be returned as such (False), or substituted with a space (True)
-    :param character_set: Which character set should be used for decoding; defaults to the ROM language
-    :return: decoded bytes (string)
+    :param encoded_string: Bytes to decode.
+    :param replace_newline: Whether to turn newlines into spaces.
+    :param character_set: Which character set to use; defaults to the ROM's language.
+    :return: The decoded string.
     """
     if character_set == "rom_default":
         character_table = _current_character_table
@@ -313,11 +311,11 @@ def decode_string(
         i = encoded_string[cursor]
         cursor += 1
         if i == 0xFF:
-            # 0xFF marks the end of a string, like 0x00 in C-style strings
+            # 0xFF marks the end of a string, similar to 0x00 in C.
             break
         elif i == 0xFE:
-            # Newline character. These are hardcoded to fit inside the text boxes,
-            # so by default we replace them with a space.
+            # Newline character. These are hardcoded for text boxes, so we usually 
+            # replace them with a space.
             if not replace_newline:
                 string += "\n"
             # If the previous character was a '-', the words before and after
@@ -329,8 +327,7 @@ def decode_string(
             if cursor >= len(encoded_string):
                 return
 
-            # Marks a variable (the following byte indicates which variable should
-            # be substituted.)
+            # This marks a variable—the next byte tells us which one to use.
             i = encoded_string[cursor]
             cursor += 1
             if i == 0x01:
@@ -343,7 +340,7 @@ def decode_string(
             if cursor >= len(encoded_string):
                 return
 
-            # Text formatting codes, which can be followed by 1, 2, or 3 bytes.
+            # Text formatting codes can be followed by 1, 2, or 3 bytes.
             i = encoded_string[cursor]
             if i in [0x04, 0x0C, 0x10]:
                 cursor += 3
@@ -352,7 +349,7 @@ def decode_string(
             else:
                 cursor += 1
         elif i in [0xFB, 0xFA]:
-            # Controls text box behaviour which we do not care about.
+            # We don't care about these text box control codes.
             continue
         else:
             # Actual printable characters

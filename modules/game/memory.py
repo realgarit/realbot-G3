@@ -43,9 +43,8 @@ def pack_uint32(value: int) -> bytes:
 
 def read_symbol(name: str, offset: int = 0x0, size: int = 0x0) -> bytes:
     """
-    This function uses the symbol tables from the Pokémon decompilation projects found here: https://github.com/pret
-    Symbol tables are loaded and parsed as a dict in the `Emulator` class, the .sym files for each game can be found
-    in `modules/data/symbols`.
+    Reads data using the symbol tables from the pret decompilation projects.
+    You can find the .sym files for each game in `modules/data/symbols`.
 
     Format of symbol tables:
     `020244ec g 00000258 gPlayerParty`
@@ -84,11 +83,9 @@ def write_symbol(name: str, data: bytes, offset: int = 0x0) -> bool:
 
 def get_callback_for_pointer_symbol(symbol: str, offset: int = 0, pretty_name: bool = True) -> str:
     """
-    Reads the value of a symbol (which should be a 4-byte pointer) and returns the nearest symbol that
-    matches its value.
-
-    This can be used for callback pointers that point at some game function, such as the two main game
-    callbacks or some other callbacks inside of structs.
+    Looks at a symbol—which should be a 4-byte pointer—and finds the closest match in the symbol table.
+    
+    This is great for tracking down which game function a callback is currently pointing to.
 
     :param symbol: The symbol containing the pointer.
     :param offset: (optional) Offset from the start of the symbol where the callback should appear.
@@ -122,9 +119,8 @@ def get_save_block(num: int = 1, offset: int = 0, size: int = 0) -> bytes:
     Reads and returns the entirety (or just parts of, if `offset` and/or `size` are set) of
     one of the two 'save blocks'.
 
-    The name 'save block' is a bit misleading as it is not just used when saving the game,
-    but rather it is a structure that contains a lot of global data about the player that
-    will _also_ be saved as-is but will be regularly accessed by the game when running.
+    The term 'save block' is a little confusing because it's not just for saving.
+    It's actually a big chunk of memory the game uses to store player data while it's running.
 
     See also: https://bulbapedia.bulbagarden.net/wiki/Save_data_structure_(Generation_III)
 
@@ -154,8 +150,7 @@ def write_to_save_block(data: bytes, num: int = 1, offset: int = 0) -> bool:
     """
     Writes data to one of the two 'save blocks'.
 
-    As with any operation that modifies the in-game memory, this comes with a high
-    risk of corrupting some in-game state, so use this with care.
+    Changing in-game memory is always risky and can mess up the game state, so be careful with this.
 
     See comment in `get_save_block` about what 'save blocks' are.
 
@@ -185,8 +180,8 @@ def get_encryption_key() -> int:
     elif context.rom.is_emerald:
         return unpack_uint32(get_save_block(2, offset=0xAC, size=4))
     else:
-        # R/S does not 'encrypt' save data yet, so the key is effectively `0`.
-        # Since the encryption is just XOR, this makes it ia no-op.
+        # R/S doesn't use encryption for save data, so we just use 0 as the key.
+        # Since it's an XOR operation, this doesn't change anything.
         return 0
 
 

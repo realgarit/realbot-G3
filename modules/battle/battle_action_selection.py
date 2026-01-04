@@ -59,9 +59,9 @@ def handle_battle_action_selection(strategy: BattleStrategy) -> Generator:
             yield
             continue
 
-        # In double battles, both player Pokémon will do their inputs in the same run. So the active
-        # battler might change in the middle of this function. If we detect that, we update the battle
-        # state as the previous Pokémon's actions might have changed it (e.g. by using potions.)
+        # In double battles, both Pokémon take their turns in one go. This means the active battler
+        # might change partway through. If it does, we'll refresh the battle state since the 
+        # first Pokémon's move might have changed things (like using a potion).
         if previous_battler_index != battler_index:
             battle_state = get_battle_state()
             previous_battler_index = battler_index
@@ -99,7 +99,7 @@ def handle_battle_action_selection(strategy: BattleStrategy) -> Generator:
                 in_battle_index = battle_state.map_battle_party_index(index)
 
                 yield from scroll_to_battle_action(2)
-                # JP roms need a little delay
+                # Japanese ROMs need a quick pause here.
                 for _ in range(5):
                     yield
                 context.emulator.press_button("A")
@@ -233,7 +233,7 @@ def battle_action_use_move(
     if context.rom.is_rs:
         yield
 
-    # Choose the 'Fight' option.
+    # Select the 'Fight' menu option.
     if get_battle_controller_callback(battler_index) not in ("HandleInputChooseMove", "HandleAction_ChooseMove"):
         yield from scroll_to_battle_action(0)
         yield
@@ -241,10 +241,8 @@ def battle_action_use_move(
     for _ in range(6 if context.rom.is_rse else 8):
         yield
 
-    # It's possible the game does not actually offer the move list at this point, for example
-    # if the Pokémon is completely out of PP. In that case we only get a message saying that
-    # Struggle is being used. So we just want to confirm that message and then stop the further
-    # execution of this function.
+    # Sometimes the game won't show the move list, like if you're out of PP and have to use Struggle.
+    # In that case, we'll just acknowledge the message and stop here.
     if get_battle_controller_callback(battler_index) not in ("HandleInputChooseMove", "HandleAction_ChooseMove"):
         while get_main_battle_callback() in (
             "HandleTurnActionSelectionState",
@@ -254,7 +252,7 @@ def battle_action_use_move(
             yield
         return
 
-    # Select move and target
+    # Choose the move and decide who to hit.
     yield from scroll_to_move(move_index, battler_index > 1)
     while get_battle_controller_callback(battler_index) in ("HandleInputChooseMove", "HandleAction_ChooseMove"):
         context.emulator.press_button("A")

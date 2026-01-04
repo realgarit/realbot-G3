@@ -13,15 +13,13 @@ from modules.core.state_cache import state_cache
 from modules.stats.stats import StatsDatabase
 from modules.core.tasks import get_global_script_context, get_tasks
 
-# Contains a queue of tasks that should be run the next time a frame completes.
-# This is currently used by the HTTP server component (which runs in a separate thread) to trigger things
-# such as extracting the current party, which need to be done from the main thread.
-# Each entry here will be executed exactly once and then removed from the queue.
+# This queue holds tasks for the next frame.
+# The HTTP server uses it to do stuff like check the party data from the main thread.
+# Each task runs once and then disappears.
 work_queue: queue.Queue[callable] = queue.Queue()
 
 
-# Keeps a list of inputs that have been pressed for each frame so that the HTTP server
-# can fetch and accumulate them for its `Inputs` stream event.
+# This tracks button presses so the HTTP server can show them in the event stream.
 inputs_each_frame: deque[int] = deque(maxlen=128)
 
 
@@ -46,13 +44,10 @@ def main_loop() -> None:
             )
             console.print("\n[red bold]Please do not ask for support if there are any problem with this game.[/]\n")
 
-        # Built-in plugins are only loaded if some bot configuration actually requires them.
-        # Since profile configuration can override global configuration, they can only be
-        # loaded at this point where the profile has been loaded and so the full config is
-        # available.
+        # We only load built-in plugins if the config needs them.
+        # Since profiles can change these settings, we wait until the profile is loaded.
         #
-        # Regular (user-provided) plugins need to be loaded in `realbot.py` as early as possible
-        # because they might add bot modes.
+        # Any plugins you add yourself are loaded earlier so they can show up in the bot modes list.
         load_built_in_plugins()
         plugin_profile_loaded(context.profile)
 
@@ -70,8 +65,7 @@ def main_loop() -> None:
         previous_frame_info: FrameInfo | None = None
 
         while True:
-            # Process work queue, which can be used to get the main thread to access the emulator
-            # at a 'safe' time (i.e. not in the middle of emulating a frame.)
+            # Here's where we handle tasks from the work queue at a safe moment between frames.
             while not work_queue.empty():
                 callback = work_queue.get_nowait()
                 callback()
@@ -97,7 +91,7 @@ def main_loop() -> None:
                 previous_frame=previous_frame_info,
             )
 
-            # Reset all bot listeners if the emulator has been reset.
+            # If the emulator resets, we need to reset the bot listeners too.
             if previous_frame_info is not None and previous_frame_info.frame_count > frame_info.frame_count:
                 state_cache.reset()
                 context.bot_listeners = get_bot_listeners(context.rom)

@@ -17,15 +17,11 @@ if TYPE_CHECKING:
 
 def _initialise_config() -> None:
     """
-    This will check for every file in the `modules/config/templates/` folder
-    whether a corresponding file exists in the `profiles/` directory.
+    This checks the modules/config/templates/ folder and makes sure the same files exist in the profiles/ directory.
 
-    If it finds any that are missing, it will create it by copying over the
-    file from the templates directory.
+    If anything is missing, we'll copy it over from the templates.
 
-    The idea is that we can keep the template files checked into Git and thus
-    overwriting them for each update, while the user can have their own real
-    config files that will not be touched.
+    This keeps the default templates updated in Git while letting you keep your own custom settings untouched.
     """
     config_templates_path = get_base_path() / "modules" / "config" / "templates"
     profiles_path = get_base_path() / "profiles"
@@ -62,7 +58,7 @@ class BotContext:
 
     def reload_config(self) -> None:
         """
-        Triggers a config reload, reload the global config then specific profile config.
+        Reloads the configuration, starting with global settings and then the specific profile.
         """
         from modules.core.console import console
         from modules.core.plugins import plugin_config_reloaded

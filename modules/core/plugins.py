@@ -42,9 +42,8 @@ def load_plugins():
 
 
 def load_built_in_plugins():
-    # This plugin needs to be loaded first so that is executed first. That's because it is supposed
-    # to set the `gif_path` and `tcg_card_path` properties on wild encounters so that other plugins
-    # can use them.
+    # We load this plugin first because it sets up the gif and tcg card paths for encounters.
+    # Other plugins need these, so it has to run before them.
     if context.config.logging.shiny_gifs or context.config.logging.tcg_cards:
         from modules.built_in_plugins.generate_encounter_media import GenerateEncounterMediaPlugin
 

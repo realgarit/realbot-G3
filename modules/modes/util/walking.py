@@ -96,7 +96,7 @@ def follow_path(waypoints: Iterable[tuple[int, int]], run: bool = True) -> Gener
     for waypoint in waypoints:
         yield from walk_to(waypoint, run)
 
-    # Wait for player to come to a full stop.
+    # Wait until the player stops moving.
     while not player_avatar_is_standing_still() or get_player_avatar().running_state != RunningState.NOT_MOVING:
         yield
 
@@ -141,21 +141,13 @@ def follow_waypoints(
     if not player_avatar_is_controllable():
         raise BotModeError("The player avatar is currently not controllable. Cannot navigate.")
 
-    # 'Running' means holding B, which on the Acro Bike leads to doing a Wheelie which is actually
-    # slower than normal riding. On other bikes it just doesn't do anything, so if we are riding one,
-    # this flag will just be ignored.
-    # Similarly, running is not possible when surfing or swimming underwater, but pressing B can
-    # cause the game to try and dive/emerge which we don't want.
+    # Holding B on an Acro Bike makes you do a wheelie, which is slow. On other bikes it does nothing.
+    # We also skip running while surfing or diving so we don't accidentally emerge or dive.
     if run and get_player_avatar().is_on_bike:
         run = False
 
-    # For each waypoint (i.e. each step of the path) we set a timeout. If the player avatar does not reach the
-    # expected location within that time, we stop the walking. The calling code could use that event to
-    # recalculate a new path.
-    #
-    # Regular steps usually take 16 frames, so the 20-frame timeout should be enough. For warps (walking into doors
-    # etc.) a 'step' may take a bit longer due to the map transition. Which is why there is an extra allowance for
-    # those cases.
+    # Each step has a timeout. If the player doesn't make it in time, we stop walking.
+    # This lets the bot try a different path if something got in the way.
     timeout_in_frames = 20
     extra_timeout_in_frames_for_warps = 280
 
@@ -166,10 +158,9 @@ def follow_waypoints(
             yield
             continue
 
-        # For the first waypoint it is possible that the player avatar is not facing the same way as it needs to
-        # walk. This leads to the first navigation step to actually become two: Turning around, then doing the step.
-        # When in tall grass, that could lead to an encounter starting mid-step which messes up the battle handling.
-        # So for the first step, we will add an explicit additional turning step.
+        # If the player isn't facing the right way to start, the first step becomes two: turn, then walk.
+        # In grass, this can cause a battle to start in the middle of a step, which is messy.
+        # So we'll make them turn first as a separate action.
         if last_waypoint is None:
             current_facing_direction = Direction.from_string(get_player_avatar().facing_direction)
             if waypoint.direction != current_facing_direction:
@@ -203,9 +194,7 @@ def follow_waypoints(
                     current_position = get_map_data_for_current_position()
                     frames_remaining_until_timeout += timeout_in_frames
 
-            # Only pressing the direction keys during the frame where movement is actually registered can help
-            # preventing weird overshoot issues in cases where a listener handles an event (like a battle, PokeNav
-            # call, ...)
+            # Pressing the keys only when movement happens helps avoid overshooting if something else interrupts the frame.
             if player_object is not None and "heldMovementFinished" in player_object.flags:
                 if waypoint.action is WaypointAction.Surf:
                     surf_task = "Task_SurfFieldEffect" if not context.rom.is_rs else "sub_8088954"
@@ -297,9 +286,7 @@ def follow_waypoints(
     # Wait for player to come to a full stop.
     context.emulator.reset_held_buttons()
     while not player_avatar_is_standing_still() or get_player_avatar().running_state != RunningState.NOT_MOVING:
-        # If we reached the destination tile and the script context is enabled, that probably means
-        # that a script has triggered at our destination. In that case, we cease control back to the
-        # bot mode immediately.
+        # If we're at the destination and a script starts, we'll give control back to the bot mode immediately.
         if last_waypoint is None or player_is_at(last_waypoint.map, last_waypoint.coordinates):
             if get_global_script_context().is_active:
                 break
@@ -360,10 +347,7 @@ def navigate_to(
             if len(waypoints) == 0:
                 return
 
-            # If the final destination turns out to be a warp, we are not going to end up in the place specified by
-            # the `map` and `coordinates` parameters, but rather on another map. Because that would lead to this
-            # function thinking we've missed the target, we will override the destination with the warp destination
-            # in those cases.
+            # If the destination is a door, we'll end up on a new map. We'll update the target so we don't think we're lost.
             if waypoints[-1].is_warp:
                 destination_map = waypoints[-1].map
                 destination_coordinates = waypoints[-1].coordinates
@@ -375,22 +359,8 @@ def navigate_to(
             yield from follow_waypoints(waypoint_generator(), run, final_facing_direction=final_facing_direction)
             break
         except TimedOutTryingToReachWaypointError:
-            # If we run into a timeout while trying to follow the waypoints, this is likely because of either of
-            # these reasons:
-            #
-            # (a) For some weird reason the player avatar moved to an unexpected location (for example due to forced
-            #     movement, or due to overshooting on the Mach Bike.)
-            # (b) Since the path is calculated in the beginning and then just followed, there's a chance that an NPC
-            #     moves and gets in our way, in which case we would just keep running into them until they finally move
-            #     out of the way again.
-            # (c) We have moved over a tile that triggered a script which froze the player avatar.
-            #
-            # In these cases, the `follow_waypoints()` function will trigger this timeout exception.
-            #
-            # In the first two  cases, We will just calculate a new path (from the new location, taking into account
-            # the new location of obstacles) and try pathing again.
-            #
-            # In the third case, we consider that an unexpected event and will abort the navigation.
+            # If walking times out, it's usually because the player moved somewhere else or an NPC is blocking the way.
+            # Or maybe a script froze the player. We'll recalculate the path and try again if it's not a script.
             if get_global_script_context().is_active:
                 if expecting_script:
                     return

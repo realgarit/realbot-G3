@@ -158,17 +158,17 @@ class PuzzleSolverMode(BotMode):
                     yield from navigate_to(MapRSE.SKY_PILLAR_3F, (11, 1))
                     # floor 4
                     yield from navigate_to(MapRSE.SKY_PILLAR_4F, (5, 4))
-                    # after falling down to floor 3
+                    # after falling to the third floor
                     yield from mount_bike()
                     yield from navigate_to(MapRSE.SKY_PILLAR_3F, (7, 1))
-                    # back on floor 4
+                    # back on the fourth floor
                     yield from navigate_to(MapRSE.SKY_PILLAR_4F, (3, 1))
-                    # floor 5
+                    # fifth floor
                     yield from navigate_to(MapRSE.SKY_PILLAR_5F, (10, 1))
                     context.message = "Sky Pillar puzzle complete!"
                     context.set_manual_mode()
 
-            # Regi Initial Puzzle
+            # Initial Regi Puzzle
             case MapRSE.PACIFIDLOG_TOWN:
                 if get_event_flag("REGI_DOORS_OPENED") == 1:
                     raise BotModeError("You already solved the sealed chamber puzzle")
@@ -206,7 +206,7 @@ class PuzzleSolverMode(BotMode):
                     context.message = "Solving Sealed Chamber Puzzle...\nStarting solution..."
                     yield from navigate_to(MapRSE.SEALED_CHAMBER_OUTER_ROOM, (10, 3))
 
-                    # First door already opened or not
+                    # Check if the first door is already open
                     if get_event_flag("SYS_BRAILLE_DIG") == 0:
                         yield from use_field_move("Dig")
                         yield from wait_for_task_to_start_and_finish("Task_DuckBGMForPokemonCry", "A")
@@ -234,7 +234,7 @@ class PuzzleSolverMode(BotMode):
                         )
                         context.message = "Two Left, Two Down, Rock Smash..."
                         yield from follow_path([(6, 21), (6, 23)])
-                        # use rock smash
+                        # use Rock Smash
                         yield from use_field_move("Rock Smash")
                         yield from wait_for_task_to_start_and_finish("Task_DoFieldMove_RunFunc")
                         if get_event_flag("SYS_REGIROCK_PUZZLE_COMPLETED"):
@@ -366,7 +366,7 @@ class PuzzleSolverMode(BotMode):
                 def path():
                     # Entrance
                     yield from navigate_to(MapRSE.SEAFLOOR_CAVERN_ENTRANCE, (10, 1))
-                    # 1F
+                    # Floor 1
                     context.message = "Solving Seafloor Cavern Puzzle...\nSolving room 1 / 6..."
                     yield from navigate_to(MapRSE.SEAFLOOR_CAVERN_ROOM1, (4, 10))
                     yield from use_rock_smash("Right")
@@ -614,12 +614,12 @@ class PuzzleSolverMode(BotMode):
                 assert_item_exists_in_bag("Soot Sack", "This mode requires the Soot Sack to have been obtained.")
 
                 def path():
-                    # glass workshop exit
+                    # exiting the glass shop
                     yield from navigate_to(MapRSE.ROUTE113_GLASS_WORKSHOP, (3, 8))
                     while get_event_var("ASH_GATHER_COUNT") < 1000:
                         yield from walk_one_tile("Down")
                         yield from navigate_to(MapRSE.ROUTE113, (32, 11))
-                        # collect 100 (E) / 101 (RS) ashes per lap
+                        # you get about 100 ashes per lap
                         yield from follow_path(
                             [
                                 # first grass patch - 29 ashes
@@ -672,7 +672,7 @@ class PuzzleSolverMode(BotMode):
                                 (35, 7),
                             ]
                         )
-                        # re-enter glass shop and exit to refresh ashes
+                        # pop back in and out of the shop to reset the ashes
                         yield from navigate_to(MapRSE.ROUTE113, (33, 5))
                     context.message = "1000 ashes collected! Talk to glassblower to exchange for White Flute."
                     context.set_manual_mode()

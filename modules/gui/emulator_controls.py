@@ -290,12 +290,9 @@ class EmulatorControls:
             font=tkinter.font.Font(size=9),
         )
 
-        # In debug mode, we are displaying more performance stats in the footer (left side.)
-        # So for game with particularly long names (e.g. 'LeafGreen (E) (Rev 1)', the stats
-        # and the game/version info on the right combined become wider than the emulator screen,
-        # leading to the window growing and shrinking.
-        #
-        # This puts the game/version info in a separate line in debug mode.
+        # In debug mode, the footer gets a bit crowded with performance stats.
+        # If the game name is long, the whole window might start jumping around as text fits or doesn't fit.
+        # So we just put the version info on its own line when debugging to keep things steady.
         if context.debug:
             version_label.grid(row=1, column=0, sticky="W")
         else:

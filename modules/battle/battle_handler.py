@@ -28,11 +28,10 @@ if TYPE_CHECKING:
 @debug.track
 def handle_battle(strategy: BattleStrategy) -> Generator:
     """
-    This is the main battle-handling function that will attempt to finish the
-    battle, calling the battle strategy's callbacks whenever a decision is
-    needed.
-    :param strategy: The battle strategy that should be queried each time there
-                     is a decision to make.
+    This is the main loop for handling battles. It keeps the battle moving and
+    asks the battle strategy what to do whenever a decision comes up.
+
+    :param strategy: The set of rules for making battle decisions.
     """
     while battle_is_active() and context.bot_mode != "Manual":
         instruction = get_current_battle_script_instruction()
@@ -67,7 +66,7 @@ def handle_fainted_pokemon(strategy: BattleStrategy):
         fainted_pokemon = battle_state.own_side.right_battler
 
     if fainted_pokemon is None:
-        # I can't remember how this could ever happen, but I'll leave this check in here for now.
+        # I'm not sure if this can actually happen, but I'm keeping the check just in case.
         context.message = "fainted_pokemon was None"
         context.debug_stepping_mode()
         # context.emulator.press_button("B")
@@ -95,18 +94,12 @@ def handle_fainted_pokemon(strategy: BattleStrategy):
 
     new_lead_index = strategy.choose_new_lead_after_faint(battle_state)
 
-    # If `choose_new_lead_after_faint()` has been called while NOT being in the party selection screen,
-    # `get_party()` still contains the 'original' (overworld) party order. Thus, we have to map the new
-    # index to the in-battle party index (because that's what we're going to select later) but only after
-    # all the sanity checks have been done.
-    # On the other hand, if this function was called IN the party menu, `get_party()` already returns the
-    # in-battle order and no mapping is needed.
+    # If we're not in the party menu yet, the game is still using the normal overworld party order.
+    # We'll need to map the new index to the in-battle order later. If we're already in the menu,
+    # then `get_party()` is already using the correct in-battle order.
     #
-    # In practice, this function will be called OUTSIDE the party menu if the battle strategy chose to
-    # send out the next Pokémon (without trying to escape) because then the call happens during the
-    # dialogue.
-    # Whereas the function will be called IN the party menu if the strategy tried to escape and failed,
-    # because then the game automatically opens the party menu.
+    # Usually, we're outside the menu if the strategy just picked the next Pokémon during the dialogue.
+    # We're inside the menu if we tried to run away but failed, since the game forces the menu open then.
     index_needs_mapping = get_game_state() != GameState.PARTY_MENU
 
     if context.bot_mode == "Manual":
@@ -131,11 +124,9 @@ def handle_fainted_pokemon(strategy: BattleStrategy):
         context.emulator.press_button("A")
         yield
 
-    # This will trigger if a battle ends at the same time as the player's Pokémon faints.
-    # That happens if the player uses moves like Explosion or Self Destruct, or receives
-    # fatal recoil damage during the finishing blow.
-    # In this case, the game obviously never asks to choose a new lead and ends the battle
-    # instead.
+    # This happens if the battle ends right as your Pokémon faints—like from using Explosion
+    # or taking too much recoil damage on a winning hit. The game just ends the battle
+    # instead of asking for a new Pokémon.
     if get_current_battle_script_instruction() == "BattleScript_FaintedMonEnd":
         return
 

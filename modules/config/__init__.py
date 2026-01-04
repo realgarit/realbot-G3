@@ -10,7 +10,7 @@ from modules.core import exceptions
 from modules.config.schemas_v1 import Battle, CatchBlock, Cheats, Discord, OBS, Keys, Logging, HTTP, ProfileMetadata
 from modules.core.runtime import get_base_path
 
-# Defines which class attributes of the Config class are meant to hold required configuration data.
+# These are the attributes in the Config class that hold the actual setting data.
 CONFIG_ATTRS = {
     "battle",
     "catch_block",
@@ -24,7 +24,7 @@ CONFIG_ATTRS = {
 
 
 class Config:
-    """Initializes a config directory and provides access to the different settings."""
+    """Set up the config directory and manage access to all settings."""
 
     def __init__(self, config_dir: str | Path | None = None, is_profile: bool = False, strict: bool = False) -> None:
         """Initialize the configuration folder, loading all config files.
@@ -64,7 +64,7 @@ class Config:
         self.loaded = True
 
     def save(self, config_dir: str | Path | None = None, strict: bool = True):
-        """Saves currently loaded configuration into files inside config_dir.
+        """Save the current settings to files in the config_dir.
 
         :param config_dir: New config dir to save to.
         :param strict: Whether to allow overwriting files or creating missing directories.

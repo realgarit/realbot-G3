@@ -118,11 +118,9 @@ def assert_has_pokemon_with_any_move(
             return
 
     if check_in_saved_game:
-        # If the check has failed for the saved game, run it again for the active game -- if that fails
-        # too, the following line will raise an unmodified error message and stop the execution of this
-        # function. If the assertion is met in the active game but not in the saved one, the line
-        # after that will add a note to the error message saying that the check only failed for the
-        # saved game.
+        # If the check fails for the saved game, we'll try it on the active game.
+        # If both fail, we'll stop and show the error. But if it only fails on the save file,
+        # we'll add a little note letting you know it's only a problem in the save.
         assert_has_pokemon_with_any_move(moves, error_message)
         error_message += _error_message_addendum_if_assert_only_failed_in_saved_game
     raise BotModeError(error_message)

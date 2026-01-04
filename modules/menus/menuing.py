@@ -46,9 +46,7 @@ def is_fade_active() -> bool:
 
 def party_menu_is_open() -> bool:
     """
-    helper function to determine whether the Pokémon party menu is active
-
-    :return: True if the party menu is active, false otherwise.
+    Checks if the Pokémon party menu is currently open.
     """
     if not context.rom.is_rs:
         return get_game_state() == GameState.PARTY_MENU
@@ -62,12 +60,9 @@ def party_menu_is_open() -> bool:
 
 def scroll_to_item_in_bag(item: Item) -> Generator:
     """
-    This will select the correct bag pocket and scroll to the correct position therein.
-
-    It will _not_ activate the item (pressing A) and it does _not_ open the bag menu.
-    It is assumed that the bag menu is already open.
-
-    :param item: Item to scroll to
+    Selects the right bag pocket and scrolls to the item.
+    
+    This doesn't use the item or open the bag—it assumes the bag is already open.
     """
 
     def open_pocket_index() -> int:
@@ -130,8 +125,7 @@ def scroll_to_party_menu_index(target_index: int) -> Generator:
             f"Cannot scroll to party index #{target_index} because the party only contains {get_party_size()} Pokémon."
         )
 
-    # Wait for fade-in to finish (happens when the bag is opened, during which time inputs
-    # are not yet active.)
+    # Wait for the fade-in to end so we can actually press buttons.
     while (
         get_game_state() != GameState.PARTY_MENU
         or unpack_uint16(read_symbol("gPaletteFade", offset=0x07, size=0x02)) & 0x80 != 0
@@ -168,7 +162,7 @@ class BaseMenuNavigator:
 
     def step(self):
         """
-        Iterates through the steps of navigating the menu for the desired outcome.
+        Runs through the steps to navigate the menu.
         """
         while self.current_step != "exit":
             if not self.navigator:
@@ -180,22 +174,20 @@ class BaseMenuNavigator:
 
     def get_next_func(self):
         """
-        Advances through the steps of navigating the menu.
+        Moves forward to the next menu step.
         """
         ...
 
     def update_navigator(self):
         """
-        Sets the navigator for the object to follow the steps for the desired outcome.
+        Sets which navigator to use for the next part of the process.
         """
         ...
 
 
 class StartMenuNavigator(BaseMenuNavigator):
     """
-    Opens the start menu and moves to the option with the desired index from the menu.
-
-    :param desired_option: The option to select from the menu.
+    Opens the start menu and scrolls to the option you want.
     """
 
     def __init__(self, desired_option: str):
@@ -467,7 +459,7 @@ class PokemonPartyMenuNavigator(BaseMenuNavigator):
 
     def select_mon(self):
         if self.game in ["POKEMON EMER", "POKEMON FIRE", "POKEMON LEAF"]:
-            # This is required so that selecting the first party member doesn't fail.
+            # We need this to make sure selecting the first party member doesn't glitch out.
             if not task_is_active("Task_HandleChooseMonInput"):
                 while not task_is_active("Task_HandleChooseMonInput"):
                     yield
@@ -651,7 +643,7 @@ def get_items_available_for_pickup() -> list[str]:
 
 class CheckForPickup(BaseMenuNavigator):
     """
-    class that handles pickup farming.
+    Handles farming items with the Pickup ability.
     """
 
     def __init__(self):
@@ -777,7 +769,7 @@ class CheckForPickup(BaseMenuNavigator):
     def get_next_mon(self):
         next_idx = self.pokemon_with_pickup_and_item.index(self.current_mon) + 1
         if next_idx > len(self.pokemon_with_pickup_and_item) - 1:
-            context.message = "I forgot how to count, switching to manual mode..."
+            context.message = "The math seems off, switching to manual mode..."
             context.set_manual_mode()
         else:
             self.current_mon = self.pokemon_with_pickup_and_item[next_idx]

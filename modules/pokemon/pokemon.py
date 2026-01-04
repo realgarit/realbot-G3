@@ -52,12 +52,12 @@ from modules.game.roms import ROMLanguage
 @dataclass
 class Pokemon:
     """
-    Represents an individual Pokémon.
+    This class represents a single Pokémon.
 
-    The only real data in here is the `self.data` property, which contains the 100-byte (party Pokémon)
-    or 80-byte (box Pokémon) string of data that everything else can be computed from.
-
-    Everything else (nickname, IVs, ...) is computed on the fly using the getters.
+    All the information comes from the `self.data` property, which is either 100 bytes for a party 
+    Pokémon or 80 bytes for one in a box.
+    
+    We calculate everything else—like nicknames and IVs—on the fly from that data.
     """
 
     data: bytes
@@ -77,20 +77,17 @@ class Pokemon:
 
     def _decrypted_data(self) -> bytes:
         """
-        Returns the decrypted Pokémon data and also puts the substructures in a consistent order.
+        Decrypts the Pokémon data and puts the internal pieces in a standard order.
 
-        For more information regarding encryption and substructure ordering, see:
+        If you want to know more about how Gen 3 encrypts and organizes this, check out Bulbapedia:
         https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_data_substructures_(Generation_III)
 
-        IMPORTANT:
-        This does NOT handle the fact that moving substructures around changes the checksum!
-        This function is purely for reading stats. Do NOT use the output of this function to
-        create a new .pk3 file!
+        Just a heads-up: moving things around like this breaks the checksum, so this is just for
+        reading stats. Don't use the result of this function to try and save a .pk3 file!
 
-        It puts the substructures in the same order as they are listed on Bulbapedia, to make working
-        with offsets a bit easier.
+        We're following the standard Bulbapedia order here to make finding specific values easier.
 
-        :return: The decrypted and re-ordered data for this Pokémon.
+        :return: Decrypted and sorted Pokémon data.
         """
         personality_value = unpack_uint32(self.data[0:4])
         # Box Pokémon (80 bytes) do not track current HP, level, status condition etc.
@@ -133,17 +130,16 @@ class Pokemon:
 
     def to_pk3(self) -> bytes:
         """
-        Returns the decrypted Pokémon data in export format.
-        The substructures are decrypted and reordered to standard order (0, 1, 2, 3),
-        and the checksum is recalculated from the decrypted data.
-
-        This format is compatible with PKHeX and other save editors.
-        Note that this only exports the 80-byte base data, so level, current, HP, etc. are lost.
-        This is unavoidable because the file format does not support storing these values.
-        For more info, see:
+        Gets the Pokémon data ready for export.
+        
+        We'll decrypt everything, put it in the standard order, and recalculate the checksum.
+        This gives you a format that works with PKHeX and other save editors.
+        
+        Keep in mind this only exports the 80-byte base data. Things like current HP and 
+        level aren't stored in this format, so those will be lost. You can read more here:
         https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_data_substructures_(Generation_III)#Format
 
-        :return: The decrypted data in export format.
+        :return: Decrypted data in a standard export format.
         """
         data = bytearray(self._decrypted_data())
         # First 32 bytes (PID, OTID, Nickname, Language, OT Name, etc) are already correct
@@ -204,9 +200,8 @@ class Pokemon:
     @property
     def is_empty(self) -> bool:
         """
-        Since many places in memory _might_ contain a Pokémon but also might not (all zeros or something),
-        this checks whether a given block of data is actually a Pokémon the same way the game does.
-        :return: Whether the data represents a Pokémon or is just an empty slot.
+        Memory can be messy—a slot might have a real Pokémon or just be full of zeros.
+        This check follows the game's rules to see if the data is a real Pokémon or just an empty slot.
         """
         if len(self.data) < 80:
             return True
@@ -298,7 +293,7 @@ class Pokemon:
         item_id = unpack_uint16(data[10:12])
         if item_id == 0:
             return None
-        # Lazy import to avoid circular dependency
+        # We're importing here to avoid a circular dependency.
         from modules.items.items import get_item_by_index
 
         return get_item_by_index(item_id)
@@ -501,10 +496,10 @@ class Pokemon:
     @property
     def is_anti_shiny(self) -> bool:
         """
-        An 'Anti-Shiny' is a Pokémon that WOULD be shiny, if the PID and Trainer ID
-        were XOR'd differently.
+        An 'Anti-Shiny' is a Pokémon that would have been shiny if the PID and Trainer ID
+        were matched up differently.
         Specifically, (TID ^ PID_HI) ^ (SID ^ PID_LO) < 8.
-        This is mostly just a fun curiosity.
+        It doesn't actually do anything in-game; it's just a neat detail.
         """
         trainer_id = self.original_trainer.id
         secret_id = self.original_trainer.secret_id
@@ -589,10 +584,10 @@ def clear_opponent() -> None:
 
 def opponent_changed() -> bool:
     """
-    Checks if the current opponent/encounter from `gEnemyParty` has changed since the function was last called.
-    Very fast way to check as this only reads the first 4 bytes (PID) and does not decode the Pokémon data.
+    Checks if the opponent in `gEnemyParty` has changed since the last time we looked.
+    This is very fast because it only checks the ID and doesn't bother decoding the whole Pokémon.
 
-    :return: True if opponent changed, otherwise False (bool)
+    :return: True if it's a new opponent, False otherwise.
     """
     try:
         global last_opid
@@ -612,8 +607,7 @@ def opponent_changed() -> bool:
 
 def pokemon_has_usable_damaging_move(pokemon: Pokemon) -> bool:
     """
-    Checks if the given Pokémon has at least one usable attacking move.
-    Returns True if a usable move is found; otherwise, False.
+    Sees if the Pokémon has any attacking moves that can actually be used.
     """
     return any(
         move is not None and move.move.base_power > 0 and move.move.name not in context.config.battle.banned_moves

@@ -48,7 +48,7 @@ class LevelGrindMode(BotMode):
         return self._controller.on_whiteout()
 
     def run(self) -> Generator:
-        # Check training spot first to see if it has encounters to not print multi choices windows for nothing
+        # Let's check the training spot first. No need to show a menu if there aren't any encounters anyway.
         self._controller.verify_on_start()
 
         party_lead_pokemon = get_party().non_eggs[0]

@@ -14,8 +14,8 @@ from modules.core.runtime import get_base_path
 from modules.core.version import realbot_version
 
 
-# Module `exceptions` is not being used, but it needs to be imported because otherwise `modules.console`
-# runs into a circular import issue.
+# We're not using the `exceptions` module here, but we still need to import it.
+# Without this, `modules.console` gets stuck in a circular import loop.
 
 
 @dataclass

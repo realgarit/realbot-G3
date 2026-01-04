@@ -134,9 +134,7 @@ class StartMenuOptionKanto(IntEnum):
 
 def get_party_menu_cursor_pos(party_length: int) -> dict:
     """
-    Function to parse the party menu data and return usable information
-
-    :param party_length: the number of Pokémon in the party
+    Parses the party menu and returns usable information.
     """
     party_menu = {
         "slot_id": -1,
@@ -170,7 +168,7 @@ def get_party_menu_cursor_pos(party_length: int) -> dict:
 
 def parse_menu() -> dict:
     """
-    Function to parse the currently displayed menu and return usable information.
+    Parses the current menu and returns the cursor's details.
     """
     if not context.rom.is_rs:
         menu = read_symbol("sMenu")
@@ -191,7 +189,7 @@ def parse_menu() -> dict:
 
 def parse_party_menu() -> dict:
     """
-    Function to parse info about the party menu
+    Pulls information about the items and actions in the party menu.
     """
     if not context.rom.is_rs:
         pmi_pointer = read_symbol("sPartyMenuInternal")
@@ -214,9 +212,7 @@ def get_battle_cursor(cursor_type: str) -> int:
 
 def get_learning_mon() -> Pokemon:
     """
-    If the learning state is entered through evolution, returns the Pokémon that is learning the move.
-
-    :return: The Pokémon trying to learn a move after evolution.
+    If a Pokémon is learning a move while evolving, this returns that Pokémon.
     """
     index = 0
     if not context.rom.is_rs:
@@ -236,14 +232,14 @@ def get_learning_mon() -> Pokemon:
 
 def get_learning_move() -> Move:
     """
-    helper function that returns the move trying to be learned
+    Returns the move currently being learned.
     """
     return get_move_by_index(int.from_bytes(read_symbol("gMoveToLearn", size=2), "little"))
 
 
 def get_learning_move_cursor_pos() -> int:
     """
-    helper function that returns the position of the move learning cursor
+    Returns the position of the cursor when learning a new move.
     """
     match context.rom.game_title:
         case "POKEMON EMER":
@@ -261,7 +257,7 @@ def get_learning_move_cursor_pos() -> int:
 
 def parse_start_menu() -> dict:
     """
-    Helper function that decodes the state of the start menu.
+    Decodes everything we need to know about the start menu's current state.
     """
     if context.rom.is_rse:
         start_menu_options_symbol = "sCurrentStartMenuActions"
@@ -293,7 +289,7 @@ def parse_start_menu() -> dict:
 
 def get_battle_menu() -> str:
     """
-    determines whether we're on the action selection menu, move selection menu, or neither
+    Checks if we're on the action menu, the move menu, or nowhere at all.
     """
     match context.rom.game_title:
         case "POKEMON RUBY" | "POKEMON SAPP":
@@ -330,7 +326,7 @@ def get_battle_controller():
 
 def name_requested() -> bool:
     """
-    Determines whether the prompt to name a Pokémon is on the screen
+    Checks if the game is asking for a nickname right now.
     """
     match context.rom.game_title:
         case "POKEMON RUBY" | "POKEMON SAPP":
@@ -346,7 +342,7 @@ def name_requested() -> bool:
 
 def switch_requested() -> bool:
     """
-    Determines whether the prompt to use another Pokémon is on the screen
+    Checks if the game is asking you to switch your Pokémon.
     """
     match context.rom.game_title:
         case "POKEMON RUBY" | "POKEMON SAPP":

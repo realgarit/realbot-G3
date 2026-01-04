@@ -190,7 +190,7 @@ class ItemHoldEffect(Enum):
 @dataclass
 class Item:
     """
-    This represents an item type in the game.
+    Represents an item from the game.
     """
 
     index: int
@@ -399,7 +399,7 @@ class ItemBag:
         if len(pocket) < pocket_size:
             return True
 
-        # In FireRed/LeafGreen, you can always put 999 items in a stack. In RSE, this only works for berries.
+        # In FireRed and LeafGreen, you can stack up to 999 items. In RSE, that only works for berries.
         if context.rom.is_frlg or item.pocket == ItemPocket.Berries:
             stack_size = 999
         else:

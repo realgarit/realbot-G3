@@ -119,16 +119,15 @@ class DaycareMode(BotMode):
             ):
                 raise BotModeError("Your bicycle is stored in the PC storage system. Please go and get it.")
 
-            # Get the Mach Bike in Mauville City
+            # Head to Mauville to get the Mach Bike.
             yield from navigate_to(MapRSE.MAUVILLE_CITY, (35, 5))
 
-            # Walk up to the bicycle shop guy
+            # Go talk to the owner of the bike shop.
             yield from navigate_to(MapRSE.MAUVILLE_CITY_BIKE_SHOP, (3, 5))
             yield from ensure_facing_direction("Left")
 
-            # Talk to him. If the player didn't have any bike, the first option will be
-            # the Mach Bike, and if they already have the Acro Bike it will just switch
-            # it, so spamming A works either way.
+            # Talk to him. If you don't have a bike, the Mach Bike is the first choice.
+            # If you have the Acro Bike, it just swaps them. So just hitting A works fine.
             context.emulator.press_button("A")
             yield
             while get_global_script_context().is_active:
@@ -136,7 +135,7 @@ class DaycareMode(BotMode):
                 yield
             yield
 
-            # Leave the bicycle shop
+            # Time to head out of the bike shop.
             yield from navigate_to(MapRSE.MAUVILLE_CITY_BIKE_SHOP, (3, 8))
 
             yield from register_key_item(get_item_by_name("Mach Bike"))
@@ -161,7 +160,7 @@ class DaycareMode(BotMode):
                 yield from wait_for_task_to_start_and_finish(yes_no_task, "A")
                 yield from wait_for_task_to_start_and_finish("Task_Fanfare")
                 yield from wait_for_task_to_start_and_finish(message_box_task, "B")
-                # loop until egg is received - necessary as extra dialogue without a task is active
+                # Keep going until you get the egg. Sometimes there's extra dialogue that doesn't trigger a task.
                 while daycare_egg_ready:
                     daycare_egg_ready = get_event_flag("PENDING_DAYCARE_EGG")
                     context.emulator.press_button("B")
@@ -192,20 +191,20 @@ class DaycareMode(BotMode):
             # if get_player_avatar().is_on_bike:
             #     context.emulator.press_button("Select")
 
-            # Enter daycare
+            # Go inside the daycare.
             yield from navigate_to(daycare_route, daycare_door)
 
-            # move to PC
+            # Walk over to the PC.
             yield from navigate_to(daycare_inside_map, (10, 2))
             yield from ensure_facing_direction("Up")
 
-            # Interact with PC
+            # Use the PC.
             party = get_party()
             yield from interact_with_pc(
                 [PCAction.release_pokemon_from_party(party[index]) for index in party_indices_to_release]
             )
 
-            # Leave daycare
+            # Head back outside.
             yield from navigate_to(daycare_inside_map, daycare_exit)
 
         def should_pick_up_egg() -> bool:

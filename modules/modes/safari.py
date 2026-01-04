@@ -66,7 +66,7 @@ class SafariMode(BotMode):
         self._feeder_direction = None
         self._pokeblock_type_in_feeder = None
         self._use_repel = False
-        self._money_spent_limit = 15000  # Since you can only have 30 Pokeblock, running 30 times is more than enough
+        self._money_spent_limit = 15000  # 30 Pokeblocks is plenty, so about 30 runs should do it.
 
     @staticmethod
     def name() -> str:

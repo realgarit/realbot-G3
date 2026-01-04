@@ -14,18 +14,16 @@ def _select_in_menu(cursor_symbol: str, target_index: int, use_third_byte: bool 
     while True:
         current_index = read_symbol(cursor_symbol, size=4)
 
-        # In double battles, for the right-side Pokémon the 3rd byte of the index is used,
-        # otherwise it's the 1st byte.
+        # Double battles use the 3rd byte for the Pokémon on the right side.
+        # Everything else uses the 1st byte.
         if use_third_byte:
             current_index = current_index[2]
         else:
             current_index = current_index[0]
 
         if current_index == target_index:
-            # If this function is called when the cursor is already pointing at the target,
-            # in some edge cases we need to wait another frame until the UI becomes responsive.
-            # This is _usually_ not necessary, but waiting that extra frame fixes the edge
-            # case so here we go.
+            # If the cursor is already where it needs to be, we might still need to wait a frame.
+            # It's an edge case, but waiting makes sure the UI is ready for the next input.
             if first_iteration:
                 yield
             break

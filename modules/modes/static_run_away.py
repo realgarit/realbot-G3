@@ -50,7 +50,7 @@ class StaticRunAway(BotMode):
 
     def run(self) -> Generator:
         match get_player_avatar().map_group_and_number:
-            # Lugia on Emerald
+            # Lugia (Emerald)
             case MapRSE.NAVEL_ROCK_BOTTOM:
                 pokemon_name = "Lugia"
                 flag_to_check = "CAUGHT_LUGIA"
@@ -61,7 +61,7 @@ class StaticRunAway(BotMode):
                     yield from walk_one_tile("Right")
                     yield from navigate_to(MapRSE.NAVEL_ROCK_BOTTOM, (11, 14))
 
-            # Lugia on FR/LG
+            # Lugia (FireRed/LeafGreen)
             case MapFRLG.NAVEL_ROCK_BASE:
                 pokemon_name = "Lugia"
                 flag_to_check = "CAUGHT_LUGIA"
@@ -72,7 +72,7 @@ class StaticRunAway(BotMode):
                     yield from walk_one_tile("Right")
                     yield from navigate_to(MapFRLG.NAVEL_ROCK_BASE, (10, 16))
 
-            # Ho-Oh on Emerald
+            # Ho-Oh (Emerald)
             case MapRSE.NAVEL_ROCK_TOP:
                 pokemon_name = "Ho-Oh"
                 flag_to_check = "CAUGHT_HO_OH"
@@ -83,7 +83,7 @@ class StaticRunAway(BotMode):
                     yield from walk_one_tile("Right")
                     yield from navigate_to(MapRSE.NAVEL_ROCK_TOP, (12, 10))
 
-            # Ho-Oh on FR/LG
+            # Ho-Oh (FireRed/LeafGreen)
             case MapFRLG.NAVEL_ROCK_SUMMIT:
                 pokemon_name = "Ho-Oh"
                 flag_to_check = "CAUGHT_HO_OH"
@@ -94,7 +94,7 @@ class StaticRunAway(BotMode):
                     yield from walk_one_tile("Right")
                     yield from navigate_to(MapFRLG.NAVEL_ROCK_SUMMIT, (9, 12))
 
-            # Regice on Emerald
+            # Regice (Emerald)
             case MapRSE.ISLAND_CAVE:
                 pokemon_name = "Regice"
                 flag_to_check = "DEFEATED_REGICE"
@@ -104,7 +104,7 @@ class StaticRunAway(BotMode):
                     yield from navigate_to(MapRSE.ISLAND_CAVE, (8, 20))
                     yield from navigate_to(MapRSE.ISLAND_CAVE, (8, 8))
 
-            # Registeel on Emerald
+            # Registeel (Emerald)
             case MapRSE.ANCIENT_TOMB:
                 pokemon_name = "Registeel"
                 flag_to_check = "DEFEATED_REGISTEEL"
@@ -114,7 +114,7 @@ class StaticRunAway(BotMode):
                     yield from navigate_to(MapRSE.ANCIENT_TOMB, (8, 20))
                     yield from navigate_to(MapRSE.ANCIENT_TOMB, (8, 8))
 
-            # Regirock on Emerald
+            # Regirock (Emerald)
             case MapRSE.DESERT_RUINS:
                 pokemon_name = "Regirock"
                 flag_to_check = "DEFEATED_REGIROCK"
@@ -124,7 +124,7 @@ class StaticRunAway(BotMode):
                     yield from navigate_to(MapRSE.DESERT_RUINS, (8, 20))
                     yield from navigate_to(MapRSE.DESERT_RUINS, (8, 8))
 
-            # Lati@s on Emerald
+            # Lati@s (Emerald)
             case MapRSE.SOUTHERN_ISLAND_INTERIOR:
                 pokemon_name = "Lati@s"
                 flag_to_check = "DEFEATED_LATIAS_OR_LATIOS"
@@ -135,7 +135,7 @@ class StaticRunAway(BotMode):
                     yield from navigate_to(MapRSE.SOUTHERN_ISLAND_INTERIOR, (13, 12))
                     yield from wait_for_script_to_start_and_finish("SouthernIsland_Interior_EventScript_Lati", "A")
 
-            # Kyogre in Emerald
+            # Kyogre (Emerald)
             case MapRSE.MARINE_CAVE_END:
                 pokemon_name = "Kyogre"
                 flag_to_check = "DEFEATED_KYOGRE"
@@ -145,7 +145,7 @@ class StaticRunAway(BotMode):
                     yield from navigate_to(MapRSE.MARINE_CAVE_ENTRANCE, (14, 1))
                     yield from navigate_to(MapRSE.MARINE_CAVE_END, (9, 26))
 
-            # Groudon in Emerald
+            # Groudon (Emerald)
             case MapRSE.TERRA_CAVE_END:
                 pokemon_name = "Groudon"
                 flag_to_check = "DEFEATED_GROUDON"
@@ -155,7 +155,7 @@ class StaticRunAway(BotMode):
                     yield from navigate_to(MapRSE.TERRA_CAVE_ENTRANCE, (14, 1))
                     yield from navigate_to(MapRSE.TERRA_CAVE_END, (17, 26))
 
-            # Rayquaza on Emerald
+            # Rayquaza (Emerald)
             case MapRSE.SKY_PILLAR_TOP:
                 pokemon_name = "Rayquaza"
                 flag_to_check = "DEFEATED_RAYQUAZA"
@@ -165,7 +165,7 @@ class StaticRunAway(BotMode):
                     yield from navigate_to(MapRSE.SKY_PILLAR_5F, (10, 1))
                     yield from navigate_to(MapRSE.SKY_PILLAR_TOP, (14, 7))
 
-            # Mew on Emerald
+            # Mew (Emerald)
             case MapRSE.FARAWAY_ISLAND_ENTRANCE:
                 pokemon_name = "Mew"
                 flag_to_check = "DEFEATED MEW"
@@ -174,7 +174,7 @@ class StaticRunAway(BotMode):
                     yield from navigate_to(MapRSE.FARAWAY_ISLAND_ENTRANCE, (22, 7))
                     yield from follow_path([(12, 16), (16, 16), (16, 13)])
 
-                    # Sometimes the bot would press "A" a little bit too early, resulting the bot being stuck and doing nothing (~1/150 chance)
+                    # Sometimes the bot hits "A" too fast and gets stuck. It's rare, but it happens, so we'll wait.
                     yield from wait_for_n_frames(5)
 
                     context.emulator.press_button("A")

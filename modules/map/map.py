@@ -116,15 +116,14 @@ class MapWarp:
         map_number = self.destination_map_number
         warp_id = self.destination_warp_id
 
-        # There is a special case for 'dynamic warps' that have their destination set
-        # in the player's save data.
+        # 'Dynamic warps' are a special case—their destination is stored in the player's save data.
         if map_group == 127 and map_number == 127:
             map_group, map_number, warp_id = get_save_block(1, offset=0x14, size=3)
 
         destination_map = get_map_data((map_group, map_number), (0, 0))
 
-        # Another special case is when there is no corresponding target warp on the
-        # destination map we use _this_ warp's coordinates as the destination.
+        # If the destination map doesn't have a matching warp, we'll just use the coordinates
+        # from our current warp instead.
         if warp_id == 0xFF:
             destination_map.local_position = self.local_coordinates
         else:
@@ -147,7 +146,7 @@ class MapWarp:
 
 class MapCoordEvent:
     """
-    A 'coord event' is an event that gets triggered by entering a tile.
+    A 'coord event' happens as soon as you step on a specific tile.
     """
 
     def __init__(self, data: bytes):
@@ -205,7 +204,7 @@ class MapCoordEvent:
 
 class MapBgEvent:
     """
-    A 'BG event' is an event that triggers when interacting with a tile.
+    A 'BG event' triggers when you interact with a tile (like pressing A on it).
     """
 
     def __init__(self, data: bytes):
@@ -233,7 +232,7 @@ class MapBgEvent:
 
     @property
     def player_facing_direction(self) -> str:
-        """This only has meaning if `kind` is 'Script'."""
+        """This only matters if the event is a 'Script'."""
         match self._data[5]:
             case 0:
                 return "Any"
@@ -250,28 +249,28 @@ class MapBgEvent:
 
     @property
     def script_pointer(self) -> int:
-        """This only has meaning if `kind` is 'Script'."""
+        """This only matters if the event is a 'Script'."""
         return unpack_uint32(self._data[8:12])
 
     @property
     def script_symbol(self) -> str:
-        """This only has meaning if `kind` is 'Script'."""
+        """This only matters if the event is a 'Script'."""
         symbol = get_symbol_name(self.script_pointer, pretty_name=True)
         return hex(self.script_pointer) if symbol == "" else symbol
 
     @property
     def hidden_item(self) -> Item:
-        """This only has meaning if `kind` is 'Hidden Item'."""
+        """This only matters if it's a 'Hidden Item'."""
         return get_item_by_index(unpack_uint16(self._data[8:10]))
 
     @property
     def hidden_item_flag_id(self) -> int:
-        """This only has meaning if `kind` is 'Hidden Item'."""
+        """This only matters if it's a 'Hidden Item'."""
         return unpack_uint16(self._data[10:12])
 
     @property
     def secret_base_id(self) -> int:
-        """This only has meaning if `kind` is 'Secret Base'."""
+        """This only matters if it's a 'Secret Base'."""
         return unpack_uint32(self._data[8:12])
 
     def to_dict(self) -> dict:
@@ -320,7 +319,7 @@ class MapLocation:
     @cached_property
     def _metatile_attributes(self) -> tuple[int, int, int]:
         """
-        :return: Metatile Attributes, Collision, Elevation
+        :return: Attributes, collision, and elevation for the metatile.
         """
         mapgrid_metatile_id_mask = 0x3FF
 

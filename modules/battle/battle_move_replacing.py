@@ -25,7 +25,7 @@ class LearnMoveState(Enum):
 
 def get_learn_move_state() -> LearnMoveState:
     """
-    Determines what step of the move_learning process we're on.
+    Checks which part of the move-learning process we're currently in.
     """
     move_selection_task = _get_evolution_task_name()
 

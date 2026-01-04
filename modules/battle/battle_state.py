@@ -330,17 +330,13 @@ class BattleState:
 
     def map_battle_party_index(self, regular_party_index: int) -> int:
         """
-        The party order within a battle may differ from the 'real' party order if Pokémon
-        have been switched in and out during the battle.
+        Sometimes the party order changes during a battle if you switch Pokémon in and out.
+        If we need to switch again, the order in the menu might not match your actual party.
+        
+        This maps your normal party index to where that Pokémon is in the current battle menu.
 
-        In that case, when deciding to switch to a different party member the order in
-        the party menu might be different from what `get_party()` returns so we'd have to
-        scroll to a different index.
-
-        This function maps party indices to that mid-battle party order.
-
-        :param regular_party_index: Party index as it would be outside the battle.
-        :return: Party index of the current in-battle party order.
+        :param regular_party_index: Which Pokémon you want from your normal party.
+        :return: Where that Pokémon is in the battle's party menu.
         """
         for battle_party_index in range(6):
             byte = self._battler_party_order[battle_party_index // 2]
@@ -416,10 +412,9 @@ class BattleStateSide:
     @property
     def active_battler(self) -> "BattlePokemon":
         """
-        This method is meant to be used in solo battles, where there is only one battler.
-        In double battles it will return the left side, unless that is absent in which case it will
-        return the right side.
-        :return: The first active battling Pokémon.
+        Use this for solo battles where there's only one battler.
+        In double battles, it gives you the Pokémon on the left, or the right one if the left is gone.
+        :return: The first active Pokémon in the battle.
         """
         left_battler = self.left_battler
         if left_battler is None:

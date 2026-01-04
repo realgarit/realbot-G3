@@ -98,9 +98,7 @@ rom_cache: dict[str, ROM] = {}
 
 def list_available_roms(force_recheck: bool = False) -> list[ROM]:
     """
-    This scans all files in the `roms/` directory and returns any entry that might
-    be a valid GB/GBA ROM, along with some metadata that could be extracted from the
-    ROM header.
+    Scans the `roms/` folder for valid GB or GBA games and pulls out some info from their headers.
 
     The GBA ROM (header) structure is described on this website:
     https://problemkaputt.de/gbatek-gba-cartridge-header.htm
@@ -195,25 +193,24 @@ def _load_gb_rom(file: Path, handle: BinaryIO) -> ROM:
 
 
 def load_rom_data(file: Path) -> ROM:
-    # Prefer cached data, so we can skip the expensive stuff below
+    # We'll use cached data if we have it to avoid doing the heavy lifting again.
     global rom_cache
     if str(file) in rom_cache:
         return rom_cache[str(file)]
 
-    # GBA cartridge headers are 0xC0 bytes long and GB(C) headers are even longer, so any
-    # files smaller than that cannot be a ROM.
+    # GBA headers are 0xC0 bytes and GB ones are even bigger, so anything smaller is definitely not a ROM.
     if file.stat().st_size < 0xC0:
         raise InvalidROMError("This does not seem to be a valid ROM (file size too small.)")
 
     with open(file, "rb") as handle:
-        # The byte at location 0xB2 must have value 0x96 in valid GBA ROMs
+        # Valid GBA ROMs always have 0x96 at location 0xB2.
         handle.seek(0xB2)
         gba_magic_number = handle.read(1)
         if gba_magic_number == b"\x96":
             rom_cache[str(file)] = _load_gba_rom(file, handle)
             return rom_cache[str(file)]
 
-        # GB(C) ROMs contain the Nintendo logo, which starts with 0xCEED6666
+        # GB ROMs are marked with the Nintendo logo, starting with 0xCEED6666.
         handle.seek(0x104)
         gb_magic_string = handle.read(4)
         if gb_magic_string == b"\xce\xed\x66\x66":

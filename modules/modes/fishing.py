@@ -31,7 +31,7 @@ class FishingMode(BotMode):
         assert_player_has_poke_balls()
         assert_boxes_or_party_can_fit_pokemon()
 
-        # Ask player to register a rod if they have one
+        # We'll ask to register a fishing rod if you've got one.
         rod_names = ["Old Rod", "Good Rod", "Super Rod"]
         assert_item_exists_in_bag(rod_names, "You do not own any fishing rod, so you cannot fish.")
 

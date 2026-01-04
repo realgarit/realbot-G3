@@ -21,7 +21,7 @@ from modules.core.version import realbot_name, realbot_version
 from modules.core.context import context
 
 
-# Defines how many frames can be reverted at the most in stepping mode.
+# This is the max number of frames you can go back while in stepping mode.
 stepping_mode_frame_history_size = 128
 stepping_mode_forward_key = "<space>"
 stepping_mode_reverse_key = "<Control-space>"
