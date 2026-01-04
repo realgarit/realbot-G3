@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import json
 import os
 import string

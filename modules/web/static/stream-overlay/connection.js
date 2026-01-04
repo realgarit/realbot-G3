@@ -1,44 +1,44 @@
 export const fetchers = {
-    /** @return {Promise<PokeBotApi.GetStatsResponse>} */
+    /** @return {Promise<RealbotApi.GetStatsResponse>} */
     stats: () => fetch("/stats").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetMapResponse>} */
+    /** @return {Promise<RealbotApi.GetMapResponse>} */
     map: () => fetch("/map").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetMapEncountersResponse>} */
+    /** @return {Promise<RealbotApi.GetMapEncountersResponse>} */
     mapEncounters: () => fetch("/map_encounters").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetShinyLogResponse>} */
+    /** @return {Promise<RealbotApi.GetShinyLogResponse>} */
     shinyLog: () => fetch("/shiny_log").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetEncounterLogResponse>} */
+    /** @return {Promise<RealbotApi.GetEncounterLogResponse>} */
     encounterLog: () => fetch("/encounter_log").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetPlayerAvatarResponse>} */
+    /** @return {Promise<RealbotApi.GetPlayerAvatarResponse>} */
     playerAvatar: () => fetch("/player_avatar").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetPartyResponse>} */
+    /** @return {Promise<RealbotApi.GetPartyResponse>} */
     party: () => fetch("/party").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetEmulatorResponse>} */
+    /** @return {Promise<RealbotApi.GetEmulatorResponse>} */
     emulator: () => fetch("/emulator").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetEventFlagsResponse>} */
+    /** @return {Promise<RealbotApi.GetEventFlagsResponse>} */
     eventFlags: () => fetch("/event_flags").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetEncounterRateResponse>} */
+    /** @return {Promise<RealbotApi.GetEncounterRateResponse>} */
     encounterRate: () => fetch("/encounter_rate").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetGameStateResponse>} */
+    /** @return {Promise<RealbotApi.GetGameStateResponse>} */
     gameState: () => fetch("/game_state").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetPokemonStorageResponse>} */
+    /** @return {Promise<RealbotApi.GetPokemonStorageResponse>} */
     pokemonStorage: () => fetch("/pokemon_storage").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetPokemonStorageSizeResponse>} */
+    /** @return {Promise<RealbotApi.GetPokemonStorageSizeResponse>} */
     pokemonStorageSize: () => fetch("/pokemon_storage?format=size-only").then(response => response.json()),
 
-    /** @return {Promise<PokeBotApi.GetDaycareResponse>} */
+    /** @return {Promise<RealbotApi.GetDaycareResponse>} */
     daycare: () => fetch("/daycare").then(response => response.json()),
 
     /** @return {Promise<object>} */

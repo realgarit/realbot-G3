@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import itertools
 import string
 import struct

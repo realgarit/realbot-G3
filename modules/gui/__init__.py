@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import contextlib
 import os
 import platform
@@ -18,7 +19,7 @@ from modules.gui.load_state_window import LoadStateWindow
 from modules.gui.select_profile_screen import SelectProfileScreen
 from modules.libmgba import LibmgbaEmulator, input_map
 from modules.runtime import get_data_path
-from modules.version import pokebot_name, pokebot_version
+from modules.version import realbot_name, realbot_version
 
 if TYPE_CHECKING:
     from pokebot import StartupSettings
@@ -117,7 +118,7 @@ class RealbotGui:
             with contextlib.suppress(ImportError):
                 from win32com.shell import shell
 
-                shell.SetCurrentProcessExplicitAppUserModelID("40cakes.pokebot-gen3")
+                shell.SetCurrentProcessExplicitAppUserModelID("realgarit.realbot-g3")
         
         try:
             sprite = PIL.Image.open(get_data_path() / "logo.png")
@@ -130,7 +131,7 @@ class RealbotGui:
     def _reset_screen(self) -> None:
         if self._current_screen is not None:
             self._current_screen.disable()
-        self.window.title(f"{pokebot_name} {pokebot_version}")
+        self.window.title(f"{realbot_name} {realbot_version}")
 
     def _enable_create_profile_screen(self) -> None:
         self._reset_screen()

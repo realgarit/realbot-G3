@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import time
 from dataclasses import dataclass
 from pathlib import Path

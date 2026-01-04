@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from typing import Generator
 
 from modules.battle_evolution_scene import handle_evolution_scene

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from collections import deque
 from tkinter import Button, PhotoImage, Tk
 
@@ -15,7 +16,7 @@ except ImportError:
 from modules.gui.debug_tabs import *
 from modules.gui.emulator_controls import DebugEmulatorControls, EmulatorControls
 from modules.sprites import generate_placeholder_image
-from modules.version import pokebot_name, pokebot_version
+from modules.version import realbot_name, realbot_version
 
 
 # Defines how many frames can be reverted at the most in stepping mode.
@@ -70,7 +71,7 @@ class EmulatorScreen:
         self._controls = controls
 
     def enable(self) -> None:
-        app_name = pokebot_name
+        app_name = realbot_name
         try:
             language = ""
             with contextlib.suppress(ImportError):
@@ -89,7 +90,7 @@ class EmulatorScreen:
         except:
             pass
 
-        self.window.title(f"{context.profile.path.name} | {app_name} {pokebot_version}")
+        self.window.title(f"{context.profile.path.name} | {app_name} {realbot_version}")
         self.window.resizable(context.debug, context.debug)
         self.window.rowconfigure(0, weight=1)
         self.window.columnconfigure(0, weight=1)

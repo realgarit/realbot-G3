@@ -38,7 +38,7 @@ let countdownTimer = null;
 
 /**
  * @param {StreamEvents.MapEncounters} mapEncounters
- * @param {PokeBotApi.GetStatsResponse} stats
+ * @param {RealbotApi.GetStatsResponse} stats
  * @param {string[] | null} targetTimers
  * @param {EncounterType} lastEncounterType
  * @param {Pokemon[]} party
@@ -242,7 +242,7 @@ function updateInfoBubbles(mapEncounters, stats, targetTimers, lastEncounterType
 
 /**
  * @param {string} speciesName
- * @param {PokeBotApi.GetStatsResponse} stats
+ * @param {RealbotApi.GetStatsResponse} stats
  * @param {"male" | "female" | null} [encounterGender]
  */
 function updateEncounterInfoBubble(speciesName, stats, encounterGender) {
@@ -296,7 +296,7 @@ function updateEncounterInfoBubble(speciesName, stats, encounterGender) {
 }
 
 /**
- * @param {PokeBotApi.GetStatsResponse} stats
+ * @param {RealbotApi.GetStatsResponse} stats
  * @param {"Old" | "Good" | "Super"} rod
  */
 function updateFishingInfoBubble(stats, rod = "Old") {
@@ -315,7 +315,7 @@ function hideFishingInfoBubble() {
 }
 
 /**
- * @param {PokeBotApi.GetStatsResponse|null} stats
+ * @param {RealbotApi.GetStatsResponse|null} stats
  */
 function updatePokeNavInfoBubble(stats) {
     if (stats === null || !stats.current_phase || !config.showPokeNavCallCounter) {

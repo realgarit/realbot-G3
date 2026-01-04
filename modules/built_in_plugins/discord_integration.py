@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import random
 from threading import Thread
 from typing import TYPE_CHECKING, Generator

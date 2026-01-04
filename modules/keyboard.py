@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import json
 from dataclasses import dataclass
 from enum import Enum

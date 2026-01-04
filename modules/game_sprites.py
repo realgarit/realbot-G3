@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from modules.memory import unpack_uint16, unpack_sint8, read_symbol
 
 

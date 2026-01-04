@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import asyncio
 import io
 import queue
@@ -40,7 +41,7 @@ from modules.pokemon_party import get_party
 from modules.pokemon_storage import get_pokemon_storage
 from modules.runtime import get_base_path
 from modules.state_cache import state_cache, StateCacheItem
-from modules.version import pokebot_version, pokebot_name
+from modules.version import realbot_version, realbot_name
 from modules.web.http_stream import add_subscriber
 
 
@@ -907,20 +908,20 @@ def http_server(host: str, port: int) -> web.AppRunner:
     api_url = f"http://{host}:{port}/docs"
 
     spec = APISpec(
-        title=f"{pokebot_name} API",
-        version=pokebot_version,
+        title=f"{realbot_name} API",
+        version=realbot_version,
         openapi_version="3.0.3",
         info=dict(
-            description=f"{pokebot_name} API",
-            version=pokebot_version,
+            description=f"{realbot_name} API",
+            version=realbot_version,
             license=dict(
                 name="GNU General Public License v3.0",
-                url="https://github.com/40Cakes/pokebot-gen3/blob/main/LICENSE",
+                url="https://github.com/realgar/realbot-g3/blob/main/LICENSE",
             ),
         ),
         servers=[
             dict(
-                description=f"{pokebot_name} server",
+                description=f"{realbot_name} server",
                 url=f"http://{host}:{port}",
             )
         ],

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import random
 import struct
 from datetime import datetime

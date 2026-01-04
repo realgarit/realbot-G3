@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from enum import Enum, auto
 from modules.context import context
 from modules.items import Item, get_item_by_index

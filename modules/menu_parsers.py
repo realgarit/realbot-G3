@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import struct
 from enum import IntEnum
 

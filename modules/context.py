@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import os
 import shutil
 from typing import Generator, Optional, TYPE_CHECKING

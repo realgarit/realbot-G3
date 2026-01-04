@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from tests.utility import BotTestCase, with_frame_timeout, with_save_state, set_next_rng_seed
 
 

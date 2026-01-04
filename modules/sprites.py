@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from pathlib import Path
 
 import PIL.Image
@@ -82,8 +83,8 @@ def _get_pokemon_sprite_path(pokemon_or_species: Pokemon | Species, sprite_direc
     if isinstance(pokemon_or_species, Pokemon):
         file_name = pokemon_or_species.species_name_for_stats
     elif pokemon_or_species.name == "Unown":
-        # P for Pokebot!
-        file_name = "Unown (P)"
+        # R for RealBot!
+        file_name = "Unown (R)"
     else:
         file_name = pokemon_or_species.name
 

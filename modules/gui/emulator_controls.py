@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import tkinter.font
 import webbrowser
 from textwrap import dedent
@@ -13,7 +14,7 @@ from modules.gui.multi_select_window import ask_for_confirmation
 from modules.libmgba import LibmgbaEmulator
 from modules.memory import GameState, get_game_state
 from modules.modes import get_bot_modes
-from modules.version import pokebot_name, pokebot_version
+from modules.version import realbot_name, realbot_version
 
 
 class EmulatorControls:
@@ -68,8 +69,8 @@ class EmulatorControls:
 
         self.help_menu = Menu(self.window, tearoff=0)
         self.help_menu.add_command(
-            label=f"{pokebot_name} Wiki",
-            command=lambda: webbrowser.open_new_tab("https://github.com/40Cakes/pokebot-gen3/tree/main/wiki"),
+            label=f"{realbot_name} Wiki",
+            command=lambda: webbrowser.open_new_tab("https://github.com/realgar/realbot-g3/tree/main/wiki"),
         )
         self.help_menu.add_command(
             label="Discord #pokebot-gen3-support",
@@ -283,7 +284,7 @@ class EmulatorControls:
 
         version_label = ttk.Label(
             group,
-            text=f"{context.rom.short_game_name} - {pokebot_name} {pokebot_version}",
+            text=f"{context.rom.short_game_name} - {realbot_name} {realbot_version}",
             foreground="grey" if not context.rom.game_name.startswith("Unsupported") else "red",
             font=tkinter.font.Font(size=9),
         )

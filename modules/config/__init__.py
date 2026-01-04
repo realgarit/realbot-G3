@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 """Module for managing and accessing configuration."""
 
 from pathlib import Path

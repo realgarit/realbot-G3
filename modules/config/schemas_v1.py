@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 """Contains default schemas for configuration files."""
 
 from __future__ import annotations
@@ -93,7 +94,7 @@ class Discord(BaseConfig):
     rich_presence: bool = False
     iv_format: Literal["basic", "formatted"] = "formatted"
     delay: int = 0
-    bot_id: str = "PokéBot Gen3"
+    bot_id: str = "RealBot G3"
     global_webhook_url: str = ""
     shiny_pokemon_encounter: DiscordWebhook = Field(default_factory=lambda: DiscordWebhook())
     blocked_shiny_encounter: DiscordWebhook = Field(default_factory=lambda: DiscordWebhook())

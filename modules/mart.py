@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from modules.context import context
 from modules.items import Item, get_item_by_index
 from modules.memory import read_symbol, unpack_uint32, unpack_uint16

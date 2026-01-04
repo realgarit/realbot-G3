@@ -14,7 +14,7 @@ let shiniesFromBeforeThisSection = 0;
 /**
  * @param {PokemonStorage} storage
  * @param {Pokemon[]} party
- * @param {PokeBotApi.GetDaycareResponse} daycare
+ * @param {RealbotApi.GetDaycareResponse} daycare
  */
 function updatePCStorage(storage, party, daycare) {
     const ignoreSpecies = new Set();
@@ -54,7 +54,7 @@ function updatePCStorage(storage, party, daycare) {
 }
 
 /**
- * @param {PokeBotApi.GetStatsResponse} stats
+ * @param {RealbotApi.GetStatsResponse} stats
  * @param {number} encountersPerHour
  */
 function updateTotalStats(stats, encountersPerHour) {

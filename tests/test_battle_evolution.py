@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from tests.utility import BotTestCase, with_save_state, with_frame_timeout
 
 

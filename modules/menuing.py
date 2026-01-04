@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from enum import IntEnum
 from typing import Generator
 

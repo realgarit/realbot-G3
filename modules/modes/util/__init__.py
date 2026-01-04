@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from .event_flags_and_vars import *
 from .higher_level_actions import *
 from .items import *

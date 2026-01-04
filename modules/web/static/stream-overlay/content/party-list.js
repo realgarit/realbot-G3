@@ -3,7 +3,7 @@ import {eggSprite, speciesSprite} from "../helper.js";
 const ul = document.querySelector("#party-list ul")
 
 /**
- * @param {PokeBotApi.GetPartyResponse} party
+ * @param {RealbotApi.GetPartyResponse} party
  */
 function updatePartyList(party) {
     ul.innerHTML = "";

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from dataclasses import dataclass
 from enum import Enum, IntEnum, auto
 from queue import SimpleQueue, PriorityQueue

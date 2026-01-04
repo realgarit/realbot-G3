@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from enum import Enum
 from typing import Generator, Union, Callable
 

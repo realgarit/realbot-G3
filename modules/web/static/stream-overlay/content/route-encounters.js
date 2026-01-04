@@ -15,15 +15,15 @@ const table = document.querySelector("#route-encounters table");
 const noEncountersMessage = document.querySelector("#no-encounters-on-this-route-message");
 
 /**
- * @param {PokeBotApi.GetMapResponse} map
+ * @param {RealbotApi.GetMapResponse} map
  */
 const updateMapName = map => {
     mapNameSpan.innerText = map.map.pretty_name;
 };
 
 /**
- * @param {PokeBotApi.GetMapEncountersResponse} encounters
- * @param {PokeBotApi.GetStatsResponse} stats
+ * @param {RealbotApi.GetMapEncountersResponse} encounters
+ * @param {RealbotApi.GetStatsResponse} stats
  * @param {EncounterType} encounterType
  * @param {StreamOverlay.SectionChecklist} checklistConfig
  * @param {string} botMode

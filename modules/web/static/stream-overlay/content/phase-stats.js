@@ -7,7 +7,7 @@ const longestStreak = document.querySelector("#phase-streak-stat");
 const phaseIVSumRecords = document.querySelector("#phase-iv-sum-records-stat");
 
 /**
- * @param {PokeBotApi.GetStatsResponse} stats
+ * @param {RealbotApi.GetStatsResponse} stats
  */
 function updatePhaseStats(stats) {
     const currentPhase = stats.current_phase;

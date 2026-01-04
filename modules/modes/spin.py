@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from typing import Generator
 
 from modules.player import get_player_avatar

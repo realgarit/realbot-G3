@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import datetime
 import sys
 from dataclasses import dataclass
@@ -10,7 +11,7 @@ import requests
 
 from modules.console import console
 from modules.runtime import get_base_path
-from modules.version import pokebot_version
+from modules.version import realbot_version
 
 
 # Module `exceptions` is not being used, but it needs to be imported because otherwise `modules.console`
@@ -94,7 +95,7 @@ def run_updater(ignore_last_update: bool = False) -> None:
     last_update = get_last_update_check_datetime()
     if ignore_last_update or last_update is None or datetime.now().timestamp() - last_update.timestamp() > 86400:
         release_info = get_most_recent_release_on_github()
-        if release_info is not None and release_info.tag_name != pokebot_version:
+        if release_info is not None and release_info.tag_name != realbot_version:
             console.print("\n[green bold]There is a new update available![/]\n")
             console.print(
                 f"The most recent version is [cyan bold]{release_info.tag_name}[/], "

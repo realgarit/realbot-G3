@@ -11,7 +11,7 @@ import {
 const tbody = document.querySelector("#shiny-log tbody");
 
 /**
- * @param {PokeBotApi.GetShinyLogResponse} shinyLog
+ * @param {RealbotApi.GetShinyLogResponse} shinyLog
  */
 function updateShinyLog(shinyLog) {
     tbody.innerHTML = "";

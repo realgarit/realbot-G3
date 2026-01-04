@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import inspect
 from types import GeneratorType
 from typing import TYPE_CHECKING, Iterable, Generator

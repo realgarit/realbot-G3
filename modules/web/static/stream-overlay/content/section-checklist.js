@@ -12,8 +12,8 @@ const speciesListElements = {};
 
 /**
  * @param {typeof StreamOverlay.SectionChecklist} checklistConfig
- * @param {PokeBotApi.GetStatsResponse} stats
- * @param {PokeBotApi.GetMapEncountersResponse} mapEncounters
+ * @param {RealbotApi.GetStatsResponse} stats
+ * @param {RealbotApi.GetMapEncountersResponse} mapEncounters
  * @param {string[]} additionalRouteSpecies
  * @param {EncounterType} encounterType
  */

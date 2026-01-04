@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import argparse
 import json
 import re
@@ -18,7 +19,7 @@ from modules.modes import get_bot_mode_names
 from modules.profiles import load_profile_by_name
 from modules.runtime import get_base_path
 from modules.stats import StatsDatabase
-from modules.version import pokebot_name, pokebot_version
+from modules.version import realbot_name, realbot_version
 
 
 def fail(error_message: str, exit_code: int = 1, extra_content: str | None = None) -> Never:
@@ -31,7 +32,7 @@ def fail(error_message: str, exit_code: int = 1, extra_content: str | None = Non
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=f"{pokebot_name} {pokebot_version} Stats Exporter")
+    parser = argparse.ArgumentParser(description=f"{realbot_name} {realbot_version} Stats Exporter")
     parser.add_argument(
         "--format",
         action="store",

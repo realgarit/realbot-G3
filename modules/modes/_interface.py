@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 """
 Contains definitions for the `BotMode` base class as well as the `BotModeError` type, so we
 can import that anywhere without having to worry about circular import issues.

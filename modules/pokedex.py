@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from functools import cached_property
 
 from modules.context import context

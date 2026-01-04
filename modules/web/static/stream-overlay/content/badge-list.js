@@ -2,7 +2,7 @@ const div = document.querySelector("div#badge-list");
 
 /**
  * @param {string} game
- * @param {PokeBotApi.GetEventFlagsResponse} eventFlags
+ * @param {RealbotApi.GetEventFlagsResponse} eventFlags
  */
 function updateBadgeList(game, eventFlags) {
     let badgeNames = [];

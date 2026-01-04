@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import sys
 from pathlib import Path
 

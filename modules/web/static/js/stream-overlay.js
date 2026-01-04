@@ -41,18 +41,18 @@ pokemon_checklist = {
 /**
  * Stores latest result of each API call so that the data is easily available for all functions.
  * @type {{
- *     emulator: PokeBotApi.GetEmulatorResponse,
- *     game_state: PokeBotApi.GetGameStateResponse,
- *     stats: PokeBotApi.GetStatsResponse,
- *     shiny_log: PokeBotApi.GetShinyLogResponse,
- *     event_flags: PokeBotApi.GetEventFlagsResponse,
+ *     emulator: RealbotApi.GetEmulatorResponse,
+ *     game_state: RealbotApi.GetGameStateResponse,
+ *     stats: RealbotApi.GetStatsResponse,
+ *     shiny_log: RealbotApi.GetShinyLogResponse,
+ *     event_flags: RealbotApi.GetEventFlagsResponse,
  *     opponent: StreamEvents.WildEncounter,
  *     checklist: null,
  *     bot_mode: string | null,
- *     map: PokeBotApi.GetMapResponse,
- *     map_encounters: PokeBotApi.GetMapEncountersResponse,
- *     party: PokeBotApi.GetPartyResponse,
- *     player: PokeBotApi.GetPlayerResponse,
+ *     map: RealbotApi.GetMapResponse,
+ *     map_encounters: RealbotApi.GetMapEncountersResponse,
+ *     party: RealbotApi.GetPartyResponse,
+ *     player: RealbotApi.GetPlayerResponse,
  * }}
  */
 const state = {
@@ -108,14 +108,14 @@ const initialData = [
     fetch("/event_flags")
         .then(response => response.json())
         .then(data => {
-            /** @var {PokeBotApi.GetEventFlagsResponse} */
+            /** @var {RealbotApi.GetEventFlagsResponse} */
             handleEventFlags(data)
         }),
 
     fetch("/emulator")
         .then(response => response.json())
         .then(data => {
-            /** @var {PokeBotApi.GetEmulatorResponse} */
+            /** @var {RealbotApi.GetEmulatorResponse} */
             handlePerformanceData({ encounter_rate: 0 })
             handleBotMode(data.bot_mode)
             initBadges({ game: data.game.title })
@@ -124,32 +124,32 @@ const initialData = [
     fetch("/game_state")
         .then(response => response.json())
         .then(data => {
-            /** @var {PokeBotApi.GetGameStateResponse} */
+            /** @var {RealbotApi.GetGameStateResponse} */
             handleGameState(data)
         }),
 
     fetch("/party")
         .then(response => response.json())
         .then(data => {
-            /** @var {PokeBotApi.GetPartyResponse} */
+            /** @var {RealbotApi.GetPartyResponse} */
             handleParty(data)
         }),
 
     fetch("/map_encounters")
         .then(response => response.json())
         .then(data => {
-            /** @var {PokeBotApi.GetMapEncountersResponse} */
+            /** @var {RealbotApi.GetMapEncountersResponse} */
             handleMapEncounters(data)
         }),
 
     fetch("/map")
         .then(response => response.json())
         .then(data => {
-            /** @var {PokeBotApi.GetMapResponse} */
+            /** @var {RealbotApi.GetMapResponse} */
             handleMap(data)
         }),
 
-    /** @var {PokeBotApi.GetPlayerResponse} */
+    /** @var {RealbotApi.GetPlayerResponse} */
     fetch("/player")
         .then(response => response.json())
         .then(data => {
@@ -228,7 +228,7 @@ async function handleStats(data) {
     }
 }
 
-/** @param {PokeBotApi.GetEventFlagsResponse} data */
+/** @param {RealbotApi.GetEventFlagsResponse} data */
 function handleEventFlags(data) {
     if (data === null) {
         return

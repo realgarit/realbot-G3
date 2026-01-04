@@ -424,7 +424,7 @@ export function calculatePSP(encounters) {
 /**
  * @param {string} speciesName
  * @param {StreamOverlay.SectionChecklist} checklistConfig
- * @param {PokeBotApi.GetStatsResponse} stats
+ * @param {RealbotApi.GetStatsResponse} stats
  * @return {number}
  */
 export function getSpeciesGoal(speciesName, checklistConfig, stats) {
@@ -440,7 +440,7 @@ export function getSpeciesGoal(speciesName, checklistConfig, stats) {
 /**
  * @param {string} speciesName
  * @param {StreamOverlay.SectionChecklist} checklistConfig
- * @param {PokeBotApi.GetStatsResponse} stats
+ * @param {RealbotApi.GetStatsResponse} stats
  * @return {number}
  */
 export function getSpeciesCatches(speciesName, checklistConfig, stats) {
@@ -467,7 +467,7 @@ export function getSpeciesCatches(speciesName, checklistConfig, stats) {
 
 /**
  * @param {StreamOverlay.SectionChecklist} sectionChecklist
- * @param {PokeBotApi.GetStatsResponse} stats
+ * @param {RealbotApi.GetStatsResponse} stats
  * @return {{caught: number; goal: number}}
  */
 export function getSectionProgress(sectionChecklist, stats) {

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import sys
 import unittest
 from datetime import datetime
@@ -12,6 +13,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 
 from modules.modes._interface import BotMode
 from modules.context import context
+import modules.gui.multi_select_window
 
 if TYPE_CHECKING:
     from modules.battle_state import BattleOutcome

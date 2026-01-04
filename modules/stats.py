@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import sqlite3
 import sys
 import threading

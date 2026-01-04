@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from types import GeneratorType
 from typing import Iterable
 

@@ -11,7 +11,7 @@ import {
 const tbody = document.querySelector("#encounter-log tbody");
 
 /**
- * @param {PokeBotApi.GetEncounterLogResponse} encounterLog
+ * @param {RealbotApi.GetEncounterLogResponse} encounterLog
  */
 function updateEncounterLog(encounterLog) {
     tbody.innerHTML = "";

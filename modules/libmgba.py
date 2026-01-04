@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import atexit
 import queue
 import time

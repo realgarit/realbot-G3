@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import importlib
 from dataclasses import dataclass
 from datetime import datetime, timezone

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import asyncio
 import json
 import queue

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import time
 import tkinter
 from tkinter import Tk, Toplevel, ttk

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from typing import Generator, Literal
 
 from modules.context import context

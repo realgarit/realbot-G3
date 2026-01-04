@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import time
 from typing import Generic, TYPE_CHECKING, TypeVar
 

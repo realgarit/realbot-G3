@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import contextlib
 import time
 import tkinter

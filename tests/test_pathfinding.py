@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from modules.map_data import MapRSE, MapFRLG
 from modules.modes.util import navigate_to
 from modules.player import get_player_location

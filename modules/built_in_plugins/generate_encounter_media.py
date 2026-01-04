@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import os
 import time
 from pathlib import Path

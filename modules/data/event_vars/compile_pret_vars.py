@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 """
 This needs to be run inside the pret decomp project, in the `include/constants/` directory.
 Something like:

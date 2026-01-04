@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from modules.battle_state import BattleState
 from modules.battle_strategies import (
     TurnAction,

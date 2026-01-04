@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import os
 from datetime import datetime
 from pathlib import Path
@@ -10,7 +11,7 @@ from modules.files import make_string_safe_for_file_name
 from modules.player import get_player, get_player_avatar
 from modules.pokemon import Pokemon
 from modules.runtime import get_sprites_path
-from modules.version import pokebot_name
+from modules.version import realbot_name
 
 TCG_REVISION = "Rev. 1.1"
 
@@ -131,7 +132,7 @@ def generate_tcg_card(pokemon_data: bytes, location: str = "") -> Path | None:
         # Bot name, card rev + date
         draw = draw_text(
             draw,
-            text=f"{pokebot_name} ~ {TCG_REVISION} ~ {custom_strftime('%b {S}, %Y', datetime.now())}",
+            text=f"{realbot_name} ~ {TCG_REVISION} ~ {custom_strftime('%b {S}, %Y', datetime.now())}",
             coords=(33, 804),
             shadow_colour="#000",
             anchor="lm",

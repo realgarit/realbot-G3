@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 """
 'Tasks' are the game's implementation of coroutines. This files contains
 abstractions and utilities for working with them.

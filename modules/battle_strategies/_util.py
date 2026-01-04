@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import math
 from typing import TYPE_CHECKING
 

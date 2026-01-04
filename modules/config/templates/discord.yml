@@ -1,10 +1,10 @@
-# See wiki for documentation: https://github.com/40Cakes/pokebot-gen3/tree/main/wiki/pages/Configuration%20-%20Discord%20Integration.md
+# See wiki for documentation: https://github.com/realgar/realbot-g3/tree/main/wiki/pages/Configuration%20-%20Discord%20Integration.md
 
 rich_presence: false
 global_webhook_url: ""
 iv_format: formatted # `basic`, `formatted`
 delay: 0
-bot_id: PokéBot Gen3
+bot_id: RealBot G3
 
 # Shiny Pokémon encounters
 shiny_pokemon_encounter:

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from modules.battle_state import BattleState, TemporaryStatus
 from modules.battle_strategies import SafariTurnAction, DefaultBattleStrategy, BattleStrategyUtil
 from modules.battle_strategies import TurnAction

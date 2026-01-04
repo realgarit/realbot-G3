@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import queue
 import sys
 from collections import deque

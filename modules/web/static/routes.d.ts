@@ -1,7 +1,7 @@
 import {ItemBag, ItemStorage, MapLocation, Player, PlayerAvatarType, Pokedex, Pokemon, PokemonStorage} from "./pokemon";
 import {EffectiveEncounterList, Encounter, GlobalStats, RegularEncounterList, ShinyPhase} from "./stats";
 
-declare module PokeBotApi {
+declare module RealbotApi {
     /**
      * Request body for `POST /emulator`
      *

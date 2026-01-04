@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from dataclasses import dataclass
 from enum import Enum
 from typing import Union, Tuple, Optional, Callable, List, Dict

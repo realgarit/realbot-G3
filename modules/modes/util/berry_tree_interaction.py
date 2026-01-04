@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from typing import Generator
 
 from modules.berry_trees import get_berry_tree_by_id, BerryTreeStage

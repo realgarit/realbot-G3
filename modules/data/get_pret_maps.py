@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 """
 This assumes that pret's `pokeemerald` and `pokefirered` repositories are checked
 out in the same directory as Pokebot.

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import random
 from typing import Generator, Callable
 

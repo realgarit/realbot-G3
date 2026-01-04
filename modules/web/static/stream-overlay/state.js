@@ -52,7 +52,7 @@ export default class OverlayState {
     /** @type {MapLocation|null} */
     map = null;
 
-    /** @type {PokeBotApi.GetMapEncountersResponse|null} */
+    /** @type {RealbotApi.GetMapEncountersResponse|null} */
     mapEncounters = null;
 
     /** @type {ShinyPhase[]} */
@@ -67,7 +67,7 @@ export default class OverlayState {
     /** @type {Pokemon[]} */
     party = [];
 
-    /** @type {PokeBotApi.GetEmulatorResponse} */
+    /** @type {RealbotApi.GetEmulatorResponse} */
     emulator = {
         emulation_speed: 1,
         video_enabled: true,
@@ -81,7 +81,7 @@ export default class OverlayState {
         game: null,
     };
 
-    /** @type {PokeBotApi.GetEventFlagsResponse} */
+    /** @type {RealbotApi.GetEventFlagsResponse} */
     eventFlags = {};
 
     /** @type {number} */
@@ -97,7 +97,7 @@ export default class OverlayState {
         boxes: [],
     };
 
-    /** @type {PokeBotApi.GetDaycareResponse} */
+    /** @type {RealbotApi.GetDaycareResponse} */
     daycare = {
         pokemon1: null,
         pokemon1_steps: 0,

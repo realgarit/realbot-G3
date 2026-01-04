@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from typing import Generator
 
 from modules.battle_menuing import scroll_to_battle_action, scroll_to_move

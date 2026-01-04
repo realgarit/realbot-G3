@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 # Note: This file will get replaced when run in GitHub actions.
 # In that case, the tagged version will be placed in here instead.
 #
@@ -10,8 +11,8 @@
 import contextlib
 from modules.runtime import get_base_path
 
-pokebot_name = "RealBot G3"
-pokebot_version = "dev"
+realbot_name = "RealBot G3"
+realbot_version = "dev"
 
 with contextlib.suppress(Exception):
     # If someone managed to get a copy of the repository without actually having
@@ -43,9 +44,9 @@ with contextlib.suppress(Exception):
                         with open(tag_path, "r") as tag_file:
                             tag = tag_file.read().strip()
                             if tag == head:
-                                pokebot_version = tag_path.name
+                                realbot_version = tag_path.name
                                 break
 
                 # If some regular non-head commit is checked out
-                if pokebot_version == "dev":
-                    pokebot_version = f"{branch_name}-{head[:7]}"
+                if realbot_version == "dev":
+                    realbot_version = f"{branch_name}-{head[:7]}"

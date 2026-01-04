@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from enum import Enum, IntEnum, IntFlag
 from functools import cached_property
 from typing import Literal

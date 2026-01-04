@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from modules.context import context
 from modules.game import decode_string
 from modules.memory import read_symbol, unpack_uint16

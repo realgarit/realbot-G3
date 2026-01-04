@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from modules.map import MapLocation
 from modules.map_data import MapFRLG, PokemonCenter, MapRSE, get_map_enum
 from modules.map_path import calculate_path, PathFindingError

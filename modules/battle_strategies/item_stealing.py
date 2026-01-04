@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from typing import Optional
 
 from modules.battle_state import BattleState, BattlePokemon, TemporaryStatus

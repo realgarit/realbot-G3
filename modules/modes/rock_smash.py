@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import contextlib
 from collections import deque
 from typing import Generator

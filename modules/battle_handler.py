@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from typing import Generator, TYPE_CHECKING
 
 from modules.battle_action_selection import handle_battle_action_selection

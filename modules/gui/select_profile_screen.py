@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from datetime import date, datetime
 from tkinter import Tk, ttk, StringVar
 from typing import Union

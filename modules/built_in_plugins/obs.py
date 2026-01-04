@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 # OBS plugin
 # This plugin allows the bot to send commands to OBS via WebSockets
 # See [here](https://github.com/obsproject/obs-websocket) for more information on OBS WebSockets

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 """Custom exception handlers."""
 
 from __future__ import annotations

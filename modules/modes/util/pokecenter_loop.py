@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from collections.abc import Callable
 from typing import Optional, Literal
 

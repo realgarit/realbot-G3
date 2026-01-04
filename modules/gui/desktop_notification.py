@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 from pathlib import Path
 
 from notifypy import Notify
@@ -6,7 +7,7 @@ from notifypy.exceptions import UnsupportedPlatform
 from modules.console import console
 from modules.context import context
 from modules.runtime import get_data_path
-from modules.version import pokebot_name, pokebot_version
+from modules.version import realbot_name, realbot_version
 
 
 def desktop_notification(title: str, message: str, icon: Path = None) -> None:
@@ -17,7 +18,7 @@ def desktop_notification(title: str, message: str, icon: Path = None) -> None:
         icon = icon or (get_data_path() / "logo.png")
 
         notification = Notify(
-            default_notification_application_name=f"{context.profile.path.name} | {pokebot_name} {pokebot_version}"
+            default_notification_application_name=f"{context.profile.path.name} | {realbot_name} {realbot_version}"
         )
         notification.title = title
         notification.message = message

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 realgarit
 import asyncio
 import json
 import time
@@ -13,7 +14,7 @@ from requests.exceptions import RequestException
 from modules.console import console
 from modules.context import context
 from modules.state_cache import state_cache
-from modules.version import pokebot_version
+from modules.version import realbot_version
 
 _event_loop: AbstractEventLoop | None = None
 _message_queue: Queue["DiscordMessage"] = Queue()
@@ -108,7 +109,7 @@ async def _process_message(message: DiscordMessage) -> None:
             embed.set_footer(text=message.embed.footer)
         else:
             embed.set_footer(
-                text=f"ID: {context.config.discord.bot_id} | {context.rom.game_name}\nPokéBot Gen3 {pokebot_version}"
+                text=f"ID: {context.config.discord.bot_id} | {context.rom.game_name}\nRealBot G3 {realbot_version}"
             )
 
         embed.set_timestamp()
@@ -188,7 +189,7 @@ def discord_rich_presence_loop() -> None:
                 details=" | ".join(details),
                 large_image=large_image,
                 start=int(start),
-                buttons=[{"label": "⏬ Download PokéBot Gen3", "url": "https://github.com/40Cakes/pokebot-gen3"}],
+                buttons=[{"label": "⏬ Download RealBot G3", "url": "https://github.com/realgar/realbot-g3"}],
             )
         except Exception as error:
             console.print(f"[yellow]Setting Discord Rich Presence failed:[/] {str(error)}")
