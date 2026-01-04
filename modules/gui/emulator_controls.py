@@ -2,7 +2,7 @@
 import tkinter.font
 import webbrowser
 from textwrap import dedent
-from tkinter import Menu, Tk, ttk
+from tkinter import Label, Menu, Tk, ttk
 from typing import Union
 
 from showinfm import show_in_file_manager
@@ -195,9 +195,10 @@ class EmulatorControls:
             )
 
         ttk.Label(group, text="Bot Mode:", justify="left").grid(row=0, sticky="W")
-        self.bot_mode_button = ttk.Button(
-            group, text=f"{context.bot_mode} ▾", width=10, padding=(0, 3), cursor="hand2", command=open_bot_mode_menu
+        self.bot_mode_button = Label(
+            group, text=f"{context.bot_mode} ▾", width=12, cursor="hand2", relief="raised", padx=5, pady=3
         )
+        self.bot_mode_button.bind("<Button-1>", lambda e: open_bot_mode_menu())
         self.bot_mode_button.grid(row=1, sticky="W", padx=0)
 
     def _add_speed_controls(self, row: int, column: int, sticky: str = "W"):
@@ -238,11 +239,14 @@ class EmulatorControls:
 
         ttk.Label(group, text="Emulation Speed:", justify="left").grid(row=0, column=0, columnspan=4, sticky="W")
 
-        button_settings = {"width": 2, "padding": (0, 3), "cursor": "hand2"}
-        menu_button_settings = {**button_settings, "width": 3}
-        self.speed_1x_button = ttk.Button(group, text="1×", **button_settings, command=lambda: set_emulation_speed(1))
-        self.speed_menu_button = ttk.Button(group, text="…", **menu_button_settings, command=open_speed_menu)
-        self.unthrottled_button = ttk.Button(group, text="∞", **button_settings, command=lambda: set_emulation_speed(0))
+        button_settings = {"width": 3, "cursor": "hand2", "relief": "raised", "padx": 5, "pady": 3}
+        self.speed_1x_button = Label(group, text="1×", **button_settings)
+        self.speed_menu_button = Label(group, text="…", **button_settings)
+        self.unthrottled_button = Label(group, text="∞", **button_settings)
+        
+        self.speed_1x_button.bind("<Button-1>", lambda e: set_emulation_speed(1))
+        self.speed_menu_button.bind("<Button-1>", lambda e: open_speed_menu())
+        self.unthrottled_button.bind("<Button-1>", lambda e: set_emulation_speed(0))
 
         self.speed_1x_button.grid(row=1, column=0)
         self.speed_menu_button.grid(row=1, column=1)
@@ -250,19 +254,16 @@ class EmulatorControls:
 
     def _add_settings_controls(self, row: int, column: int):
         group = ttk.Frame(self.frame)
-        style = ttk.Style()
-        style.map(
-            "Accent.TButton",
-            foreground=[("!active", "white"), ("active", "white"), ("pressed", "white")],
-            background=[("!active", "purple1"), ("active", "purple3"), ("pressed", "purple1")],
-        )
         group.grid(row=row, column=column, sticky="W")
 
         ttk.Label(group, text="Other Settings:").grid(row=0, columnspan=2, sticky="W")
 
-        button_settings = {"width": 4, "padding": (0, 3), "cursor": "hand2"}
-        self.toggle_video_button = ttk.Button(group, text="Video", **button_settings, command=context.toggle_video)
-        self.toggle_audio_button = ttk.Button(group, text="Audio", **button_settings, command=context.toggle_audio)
+        button_settings = {"width": 6, "cursor": "hand2", "relief": "raised", "padx": 5, "pady": 3}
+        self.toggle_video_button = Label(group, text="Video", **button_settings)
+        self.toggle_audio_button = Label(group, text="Audio", **button_settings)
+        
+        self.toggle_video_button.bind("<Button-1>", lambda e: context.toggle_video())
+        self.toggle_audio_button.bind("<Button-1>", lambda e: context.toggle_audio())
 
         self.toggle_video_button.grid(row=1, column=0, padx=2)
         self.toggle_audio_button.grid(row=1, column=1, padx=2)
@@ -300,13 +301,13 @@ class EmulatorControls:
         else:
             version_label.grid(row=0, column=1, sticky="E")
 
-    def _set_button_colour(self, button: ttk.Button, active_condition: bool, disabled_condition: bool = False) -> None:
+    def _set_button_colour(self, button: Label, active_condition: bool, disabled_condition: bool = False) -> None:
         if disabled_condition:
-            button.config(style="TButton", state="disabled")
+            button.config(background="#d9d9d9", foreground="#a3a3a3", relief="flat")
         elif active_condition:
-            button.config(style="Accent.TButton", state="normal")
+            button.config(background="#E34234", foreground="white", relief="sunken")  # Realgar red
         else:
-            button.config(style="TButton", state="normal")
+            button.config(background="#d9d9d9", foreground="black", relief="raised")
 
     def _update_stats(self):
         stats = []
