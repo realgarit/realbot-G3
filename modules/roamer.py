@@ -5,9 +5,9 @@ from modules.context import context
 from modules.map import get_map_data
 from modules.map_data import MapRSE, MapFRLG
 from modules.memory import get_save_block, read_symbol, unpack_uint16, unpack_uint32
+from modules.pokemon_constants import HIDDEN_POWER_MAP
 from modules.pokemon import (
     ContestConditions,
-    HIDDEN_POWER_MAP,
     Nature,
     Species,
     StatsValues,

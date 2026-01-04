@@ -6,6 +6,7 @@ from typing import Literal
 from modules.context import context
 from modules.game import decode_string
 from modules.map import MapLocation, ObjectEvent, calculate_targeted_coords, get_player_map_object
+from modules.items import get_item_by_index, Item
 from modules.map_data import MapFRLG, MapRSE, get_map_enum
 from modules.memory import (
     get_save_block,
@@ -17,7 +18,6 @@ from modules.memory import (
     decrypt32,
     decrypt16,
 )
-from modules.pokemon import Item, get_item_by_index
 from modules.state_cache import state_cache
 from modules.tasks import task_is_active
 

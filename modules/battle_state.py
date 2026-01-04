@@ -8,18 +8,17 @@ from modules.fishing import FishingRod
 from modules.game import get_symbol_name_before
 from modules.memory import unpack_uint16, unpack_uint32, read_symbol, get_callback_for_pointer_symbol
 from modules.player import get_player_avatar, AvatarFlags
+from modules.items import get_item_by_index, Item
 from modules.pokemon import (
     Species,
     Ability,
     Type,
     Move,
     LearnedMove,
-    Item,
     Nature,
     get_species_by_index,
     get_type_by_index,
     get_move_by_index,
-    get_item_by_index,
     get_nature_by_index,
     StatsValues,
     StatusCondition,

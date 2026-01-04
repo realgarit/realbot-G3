@@ -9,7 +9,7 @@ from typing import Literal, TYPE_CHECKING
 from modules.berry_trees import get_berry_tree_by_id
 from modules.context import context
 from modules.game import decode_string, get_event_flag_name, get_event_var_name
-from modules.items import get_item_by_name
+from modules.items import get_item_by_name, Item, get_item_by_index
 from modules.memory import (
     get_save_block,
     get_symbol_name,
@@ -20,9 +20,7 @@ from modules.memory import (
     get_event_flag_by_number,
 )
 from modules.pokemon import (
-    Item,
     Species,
-    get_item_by_index,
     get_species_by_index,
     Ability,
     get_type_by_name,
