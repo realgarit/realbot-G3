@@ -2,6 +2,18 @@
 
 # ❓ Getting Started
 
+## Supported Operating Systems
+
+<img src="../images/os_windows.png" alt="Windows" style="max-width: 80px"> <img src="../images/os_apple.png" alt="MacOS" style="max-width: 80px"> <img src="../images/os_ubuntu.png" alt="Ubuntu" style="max-width: 80px"> <img src="../images/os_debian.png" alt="Debian" style="max-width: 80px"> <img src="../images/os_pop.png" alt="PopOS" style="max-width: 80px"> <img src="../images/os_arch.png" alt="Arch Linux" style="max-width: 80px">
+
+- Windows
+- MacOS
+- Linux, tested and confirmed working on the following distros:
+  - Ubuntu 24.04
+  - Debian 12
+  - Pop!\_OS 22.04 LTS
+  - Arch Linux
+
 ## What You'll Need
 
 ### Windows
