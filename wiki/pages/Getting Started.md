@@ -5,55 +5,89 @@
 ## What You'll Need
 
 ### Windows
-- [Python 3.13](https://www.python.org/downloads/windows/) (Download the **64-bit installer**).
-- **Important**: Make sure you check the box that says `Add Python to PATH` when you install it.
-
-### macOS
-- [Python 3.13](https://www.python.org/downloads/macos/) (Download the **universal2 installer**) or run `brew install python@3.13`.
-- mGBA 0.10.x. You can install it with `brew install mgba`. 
-- For more details, see the [macOS Installation guide](/wiki/pages/MacOS%20Installation.md).
+- **Python 3.13** ([Download 64-bit installer](https://www.python.org/downloads/windows/))
+  - **Important**: Check the box `Add Python to PATH` during installation.
+  - Python 3.13 includes **Tkinter 9**, which is required for the bot's UI to look correct and fix scaling issues.
 
 ### Linux (Ubuntu/Debian/Arch)
-- Python 3.13. Run `sudo apt install python3.13` (or use your package manager).
-- You'll also need these packages: `sudo apt install python3-distutils python3-tk libmgba0.10 portaudio19-dev`.
-- If your distro doesn't have `libmgba0.10`, you can download the `.deb` file from [mgba.io](https://mgba.io/downloads.html).
+- **Python 3.13**
+  - Run `sudo apt install python3.13` (or your distro's equivalent).
+- **Dependencies**
+  - `sudo apt install python3.13-venv python3-tk libmgba0.10 portaudio19-dev`
+  - Note: You must treat `python3-tk` as required for the UI.
+- If `libmgba0.10` isn't in your repos, grab the .deb from [mgba.io](https://mgba.io/downloads.html).
+
+### macOS
+- See the [macOS Installation guide](/wiki/pages/MacOS%20Installation.md).
 
 ---
 
 ## Download the Bot
 
-### Stable Version (Recommended)
-Go to the [releases page](https://github.com/realgar/realbot-g3/releases) and download the **realbot-DATE.zip** file. The bot has an auto-updater, so it'll check for new versions once a day.
+### Stable Version
+> **Coming Soon!** 
+We are currently working on our first stable release for RealBot G3. Please use the Dev Version for now.
 
-### Dev Version (Latest Features)
-If you want the absolute latest code, you can download the ZIP from the main [GitHub page](https://github.com/realgar/realbot-g3). 
+### Dev Version
+Get the latest code directly from GitHub:
 
-If you know how to use Git, you can also clone the repo:
-`git clone https://github.com/realgar/realbot-g3.git`
-
----
-
-## How to Run It
-
-1. Put your **official** Pokémon GBA ROMs into the `roms/` folder.
-2. Double-click `realbot.py` or run `python realbot.py` in your terminal.
-3. The bot will automatically check and install any missing requirements the first time you run it.
-4. Follow the steps on the screen to create your profile.
-
-### Tips
-- **Key Mappings**: The bot uses default mGBA keys. You can see them [here](pages/Configuration%20-%20Key%20Mappings.md).
-- **Running Away**: Make sure your lead Pokémon can escape from battles 100% of the time, or the bot might get stuck. Using a Smoke Ball or a fast Pokémon is a good idea.
-- **Backups**: We're still working on the bot, so things might change. Always back up your `profiles/` folder before you update!
+1.  **Download ZIP**: Go to [realgarit/realbot-G3](https://github.com/realgarit/realbot-G3), click **Code** > **Download ZIP`.
+2.  **Git Clone**:
+    ```bash
+    git clone https://github.com/realgarit/realbot-G3.git
+    ```
 
 ---
 
-## Importing a Save
+## Setup & Run
 
-If you already have a save file from mGBA:
-1. Open the game in mGBA and load your save.
-2. Go to **File** > **Save State File...** and save it somewhere.
-3. Run the bot (`realbot.py`), type a name for your profile, and click **Load Existing Save**.
-4. Pick the save state file you just made. The bot will create a new profile and start running.
+### 1. Set up a Virtual Environment (Recommended)
+Using a `venv` keeps the bot's libraries separate from your system.
+
+**Windows:**
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+```
+
+**Linux:**
+```bash
+python3.13 -m venv venv
+source venv/bin/activate
+```
+*(You'll need to run the activate command every time you open a new terminal)*
+
+### 2. Add ROMs
+Place your **official** Pokémon .gba ROMs into the `roms/` folder.
+
+### 3. Run the Bot
+The bot handles its own requirements installation.
+
+**Windows:**
+```powershell
+python realbot.py
+```
+
+**Linux:**
+```bash
+python3.13 realbot.py
+```
+
+Follow the on-screen prompts to create your profile!
+
+---
+
+## Tips & Troubleshooting
+
+-   **Escape 100%**: Your lead Pokémon must be able to flee battles, or the bot will get stuck.
+-   **Key Mappings**: Default controls are standard mGBA. Customize them in `profiles/config.yml` or check the [Key Mappings](pages/Configuration%20-%20Key%20Mappings.md) page.
+-   **Updates**: Back up your `profiles/` folder before updating!
+-   **Linux Audio**: If you get audio errors, ensure `portaudio19-dev` is installed.
+
+## Importing Saves
+1.  In mGBA, go to **File** > **Save State File...** and save a file.
+2.  Run RealBot, choose a profile name, and select **Load Existing Save`.
+3.  Support file types: `.ss1` (mGBA save states).
 
 ---
 
