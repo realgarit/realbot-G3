@@ -1,83 +1,91 @@
 # See wiki for documentation: https://github.com/realgarit/realbot-g3/tree/main/wiki/pages/Configuration%20-%20Discord.md
 
 rich_presence: false
-global_webhook_url: ""
-iv_format: formatted # `basic`, `formatted`
 delay: 0
-bot_id: RealBot G3
+iv_format: formatted # `basic`, `formatted`
 
-# Shiny Pokémon encounters
+# ==============================================================================
+# DEFAULT SETTINGS (Main Bot Identity)
+# ==============================================================================
+bot_id: "RealBot G3"
+# bot_username: "Emerald Bot"
+# bot_avatar_url: "https://example.com/shiny.png"
+global_webhook_url: ""
+
+
+# ==============================================================================
+# GROUP 1: SHINY ENCOUNTERS
+# (Inherits global_webhook_url and bot_username by default)
+# ==============================================================================
+
 shiny_pokemon_encounter:
   enable: false
-  ping_mode:
-  ping_id:
-  #webhook_url:
+  ping_mode: # role, user, or empty
+  ping_id: # 1234567890
 
-# Shiny Pokémon encounters that were on the block list and will therefore not be caught
 blocked_shiny_encounter:
   enable: false
   ping_mode:
   ping_id:
-  #webhook_url:
 
-# Pokémon encounter milestones
+anti_shiny_pokemon_encounter:
+  enable: false
+  ping_mode:
+  ping_id:
+
+custom_filter_pokemon_encounter:
+  enable: false
+  ping_mode:
+  ping_id:
+
+
+# ==============================================================================
+# GROUP 2: LOG EVENTS
+# (You can override bot_username and webhook_url here for a second channel)
+# ==============================================================================
+
 pokemon_encounter_milestones:
   enable: false
   interval: 10000
   ping_mode:
   ping_id:
-  #webhook_url:
+  # bot_username: "Log Bot"
+  # webhook_url: "https://discord.com/api/webhooks/..."
 
-# Shiny Pokémon encounter milestones
 shiny_pokemon_encounter_milestones:
   enable: false
   interval: 5
   ping_mode:
   ping_id:
-  #webhook_url:
+  # bot_username: "Log Bot"
+  # webhook_url: "https://discord.com/api/webhooks/..."
 
-# Total encounter milestones
 total_encounter_milestones:
   enable: false
   interval: 25000
   ping_mode:
   ping_id:
-  #webhook_url:
+  # bot_username: "Log Bot"
+  # webhook_url: "https://discord.com/api/webhooks/..."
 
-# Phase summary
 phase_summary:
   enable: false
   first_interval: 8192
   consequent_interval: 5000
   ping_mode:
   ping_id:
-  #webhook_url:
+  # bot_username: "Log Bot"
+  # webhook_url: "https://discord.com/api/webhooks/..."
 
-# Anti-Shiny Pokémon encounters
-anti_shiny_pokemon_encounter:
-  enable: false
-  ping_mode:
-  ping_id:
-  #webhook_url:
-
-# Custom filter Pokémon encountered
-custom_filter_pokemon_encounter:
-  enable: false
-  ping_mode:
-  ping_id:
-  #webhook_url:
-
-# Pickup new items notification
 pickup:
   enable: false
   interval: 10
   ping_mode:
   ping_id:
-  #webhook_url:
+  # bot_username: "Log Bot"
+  # webhook_url: "https://discord.com/api/webhooks/..."
 
-# TCG cards
 tcg_cards:
   enable: false
-  ping_mode:
-  ping_id:
-  #webhook_url:
+  # bot_username: "Log Bot"
+  # webhook_url: "https://discord.com/api/webhooks/..."

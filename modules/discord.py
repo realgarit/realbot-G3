@@ -38,6 +38,8 @@ class DiscordMessage:
     image: Path = None
     embed: DiscordMessageEmbed | None = None
     delay: int | None = None
+    bot_username: str | None = None
+    bot_avatar_url: str | None = None
 
 
 def discord_send(message: DiscordMessage) -> None:
@@ -53,7 +55,14 @@ def discord_send(message: DiscordMessage) -> None:
 
 
 async def _process_message(message: DiscordMessage) -> None:
-    webhook = DiscordWebhook(url=message.webhook_url, content=message.content, timeout=10, rate_limit_retry=True)
+    webhook = DiscordWebhook(
+        url=message.webhook_url,
+        content=message.content,
+        username=message.bot_username or context.config.discord.bot_username,
+        avatar_url=message.bot_avatar_url or context.config.discord.bot_avatar_url,
+        timeout=10,
+        rate_limit_retry=True,
+    )
 
     # If one of the image files do not yet exist (which can happen as things like the
     # encounter GIF or the TCG cards are generated in a separate thread) delay

@@ -96,6 +96,8 @@ class Discord(BaseConfig):
     delay: int = 0
     bot_id: str = "RealBot G3"
     global_webhook_url: str = ""
+    bot_username: str | None = None
+    bot_avatar_url: str | None = None
     shiny_pokemon_encounter: DiscordWebhook = Field(default_factory=lambda: DiscordWebhook())
     blocked_shiny_encounter: DiscordWebhook = Field(default_factory=lambda: DiscordWebhook())
     pokemon_encounter_milestones: DiscordWebhook = Field(default_factory=lambda: DiscordWebhook(interval=10000))
@@ -136,6 +138,8 @@ class DiscordWebhook(BaseConfig):
     ping_mode: Literal["user", "role", None] = None
     ping_id: str | None = None
     webhook_url: str | None = None
+    bot_username: str | None = None
+    bot_avatar_url: str | None = None
 
 
 class Keys(BaseConfig):

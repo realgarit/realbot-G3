@@ -110,7 +110,15 @@ def send_discord_message(webhook_config: "DiscordWebhook", content: str, **kwarg
     if content == "":
         ping = ping.strip()
 
-    discord_send(DiscordMessage(webhook_url=webhook_config.webhook_url, content=f"{content}{ping}", **kwargs))
+    discord_send(
+        DiscordMessage(
+            webhook_url=webhook_config.webhook_url,
+            content=f"{content}{ping}",
+            bot_username=webhook_config.bot_username,
+            bot_avatar_url=webhook_config.bot_avatar_url,
+            **kwargs,
+        )
+    )
 
 
 class DiscordPlugin(BotPlugin):
