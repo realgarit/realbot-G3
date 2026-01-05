@@ -19,7 +19,7 @@ sudo apt update
 ```
 Then install the dependencies:
 ```bash
-sudo apt install python3.13 python3.13-venv python3-tk libmgba0.10 portaudio19-dev
+sudo apt install python3.13 python3.13-venv python3.13-tk libmgba0.10 portaudio19-dev
 ```
 *Note: If `apt` selects `libmgba0.10t64` instead of `libmgba0.10`, that is fine.*
 
@@ -27,7 +27,7 @@ sudo apt install python3.13 python3.13-venv python3-tk libmgba0.10 portaudio19-d
 Debian does not support PPAs. If Python 3.13 is not in your repositories, you may need to build it from source or use `testing`/`unstable` repos.
 ```bash
 sudo apt update
-sudo apt install python3.13 python3.13-venv python3-tk libmgba0.10 portaudio19-dev
+sudo apt install python3.13 python3.13-venv python3.13-tk libmgba0.10 portaudio19-dev
 ```
 *Note: Even for headless mode, `libmgba` is required. If `libmgba0.10` isn't in your repos, you can download the .deb from [mgba.io](https://mgba.io/downloads.html).*
 
