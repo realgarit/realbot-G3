@@ -137,6 +137,15 @@ if __name__ == "__main__":
                 context.emulator.shutdown()
 
         win32api.SetConsoleCtrlHandler(win32_signal_handler, True)
+    else:
+        import signal
+
+        def signal_handler(signum, frame):
+            sys.exit(0)
+
+        signal.signal(signal.SIGTERM, signal_handler)
+        signal.signal(signal.SIGHUP, signal_handler)
+        signal.signal(signal.SIGINT, signal_handler)
 
     startup_settings = parse_arguments(get_bot_mode_names())
     console.print(f"Starting [bold cyan]{realbot_name} {realbot_version}![/]")

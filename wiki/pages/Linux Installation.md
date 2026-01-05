@@ -105,7 +105,57 @@ python realbot.py Realgar2 -hl
 
 ---
 
-## 4. Troubleshooting
+## 4. Common Output & Verification
 
-- **Audio Errors**: If the bot crashes with audio errors on a server, ensure `portaudio19-dev` is installed. You can also disable audio output with the `-na` flag.
-- **Permission Denied**: If the bot cannot download `libmgba-py` during the first run, ensure your user has write permissions to the bot directory.
+When you start the bot, you will likely see output like this:
+```text
+Starting RealBot G3 ...
+Running mGBA ...
+Error querying device -1
+Failed to initialise sound! Sound will be disabled.
+```
+
+**This is normal!** 
+- The sound error happens because headless servers don't have speakers. The bot automatically disables audio and continues running.
+- If the command doesn't exit (return you to the command prompt), **the bot is running**.
+- To see more activity, you can add the `-d` (debug) flag:
+  ```bash
+  python realbot.py Realgar1 -hl -d
+  ```
+
+### Running Specific Modes
+To start the bot in a specific mode (like Spin for shiny hunting), use the `-m` (Mode) flag. You must put the mode name in quotes if it has spaces.
+
+**Examples:**
+```bash
+# Run in Spin mode
+python realbot.py Realgar1 -hl -m Spin
+
+# Run in Fishing mode
+python realbot.py Realgar1 -hl -m Fishing
+
+# Run in "Acro Bike Bunny Hop" mode (quotes required!)
+python realbot.py Realgar1 -hl -m "Acro Bike Bunny Hop"
+```
+
+### Changing Speed
+You can also set the emulation speed with `-s`:
+```bash
+# Run Spin mode at max speed (0 = unthrottled)
+python realbot.py Realgar1 -hl -m Spin -s 0
+```
+
+### Stopping the Bot
+To stop the bot gracefully and **save your game state**:
+- Press **`Ctrl + C`** in the terminal window.
+- The bot will detect the signal, save your game, and shut down safely.
+
+**Note:** If you are using `tmux`, you can also use `kill [PID]` from another terminal, and the bot will still shut down gracefully.
+
+---
+
+## 5. Troubleshooting
+
+- **Permissions**: If the bot cannot download `libmgba-py`, check your folder permissions.
+- **Discord**: The bot will automatically skip Rich Presence if Discord isn't installed.
+- **Audio**: Audio errors are expected on headless systems; use `-na` to silence them if you prefer.
