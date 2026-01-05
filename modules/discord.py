@@ -53,12 +53,16 @@ def discord_send(message: DiscordMessage) -> None:
 
     asyncio.run_coroutine_threadsafe(_message_queue.put(message), _event_loop)
 
-
 async def _process_message(message: DiscordMessage) -> None:
+    # Dynamic bot username: use configured name, or fall back to game-based name
+    bot_username = message.bot_username or context.config.discord.bot_username
+    if not bot_username:
+        bot_username = f"{context.rom.short_game_name} Bot"
+
     webhook = DiscordWebhook(
         url=message.webhook_url,
         content=message.content,
-        username=message.bot_username or context.config.discord.bot_username,
+        username=bot_username,
         avatar_url=message.bot_avatar_url or context.config.discord.bot_avatar_url,
         timeout=10,
         rate_limit_retry=True,
