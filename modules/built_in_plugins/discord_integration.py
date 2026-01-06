@@ -10,6 +10,7 @@ from modules.discord import (
     DiscordMessageEmbed,
     discord_send,
     discord_rich_presence_loop,
+    stop_discord,
 )
 from modules.pokemon.encounter import EncounterValue
 from modules.core.plugin_interface import BotPlugin
@@ -130,6 +131,9 @@ class DiscordPlugin(BotPlugin):
 
         if context.config.discord.rich_presence:
             Thread(target=discord_rich_presence_loop, daemon=True).start()
+
+    def on_shutdown(self) -> None:
+        stop_discord()
 
     def on_logging_encounter(self, encounter: "EncounterInfo") -> Generator | None:
         global_stats = context.stats.get_global_stats()

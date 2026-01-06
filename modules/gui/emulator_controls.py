@@ -2,7 +2,8 @@
 import tkinter.font
 import webbrowser
 from textwrap import dedent
-from tkinter import Label, Menu, Tk, ttk
+from tkinter import Menu
+import ttkbootstrap as ttk
 from typing import Union
 
 from showinfm import show_in_file_manager
@@ -18,8 +19,9 @@ from modules.core.version import realbot_name, realbot_version
 
 
 class EmulatorControls:
-    def __init__(self, window: Tk):
+    def __init__(self, window: ttk.Window, parent: ttk.Frame):
         self.window = window
+        self.parent = parent
         self.last_known_bot_mode = context.bot_mode
 
         self.frame: Union[ttk.Frame, None] = None
@@ -40,7 +42,8 @@ class EmulatorControls:
         self.debug_menu: Menu | None = None
 
     def get_additional_width(self) -> int:
-        return 5
+        # 10px accounts for the 5px padding on each side of the master container
+        return 10
 
     def get_additional_height(self) -> int:
         return 200
@@ -89,7 +92,7 @@ class EmulatorControls:
 
         self.window.config(menu=self.menu_bar)
 
-        self.frame = ttk.Frame(self.window, padding=5)
+        self.frame = ttk.Frame(self.parent, padding=0)
         self.frame.grid(row=1, sticky="NSWE")
         self.frame.columnconfigure(1, weight=1)
         self.frame.rowconfigure(1, weight=1)
@@ -114,22 +117,26 @@ class EmulatorControls:
             return
 
         self.bot_mode_button.config(text=f"{context.bot_mode} ▾")
-        self._set_button_colour(self.bot_mode_button, active_condition=context.bot_mode == "Manual")
+        self._update_button_style(self.bot_mode_button, active=context.bot_mode == "Manual")
 
         if context.emulation_speed > 1:
             speed_text = f"{context.emulation_speed}× ▾"
         else:
             speed_text = "… ▾"
-        self.speed_menu_button.config(text=speed_text)
+        self.speed_menu_button.configure(text=speed_text)
 
-        self._set_button_colour(self.speed_1x_button, active_condition=context.emulation_speed == 1)
-        self._set_button_colour(self.speed_menu_button, active_condition=context.emulation_speed > 1)
-        self._set_button_colour(self.unthrottled_button, active_condition=context.emulation_speed == 0)
 
-        self._set_button_colour(self.toggle_video_button, active_condition=context.video)
-        self._set_button_colour(
-            self.toggle_audio_button, active_condition=context.audio, disabled_condition=context.emulation_speed == 0
-        )
+        self._update_button_style(self.speed_1x_button, active=context.emulation_speed == 1)
+        self._update_button_style(self.speed_menu_button, active=context.emulation_speed > 1)
+        self._update_button_style(self.unthrottled_button, active=context.emulation_speed == 0)
+
+        self._update_button_style(self.toggle_video_button, active=context.video)
+        # For audio, check disabled state too if needed, but bootstyle handles disabled via state
+        if context.emulation_speed == 0:
+             self.toggle_audio_button.configure(state="disabled")
+        else:
+             self.toggle_audio_button.configure(state="normal")
+        self._update_button_style(self.toggle_audio_button, active=context.audio)
 
         self.bot_message.config(text=context.message)
 
@@ -195,10 +202,9 @@ class EmulatorControls:
             )
 
         ttk.Label(group, text="Bot Mode:", justify="left").grid(row=0, sticky="W")
-        self.bot_mode_button = Label(
-            group, text=f"{context.bot_mode} ▾", width=12, cursor="hand2", relief="raised", padx=5, pady=3
+        self.bot_mode_button = ttk.Button(
+            group, text=f"{context.bot_mode} ▾", cursor="hand2", command=open_bot_mode_menu
         )
-        self.bot_mode_button.bind("<Button-1>", lambda e: open_bot_mode_menu())
         self.bot_mode_button.grid(row=1, sticky="W", padx=0)
 
     def _add_speed_controls(self, row: int, column: int, sticky: str = "W"):
@@ -234,23 +240,18 @@ class EmulatorControls:
             )
 
         group = ttk.Frame(self.frame)
-        group.grid(row=row, column=column, sticky=sticky)
+        group.grid(row=row, column=column, sticky=sticky, pady=(5, 0))
         group.columnconfigure(3, weight=1)
 
         ttk.Label(group, text="Emulation Speed:", justify="left").grid(row=0, column=0, columnspan=4, sticky="W")
 
-        button_settings = {"width": 3, "cursor": "hand2", "relief": "raised", "padx": 5, "pady": 3}
-        self.speed_1x_button = Label(group, text="1×", **button_settings)
-        self.speed_menu_button = Label(group, text="…", **button_settings)
-        self.unthrottled_button = Label(group, text="∞", **button_settings)
+        self.speed_1x_button = ttk.Button(group, text="1×", cursor="hand2", width=3, command=lambda: set_emulation_speed(1))
+        self.speed_menu_button = ttk.Button(group, text="…", cursor="hand2", width=3, command=open_speed_menu)
+        self.unthrottled_button = ttk.Button(group, text="∞", cursor="hand2", width=3, command=lambda: set_emulation_speed(0))
         
-        self.speed_1x_button.bind("<Button-1>", lambda e: set_emulation_speed(1))
-        self.speed_menu_button.bind("<Button-1>", lambda e: open_speed_menu())
-        self.unthrottled_button.bind("<Button-1>", lambda e: set_emulation_speed(0))
-
-        self.speed_1x_button.grid(row=1, column=0)
-        self.speed_menu_button.grid(row=1, column=1)
-        self.unthrottled_button.grid(row=1, column=2)
+        self.speed_1x_button.grid(row=1, column=0, padx=2)
+        self.speed_menu_button.grid(row=1, column=1, padx=2)
+        self.unthrottled_button.grid(row=1, column=2, padx=2)
 
     def _add_settings_controls(self, row: int, column: int):
         group = ttk.Frame(self.frame)
@@ -258,15 +259,25 @@ class EmulatorControls:
 
         ttk.Label(group, text="Other Settings:").grid(row=0, columnspan=2, sticky="W")
 
-        button_settings = {"width": 6, "cursor": "hand2", "relief": "raised", "padx": 5, "pady": 3}
-        self.toggle_video_button = Label(group, text="Video", **button_settings)
-        self.toggle_audio_button = Label(group, text="Audio", **button_settings)
-        
-        self.toggle_video_button.bind("<Button-1>", lambda e: context.toggle_video())
-        self.toggle_audio_button.bind("<Button-1>", lambda e: context.toggle_audio())
+        self.toggle_video_button = ttk.Button(group, text="Video", cursor="hand2", width=6, command=lambda: context.toggle_video())
+        self.toggle_audio_button = ttk.Button(group, text="Audio", cursor="hand2", width=6, command=lambda: context.toggle_audio())
 
         self.toggle_video_button.grid(row=1, column=0, padx=2)
         self.toggle_audio_button.grid(row=1, column=1, padx=2)
+
+    def _get_active_color(self) -> str:
+        """Returns a bootstrap color name based on the current game."""
+        if not context.rom:
+            return "primary"
+        
+        name = context.rom.game_name.lower()
+        if "emerald" in name or "green" in name:
+            return "success"
+        if "ruby" in name or "red" in name:
+            return "danger"
+        if "sapphire" in name or "blue" in name:
+            return "primary"
+        return "info"
 
     def _add_message_area(self, row: int, column: int, columnspan: int = 1):
         group = ttk.LabelFrame(self.frame, text="Message:", padding=(10, 5))
@@ -288,6 +299,7 @@ class EmulatorControls:
             text=f"{context.rom.short_game_name} - {realbot_name} {realbot_version}",
             foreground="grey" if not context.rom.game_name.startswith("Unsupported") else "red",
             font=tkinter.font.Font(size=9),
+            wraplength=440,
         )
 
         # In debug mode, the footer gets a bit crowded with performance stats.
@@ -298,13 +310,14 @@ class EmulatorControls:
         else:
             version_label.grid(row=0, column=1, sticky="E")
 
-    def _set_button_colour(self, button: Label, active_condition: bool, disabled_condition: bool = False) -> None:
-        if disabled_condition:
-            button.config(background="#d9d9d9", foreground="#a3a3a3", relief="flat")
-        elif active_condition:
-            button.config(background="#E34234", foreground="white", relief="sunken")  # Realgar red
+    def _update_button_style(self, button: ttk.Button, active: bool) -> None:
+        color = self._get_active_color()
+        if active:
+            # Solid color for active state
+            button.configure(bootstyle=color)
         else:
-            button.config(background="#d9d9d9", foreground="black", relief="raised")
+            # Outline color for inactive state (modern look)
+            button.configure(bootstyle=f"{color}-outline")
 
     def _update_stats(self):
         stats = []
@@ -354,8 +367,8 @@ class DebugTab:
 
 
 class DebugEmulatorControls(EmulatorControls):
-    def __init__(self, window: Tk):
-        super().__init__(window)
+    def __init__(self, window: ttk.Window, parent: ttk.Frame):
+        super().__init__(window, parent)
         self.debug_notebook = None
         self.debug_frame: Union[ttk.Frame, None] = None
         self.debug_notebook: ttk.Notebook
@@ -365,10 +378,10 @@ class DebugEmulatorControls(EmulatorControls):
         return 550
 
     def add_to_window(self):
-        self.debug_frame = ttk.Frame(self.window, padding=(10, 5))
+        self.debug_frame = ttk.Frame(self.parent, padding=0)
         self.debug_frame.rowconfigure(0, weight=1)
         self.debug_frame.columnconfigure(0, weight=1)
-        self.debug_frame.grid(row=0, column=1, rowspan=2, sticky="NWES")
+        self.debug_frame.grid(row=0, column=1, rowspan=2, sticky="NWES", padx=(5, 0))
 
         self.debug_notebook = ttk.Notebook(self.debug_frame)
         for tab in self.debug_tabs:

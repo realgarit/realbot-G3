@@ -31,6 +31,7 @@ required_modules = [
     "show-in-file-manager~=1.1.4",
     "aiohttp~=3.10.9",
     "aiortc~=1.10.0",
+    "ttkbootstrap~=1.10.1",
 ]
 
 if platform.system() == "Windows":

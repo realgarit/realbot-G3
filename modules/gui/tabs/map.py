@@ -111,7 +111,7 @@ class MapTab(DebugTab):
         player_location = get_player_avatar().local_coordinates
         self._selected_tile = (player_location[0] + x_offset, player_location[1] + y_offset)
         # Select the 'Map' tab
-        self._tv._tv.nametowidget(self._tv._tv.winfo_parent()).master.select(5)  # 5 is the index of the Map tab
+        self._tv._tv.nametowidget(self._tv._tv.winfo_parent()).master.master.select(3)  # 3 is the index of the Map tab
 
     def _get_data(self, show_different_tile: bool):
         player_avatar = get_player_avatar()
@@ -119,137 +119,130 @@ class MapTab(DebugTab):
         if show_different_tile and self._selected_tile:
             player_location = self._selected_tile
 
-        # map_data = get_map_data(player_avatar.map_group_and_number)
-        current_map = get_map_data(player_avatar.map_group_and_number)
-        tile = _find_tile_by_local_coordinates(player_location, current_map)
-        if tile is None:
-            return {"Error": "Tile not found"}
+        # get_map_data returns a MapLocation for the specific tile at player_location
+        current_map = get_map_data(player_avatar.map_group_and_number, player_location)
+        if current_map is None:
+            return {"Error": "Map data not found"}
 
-        map_objects = {
-            f"Object #{i + 1}": {
-                "__value": f"{obj.object_type} at ({obj.x}, {obj.y})",
-                "Type": obj.object_type,
-                "Coordinates": self.format_coordinates((obj.x, obj.y)),
+        map_objects_data = {}
+        all_objects = get_map_objects()
+        matching_objects = [obj for obj in all_objects if obj.current_coords == player_location]
+        
+        for i, obj in enumerate(matching_objects):
+            # Try to get template info for more details
+            template = None
+            with contextlib.suppress(Exception):
+                template = obj.object_event_template
+
+            map_objects_data[f"Object #{i + 1}"] = {
+                "__value": f"ID {obj.local_id} at ({obj.current_coords[0]}, {obj.current_coords[1]})",
+                "Type": f"Graphics ID {obj.graphics_id}",
+                "Coordinates": self.format_coordinates(obj.current_coords),
                 "Movement Type": obj.movement_type,
-                "Radius": obj.radius,
-                "Script Pointer": hex(obj.script_pointer),
-                "Flag": obj.flag,
+                "Trainer Type": obj.trainer_type,
+                "Local ID": obj.local_id,
             }
-            for i, obj in enumerate(get_map_objects(player_avatar.map_group_and_number))
-            if obj.x == player_location[0] and obj.y == player_location[1]
-        }
+            if template:
+                map_objects_data[f"Object #{i + 1}"].update({
+                    "Script": template.script_symbol,
+                    "Flag ID": template.flag_id,
+                    "Trainer Range": template.trainer_range if template.trainer_type != "None" else "N/A",
+                })
 
         # Filter encounters to only show those relevant to the current tile
-        encounters = get_wild_encounters_for_map(player_avatar.map_group_and_number)
+        map_group, map_num = player_avatar.map_group_and_number
+        encounters = get_wild_encounters_for_map(map_group, map_num)
         
-        # Calculate rates...
-        # Wait, get_effective_encounter_rates_for_current_map returns List[EffectiveWildEncounter]
-        # I need to filter relevant ones.
-        
-        # NOTE: Logic from original file suggests passing ALL encounters to a helper function within _get_data
-        # But here I am inside _get_data.
-        # Original code called `self.list_encounters` and `self.list_effective_encounters`.
-        
-        def format_coordinates(coordinates: tuple[int, int]):
-             return f"({coordinates[0]}, {coordinates[1]})"
-
-        self.format_coordinates = format_coordinates # monkey patch for local usage if needed or define method
-
         def list_encounters(encounter_list: list[WildEncounter], rate: int):
             if not encounter_list or rate == 0:
                 return {"__value": "None"}
             
             result = {"__value": f"{rate}%"}
             for encounter in encounter_list:
-                result[f"{encounter.species.name} (Lv. {encounter.min_level}-{encounter.max_level})"] = (
-                    f"Rate: {rate}%" if len(encounter_list) == 1 else ""
-                )
+                label = f"{encounter.species.name} (Lv. {encounter.min_level}"
+                if encounter.min_level != encounter.max_level:
+                    label += f"-{encounter.max_level}"
+                label += ")"
+                result[label] = f"{encounter.encounter_rate}%"
             return result
         
-        def list_effective_encounters(label: str, encounters: list[EffectiveWildEncounter]):
-             if not encounters:
+        def list_effective_encounters(label: str, encounters_list: list[EffectiveWildEncounter]):
+             if not encounters_list:
                  return {label: {"__value": "None"}}
              
-             data = {"__value": f"{sum(e.rate for e in encounters)}%"}
-             for e in encounters:
-                 data[f"{e.species.name} (Lv. {e.level})"] = f"{e.rate}%"
+             total_rate = sum(e.encounter_rate for e in encounters_list)
+             data = {"__value": f"{total_rate:.2f}%"}
+             for e in encounters_list:
+                 label_text = f"{e.species.name} (Lv. {e.min_level}"
+                 if e.min_level != e.max_level:
+                     label_text += f"-{e.max_level}"
+                 label_text += ")"
+                 data[label_text] = f"{e.encounter_rate:.2f}%"
              return {label: data}
 
-        land_encounters = list_encounters(encounters.land_mons, encounters.land_mons_rate)
-        water_encounters = list_encounters(encounters.water_mons, encounters.water_mons_rate)
-        fishing_encounters = list_encounters(encounters.fishing_mons, encounters.fishing_mons_rate)
-        hidden_encounters = list_encounters(encounters.hidden_mons, encounters.hidden_mons_rate) # Ruby/Sapphire only
-        rock_smash_encounters = list_encounters(encounters.rock_smash_mons, encounters.rock_smash_mons_rate)
+        land_encounters = list_encounters(encounters.land_encounters, encounters.land_encounter_rate) if encounters else {"__value": "None"}
+        water_encounters = list_encounters(encounters.surf_encounters, encounters.surf_encounter_rate) if encounters else {"__value": "None"}
+        rock_smash_encounters = list_encounters(encounters.rock_smash_encounters, encounters.rock_smash_encounter_rate) if encounters else {"__value": "None"}
+        
+        fishing_data = {"__value": f"{encounters.fishing_encounter_rate}%" if encounters else "None"}
+        if encounters:
+            fishing_data.update({
+                "Old Rod": list_encounters(encounters.old_rod_encounters, encounters.fishing_encounter_rate),
+                "Good Rod": list_encounters(encounters.good_rod_encounters, encounters.fishing_encounter_rate),
+                "Super Rod": list_encounters(encounters.super_rod_encounters, encounters.fishing_encounter_rate),
+            })
 
-        # Effective encounters
-        effective_encounters_data = {}
-        if not show_different_tile:
-            effective_rates = get_effective_encounter_rates_for_current_map()
-            if effective_rates:
-                 # Group by type (Land, Water, etc.)
-                 # The return type of `get_effective_encounter_rates_for_current_map` depends on implementation.
-                 # Assuming it returns a dict or list?
-                 # modules/map.py says it returns list[EffectiveWildEncounter]
-                 # Wait, original debug_tabs.py line 1360:
-                 # effective_encounters = get_effective_encounter_rates_for_current_map()
-                 # then it iterates or passes it.
-                 # Let's check `get_effective_encounter_rates_for_current_map`.
-                 # It returns `list[EffectiveWildEncounter]`.
-                 
-                 # Original `_get_data` logic for effective encounters:
-                 # effective_encounters = get_effective_encounter_rates_for_current_map()
-                 # if len(effective_encounters) > 0:
-                 #     effective_encounters_data = list_effective_encounters("Effective Encounters", effective_encounters)
-                 pass
-        
-        # ... Reconstructing the huge dict return ...
-        
-        # Let's simplify and make sure I copy the dict structure correctly.
-        map_enum = get_map_enum(player_avatar.map_group_and_number)
+        map_enum = get_map_enum((map_group, map_num))
         map_name = map_enum.name if map_enum else "Unknown"
 
+        # Use dict_for_tile() as a base but augment it
+        tile_info = current_map.dict_for_tile()
+        
         data = {
             "Map": {
-                "__value": f"{map_name} ({player_avatar.map_group_and_number[0]}, {player_avatar.map_group_and_number[1]})",
-                "Group": player_avatar.map_group_and_number[0],
-                "Number": player_avatar.map_group_and_number[1],
+                "__value": f"{map_name} ({map_group}, {map_num})",
+                "Group": map_group,
+                "Number": map_num,
                 "Name": map_name,
-                "Width": current_map.width,
-                "Height": current_map.height,
+                "Width": current_map.map_size[0],
+                "Height": current_map.map_size[1],
             },
             "Tile": {
                  "__value": f"({player_location[0]}, {player_location[1]})",
                  "X": player_location[0],
                  "Y": player_location[1],
-                 "Metatile ID": hex(tile.metatile_id),
-                 "Movement Permission": hex(tile.movement_permission),
-                 "Collision": bool(tile.collision),
-                 "Terrain Type": tile.terrain_type,
-                 "Encounter Type": {"__value": "Yes" if tile.has_encounters else "No"},
-                 "Tile Type": tile.tile_type,
-                 "Map Type": current_map.map_type,
+                 "Elevation": tile_info["elevation"],
+                 "Type": tile_info["type"],
+                 "Collision": bool(tile_info["collision"]),
+                 "Encounter Type": {"__value": "Yes" if tile_info["has_encounters"] else "No"},
+                 "Is Surfable": "Yes" if tile_info["is_surfing_possible"] else "No",
             },
-            "Objects": {"__value": f"{len(map_objects)} Objects", **map_objects},
+            "Objects": {"__value": f"{len(matching_objects)} Objects", **map_objects_data},
             "Encounters": {
                 "__value": "Rates",
                 "Land": land_encounters,
                 "Water": water_encounters,
-                "Fishing": fishing_encounters,
+                "Fishing": fishing_data,
                 "Rock Smash": rock_smash_encounters,
             },
         }
         
         if show_different_tile:
             data["Tile"]["__value"] += " (Selected)"
-        
-        if context.rom.is_rse:
-             data["Encounters"]["Hidden"] = hidden_encounters
 
         if not show_different_tile:
              effective = get_effective_encounter_rates_for_current_map()
              if effective:
-                 data["Effective Encounters"] = list_effective_encounters("Effective Encounters", effective)["Effective Encounters"]
-
+                 data["Effective Encounters"] = {
+                     "__value": f"Repel Lv. {effective.repel_level}",
+                     **list_effective_encounters("Land", effective.land_encounters),
+                     **list_effective_encounters("Surfing", effective.surf_encounters),
+                     **list_effective_encounters("Old Rod", effective.old_rod_encounters),
+                     **list_effective_encounters("Good Rod", effective.good_rod_encounters),
+                     **list_effective_encounters("Super Rod", effective.super_rod_encounters),
+                     **list_effective_encounters("Rock Smash", effective.rock_smash_encounters),
+                 }
+        
         return data
 
     def format_coordinates(self, coordinates: tuple[int, int]):

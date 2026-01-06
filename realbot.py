@@ -142,6 +142,8 @@ if __name__ == "__main__":
         import signal
 
         def signal_handler(signum, frame):
+            from modules.core.plugins import plugin_shutdown
+            plugin_shutdown()
             if context.emulator:
                 context.emulator.shutdown()
             os._exit(0)
@@ -170,3 +172,5 @@ if __name__ == "__main__":
     context.gui = gui
 
     gui.run(startup_settings)
+    from modules.core.plugins import plugin_shutdown
+    plugin_shutdown()

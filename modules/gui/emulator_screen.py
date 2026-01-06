@@ -1,6 +1,8 @@
 # Copyright (c) 2026 realgarit
 from collections import deque
-from tkinter import Button, PhotoImage, Tk, Canvas, ttk
+from tkinter import PhotoImage, Canvas
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
 from typing import Union
 
 import PIL.Image
@@ -28,13 +30,14 @@ stepping_mode_reverse_key = "<Control-space>"
 
 
 class EmulatorScreen:
-    def __init__(self, window: Tk, use_opengl: bool = False):
+    def __init__(self, window: ttk.Window, parent: ttk.Frame, use_opengl: bool = False):
         if use_opengl and not can_use_opengl:
             raise RuntimeError(
                 "Cannot use OpenGL because importing the library failed. Did you do `pip install PyOpenGL PyOpenGL_accelerate pyopengltk`?"
             )
 
         self.window = window
+        self.parent = parent
 
         self.canvas: Union[Canvas, None] = None
         self.current_canvas_image: Union[PhotoImage, None] = None
@@ -57,20 +60,19 @@ class EmulatorScreen:
         self._controls: EmulatorControls | None = None
 
     def _initialise_controls(self, debug: bool = False) -> None:
-        if debug:
-            controls = DebugEmulatorControls(self.window)
-            controls.add_tab(TasksTab())
-            controls.add_tab(BattleTab())
-            controls.add_tab(PlayerTab())
-            controls.add_tab(MapTab(self.canvas))
-            controls.add_tab(MiscTab())
-            controls.add_tab(SymbolsTab())
-            controls.add_tab(EventFlagsTab())
-            controls.add_tab(EventVarsTab())
-            controls.add_tab(EmulatorTab())
+        if not debug:
+            self._controls = EmulatorControls(self.window, self.frame)
         else:
-            controls = EmulatorControls(self.window)
-        self._controls = controls
+            self._controls = DebugEmulatorControls(self.window, self.frame)
+            self._controls.add_tab(TasksTab())
+            self._controls.add_tab(BattleTab())
+            self._controls.add_tab(PlayerTab())
+            self._controls.add_tab(MapTab(self.canvas))
+            self._controls.add_tab(MiscTab())
+            self._controls.add_tab(SymbolsTab())
+            self._controls.add_tab(EventFlagsTab())
+            self._controls.add_tab(EventVarsTab())
+            self._controls.add_tab(EmulatorTab())
 
     def enable(self) -> None:
         app_name = realbot_name
@@ -94,13 +96,16 @@ class EmulatorScreen:
 
         self.window.title(f"{context.profile.path.name} | {app_name} {realbot_version}")
         self.window.resizable(context.debug, context.debug)
-        self.window.rowconfigure(0, weight=1)
-        self.window.columnconfigure(0, weight=1)
 
-        self.frame = ttk.Frame(self.window)
+        self.frame = ttk.Frame(self.parent)
         self.frame.grid(sticky="NSWE")
-        self.frame.rowconfigure(0, weight=1)
+        self.frame.rowconfigure(0, weight=1) # The canvas/video row
         self.frame.columnconfigure(0, weight=1)
+
+        # Control bar frame for stepping buttons etc. to avoid absolute positioning
+        self.control_bar = ttk.Frame(self.frame, padding=0)
+        self.control_bar.grid(row=1, column=0, sticky="ew") # Placed below canvas
+
 
         self._add_canvas()
         self._initialise_controls(context.debug)
@@ -152,13 +157,21 @@ class EmulatorScreen:
         else:
             self.window.geometry(f"{self.width}x{self.height}")
 
-        self.window.rowconfigure(0, weight=0, minsize=self.height * self._scale)
-        self.window.rowconfigure(1, weight=1)
-        self.window.columnconfigure(0, weight=0, minsize=self.width * self._scale)
-        self.window.columnconfigure(1, weight=1)
+        self.parent.rowconfigure(0, weight=1, minsize=self.height * self._scale)
+        self.parent.columnconfigure(0, weight=0, minsize=self.width * self._scale)
+        self.parent.columnconfigure(1, weight=1)
+
+        self.frame.rowconfigure(0, weight=0, minsize=self.height * self._scale)
+        self.frame.rowconfigure(1, weight=1)
+        self.frame.columnconfigure(0, weight=0, minsize=self.width * self._scale)
+        self.frame.columnconfigure(1, weight=1)
 
         self.canvas.config(width=self.width * self._scale, height=self.height * self._scale)
         self.center_of_canvas = (self._scale * self.width // 2, self._scale * self.height // 2)
+
+        # Ensure control bar stays at bottom or top as intended (here we put it at bottom row 1)
+        # We might need to adjust rows if controls are added
+
 
         if not context.video:
             self._generate_placeholder_image()
@@ -172,9 +185,12 @@ class EmulatorScreen:
 
             def update_back_button():
                 if len(self._step_history) > 1:
-                    self._back_button.config(background="orange", state="normal")
+                    # bootstyle update (e.g. "warning" or "danger" vs "secondary")
+                    self._back_button.configure(bootstyle="warning")
+                    self._back_button.configure(state="normal")
                 else:
-                    self._back_button.config(background="grey", state="disabled")
+                    self._back_button.configure(bootstyle="secondary")
+                    self._back_button.configure(state="disabled")
 
             def next_step(*args):
                 if len(args) > 0 and args[0].state & 4 != 0 and not stepping_mode_forward_key.startswith("<Control-"):
@@ -195,15 +211,15 @@ class EmulatorScreen:
                     context.emulator.load_save_state(save_state)
                     update_back_button()
 
-            self._stepping_button = Button(
-                self.window, text="⮞", padx=8, background="red", foreground="white", command=next_step, cursor="hand2"
+            self._stepping_button = ttk.Button(
+                self.control_bar, text="⮞", command=next_step, cursor="hand2", bootstyle="danger"
             )
-            self._stepping_button.place(x=32, y=0)
+            self._stepping_button.pack(side=LEFT, padx=5)
 
-            self._back_button = Button(
-                self.window, text="⮜", padx=8, foreground="white", command=previous_step, cursor="hand2"
+            self._back_button = ttk.Button(
+                self.control_bar, text="⮜", command=previous_step, cursor="hand2", bootstyle="secondary"
             )
-            self._back_button.place(x=0, y=0)
+            self._back_button.pack(side=LEFT, padx=0)
             update_back_button()
 
             self._current_step = 0
@@ -250,7 +266,7 @@ class EmulatorScreen:
         if self._use_opengl:
             self._glfw_gui = GlfwGui(None, None)
             threading.Thread(target=self._glfw_gui.run_opengl_window, daemon=True).start()
-        self.canvas = Canvas(self.window, width=480, height=320)
+        self.canvas = Canvas(self.frame, width=480, height=320)
         if not self._use_opengl:
             self.canvas.grid(sticky="NW", row=0, column=0)
 

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 realgarit
 import asyncio
+import contextlib
 import json
 import time
 from asyncio import Queue, set_event_loop, new_event_loop, AbstractEventLoop
@@ -18,6 +19,7 @@ from modules.core.version import realbot_version
 
 _event_loop: AbstractEventLoop | None = None
 _message_queue: Queue["DiscordMessage"] = Queue()
+_stop_event = asyncio.Event()
 
 
 @dataclass
@@ -168,6 +170,9 @@ def discord_rich_presence_loop() -> None:
         large_image = None
 
     while True:
+        if _stop_event.is_set():
+            break
+
         location = "N/A"
         try:
             player_avatar = state_cache.player_avatar.value
@@ -209,15 +214,26 @@ def discord_rich_presence_loop() -> None:
             )
         except Exception as error:
             console.print(f"[yellow]Setting Discord Rich Presence failed:[/] {str(error)}")
+            if _stop_event.is_set():
+                break
 
-        time.sleep(15)
+        # Check for stop event more frequently to avoid waiting up to 15s during shutdown
+        for _ in range(150):
+            if _stop_event.is_set():
+                break
+            time.sleep(0.1)
+
+    with contextlib.suppress(Exception):
+        rpc.close()
 
 
 async def _handle_message_queue() -> None:
-    while True:
-        message = await _message_queue.get()
+    while not _stop_event.is_set():
         try:
+            message = await asyncio.wait_for(_message_queue.get(), timeout=1.0)
             await _process_message(message)
+        except asyncio.TimeoutError:
+            continue
         except:
             serialised_message = json.dumps(message, indent=4)
             console.print_exception()
@@ -231,4 +247,19 @@ def discord_message_thread() -> None:
     set_event_loop(_event_loop)
 
     _event_loop.create_task(_handle_message_queue())
-    _event_loop.run_forever()
+    try:
+        _event_loop.run_forever()
+    finally:
+        _event_loop.close()
+
+
+def stop_discord() -> None:
+    """
+    Signals the Discord threads to stop.
+    """
+    if _event_loop and _event_loop.is_running():
+        _event_loop.call_soon_threadsafe(_stop_event.set)
+        _event_loop.call_soon_threadsafe(_event_loop.stop)
+    else:
+        # Fallback if the loop isn't running or doesn't exist
+        _stop_event.set()

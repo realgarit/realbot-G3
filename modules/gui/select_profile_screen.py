@@ -1,14 +1,18 @@
 # Copyright (c) 2026 realgarit
 from datetime import date, datetime
-from tkinter import Tk, ttk, StringVar
+import ttkbootstrap as ttk
+from tkinter import StringVar
 from typing import Union
 
 from modules.core.profiles import Profile, list_available_profiles
 
 
 class SelectProfileScreen:
-    def __init__(self, window: Tk, enable_profile_creation_screen: callable, run_profile: callable):
+    def __init__(
+        self, window: ttk.Window, parent: ttk.Frame, enable_profile_creation_screen: callable, run_profile: callable
+    ):
         self.window = window
+        self.parent = parent
         self.enable_profile_creation_screen = enable_profile_creation_screen
         self.run_profile = run_profile
         self.frame: Union[ttk.Frame, None] = None
@@ -23,10 +27,7 @@ class SelectProfileScreen:
             self.enable_profile_creation_screen()
             return
 
-        self.window.rowconfigure(0, weight=1)
-        self.window.columnconfigure(0, weight=1)
-
-        self.frame = ttk.Frame(self.window, padding=10)
+        self.frame = ttk.Frame(self.parent)
         self.frame.grid(sticky="NSWE")
         self.frame.rowconfigure(1, weight=1)
         self.frame.columnconfigure(0, weight=1)
@@ -40,12 +41,8 @@ class SelectProfileScreen:
 
     def _add_header_and_controls(self, row: int = 0) -> None:
         header = ttk.Frame(self.frame)
-        style = ttk.Style()
-        style.map(
-            "Accent.TButton",
-            foreground=[("!active", "white"), ("active", "white"), ("pressed", "white")],
-            background=[("!active", "green"), ("active", "darkgreen"), ("pressed", "green")],
-        )
+        # Removed manual style map; use bootstyle
+
         header.grid(row=row, sticky="NEW")
         header.columnconfigure(0, weight=1)
 
@@ -56,12 +53,19 @@ class SelectProfileScreen:
             header,
             text="+ New profile",
             command=self.enable_profile_creation_screen,
-            style="Accent.TButton",
+            bootstyle="success",
             cursor="hand2",
         )
         new_profile_button.grid(column=1, row=0, sticky="E")
 
-    def _add_profile_list(self, available_profiles: list[Profile], row: int = 1) -> None:
+    def _add_profile_list(self, available_profiles: list[Profile], row: int = 2) -> None: # Moved to row 2
+        
+        # Search frame placeholders (row 1)
+        self.search_frame = ttk.Frame(self.frame, padding=(0, 5))
+        self.search_frame.grid(row=1, column=0, sticky="ew")
+        self.search_frame.columnconfigure(0, weight=1)
+        self.search_frame.grid_remove() # Start hidden
+
         container = ttk.Frame(self.frame, padding=(0, 10, 0, 0))
         container.columnconfigure(0, weight=1)
         container.rowconfigure(0, weight=1)
@@ -110,9 +114,10 @@ class SelectProfileScreen:
         def on_ctrl_f(event):
             nonlocal search_field
             if search_field is None:
+                self.search_frame.grid() # Show the frame
                 search_term = StringVar()
-                search_field = ttk.Entry(self.frame, textvariable=search_term)
-                search_field.place(x=0, y=0)
+                search_field = ttk.Entry(self.search_frame, textvariable=search_term)
+                search_field.pack(fill="x", expand=True) # Fill the search frame
                 search_field.focus_set()
 
                 def select_all():
@@ -127,6 +132,7 @@ class SelectProfileScreen:
 
                 def remove_field():
                     nonlocal search_field
+                    self.search_frame.grid_remove() # Hide the frame
                     search_field.destroy()
                     search_field = None
                     if self._filter_term != "":
@@ -137,7 +143,7 @@ class SelectProfileScreen:
                 search_field.bind("<KeyRelease>", on_change)
                 search_field.bind("<Escape>", lambda _: self.window.after(50, remove_field))
             else:
-                search_field.destroy()
+               remove_field()
 
         self.window.bind("<Control-f>", on_ctrl_f)
 

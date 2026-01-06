@@ -1,6 +1,7 @@
 # Copyright (c) 2026 realgarit
 import re
-from tkinter import StringVar, Tk, ttk, filedialog
+from tkinter import StringVar, filedialog
+import ttkbootstrap as ttk
 from typing import Union
 
 from PIL import Image, ImageOps, ImageTk
@@ -13,17 +14,17 @@ from modules.core.version import realbot_name
 
 
 class CreateProfileScreen:
-    def __init__(self, window: Tk, enable_profile_selection_screen: callable, run_profile: callable):
+    def __init__(
+        self, window: ttk.Window, parent: ttk.Frame, enable_profile_selection_screen: callable, run_profile: callable
+    ):
         self.window = window
+        self.parent = parent
         self.enable_profile_selection_screen = enable_profile_selection_screen
         self.run_profile = run_profile
         self.frame: ttk.Frame | None = None
 
     def enable(self) -> None:
-        self.window.rowconfigure(0, weight=1)
-        self.window.columnconfigure(0, weight=1)
-
-        self.frame = ttk.Frame(self.window, padding=10)
+        self.frame = ttk.Frame(self.parent)
         self.frame.grid(sticky="NSWE")
         self.frame.rowconfigure(0, weight=1)
         self.frame.rowconfigure(1, weight=1)
@@ -198,7 +199,7 @@ class CreateProfileScreen:
             cursor="hand2",
             state="disabled",
             command=handle_create_new_game_press,
-            style="Accent.TButton",
+            bootstyle="success",
         )
         new_game_button.grid(column=0, row=0)
 

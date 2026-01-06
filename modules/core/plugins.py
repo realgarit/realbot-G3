@@ -170,3 +170,8 @@ def plugin_should_nickname_pokemon(encounter: "EncounterInfo") -> str | None:
             return nickname
 
     return None
+
+
+def plugin_shutdown() -> None:
+    for plugin in plugins:
+        plugin.on_shutdown()

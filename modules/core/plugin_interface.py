@@ -188,3 +188,9 @@ class BotPlugin(ABC):
                  not give a nickname.
         """
         return None
+
+    def on_shutdown(self) -> None:
+        """
+        This is called when the bot is shutting down.
+        """
+        pass
