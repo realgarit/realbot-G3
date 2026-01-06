@@ -60,7 +60,7 @@ class CreateProfileScreen:
             'bot statistics, screenshots etc. Profiles are stored in the "profiles/" folder.\n'
         )
 
-        container = ttk.Frame(self.frame, padding=(0, 40, 0, 0))
+        container = ttk.Frame(self.frame, padding=40)
         container.grid(sticky="N", row=row)
 
         birch_sprite = Image.open(get_sprites_path() / "other" / "Birch.png")
@@ -69,7 +69,7 @@ class CreateProfileScreen:
         birch_image = ImageTk.PhotoImage(birch_sprite)
         flipped_birch_image = ImageTk.PhotoImage(flipped_birch_sprite)
 
-        icon = ttk.Label(container, image=flipped_birch_image, padding=(0, 0, 15, 0))
+        icon = ttk.Label(container, image=flipped_birch_image, padding=10)
         icon.grid(sticky="N", row=0, column=0)
         icon.img1 = birch_image
         icon.img2 = flipped_birch_image
@@ -85,10 +85,10 @@ class CreateProfileScreen:
         text.grid(sticky="N", row=0, column=1)
 
     def _add_form(self, row: int = 1) -> None:
-        container = ttk.LabelFrame(self.frame, text="Create a New Profile", padding=(20, 10))
+        container = ttk.LabelFrame(self.frame, text="Create a New Profile", padding=15)
         container.grid(row=row, sticky="N")
 
-        label_padding = (0, 6, 10, 6)
+        label_padding = (0, 5, 0, 5)
 
         ttk.Label(container, text="Name:", padding=label_padding).grid(row=0, column=0, sticky="W")
 
@@ -187,11 +187,8 @@ class CreateProfileScreen:
                 message_label.config(text=str(error), foreground="red")
                 message_label.grid(row=3, column=0, columnspan=2)
 
-        button_container = ttk.Frame(container, padding=(0, 15, 0, 5))
+        button_container = ttk.Frame(container, padding=15)
         button_container.grid(row=2, column=0, columnspan=2)
-        button_container.columnconfigure(0, weight=1)
-        button_container.columnconfigure(1, minsize=10)
-        button_container.columnconfigure(2, weight=1)
 
         new_game_button = ttk.Button(
             button_container,
@@ -201,7 +198,7 @@ class CreateProfileScreen:
             command=handle_create_new_game_press,
             bootstyle="success",
         )
-        new_game_button.grid(column=0, row=0)
+        new_game_button.grid(column=0, row=0, padx=5)
 
         load_save_button = ttk.Button(
             button_container,
@@ -210,9 +207,9 @@ class CreateProfileScreen:
             state="disabled",
             command=handle_load_save_press,
         )
-        load_save_button.grid(column=2, row=0)
+        load_save_button.grid(column=1, row=0, padx=5)
 
-        message_label = ttk.Label(container, text="", wraplength=340, padding=(0, 15, 0, 0))
+        message_label = ttk.Label(container, text="", wraplength=340, padding=10)
 
     def _show_missing_roms_screen(self) -> None:
         group = ttk.Frame(self.frame)
@@ -224,7 +221,7 @@ class CreateProfileScreen:
             "Note that only the original ROMs for Pokémon Ruby, Sapphire, Emerald, FireRed and LeafGreen "
             "are supported by this bot. Any modified ROM will not be detected."
         )
-        message = ttk.Label(group, text=error_message, wraplength=300, foreground="red", padding=(0, 0, 0, 25))
+        message = ttk.Label(group, text=error_message, wraplength=300, foreground="red", padding=25)
         message.grid(row=0, column=0, sticky="S")
 
         def handle_button_click() -> None:

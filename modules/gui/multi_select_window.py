@@ -50,17 +50,17 @@ def ask_for_choice(choices: list[Selection], window_title: str = "Choose...") ->
     window.rowconfigure(0, weight=1)
     window.columnconfigure(0, weight=1)
 
-    frame = ttk.Frame(window)
+    frame = ttk.Frame(window, padding=10)
     frame.pack(fill="both", expand=True)
 
     canvas = Canvas(frame)
     canvas.pack(side="left", fill="both", expand=True)
     canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
 
-    frame = ttk.Frame(canvas, width=window_geometry[1])
+    content_frame = ttk.Frame(canvas)
     for i in range(len(choices)):
-        frame.columnconfigure(i, weight=1)
-    canvas.create_window((0, 0), window=frame, anchor="nw")
+        content_frame.columnconfigure(i, weight=1, uniform="buttons")
+    canvas.create_window((0, 0), window=content_frame, anchor="nw")
 
     photo_buffer = []
     column = 0
@@ -70,18 +70,17 @@ def ask_for_choice(choices: list[Selection], window_title: str = "Choose...") ->
             photo = photo.zoom(128 // photo.width())
 
         photo_buffer.append(photo)
-        button_frame = ttk.Frame(frame, padding=5)
-        button_frame.grid(row=1, column=column, sticky="NSWE")
         button = ttk.Button(
-            button_frame,
+            content_frame,
             text=selection.button_label,
             image=photo,
             compound="top",
             padding=10,
-            width=1,
             command=lambda s=selection.button_label: return_selection(s),
+            bootstyle="success",
+            cursor="hand2",
         )
-        button.grid(sticky="NSWE")
+        button.grid(row=0, column=column, sticky="NSWE", padx=5, pady=5)
         button.state(["!disabled"] if selection.button_enable else ["disabled"])
         column += 1
 
@@ -133,17 +132,18 @@ def ask_for_confirmation(message: str, window_title: str = "Confirmation") -> bo
     window.rowconfigure(0, weight=1)
     window.columnconfigure(0, weight=1)
 
-    frame = ttk.Frame(window, padding=10)
+    frame = ttk.Frame(window, padding=20)
     frame.pack(fill="both", expand=True)
+    frame.columnconfigure(0, weight=1)
 
-    label = ttk.Label(frame, text=message, anchor="center", wraplength=250)
-    label.pack(pady=20)
+    label = ttk.Label(frame, text=message, anchor="center", wraplength=300, justify="center")
+    label.grid(row=0, column=0, pady=20, sticky="EW")
 
     button_frame = ttk.Frame(frame)
-    button_frame.pack()
-    yes_button = ttk.Button(button_frame, text="Yes", command=on_yes)
+    button_frame.grid(row=1, column=0)
+    yes_button = ttk.Button(button_frame, text="Yes", command=on_yes, width=10)
     yes_button.grid(row=0, column=0, padx=10)
-    no_button = ttk.Button(button_frame, text="No", command=on_no)
+    no_button = ttk.Button(button_frame, text="No", command=on_no, width=10)
     no_button.grid(row=0, column=1, padx=10)
 
     checked_window_height = False
@@ -216,8 +216,12 @@ def ask_for_choice_scroll(
     canvas.configure(yscrollcommand=scrollbar.set)
     canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
 
-    content_frame = ttk.Frame(canvas)
+    content_frame = ttk.Frame(canvas, padding=10)
     canvas.create_window((0, 0), window=content_frame, anchor="nw")
+
+    # Configure uniform column widths
+    for i in range(options_per_row):
+        content_frame.columnconfigure(i, weight=1, uniform="buttons")
 
     photo_buffer = []
     row = 0
@@ -229,28 +233,21 @@ def ask_for_choice_scroll(
             photo = photo.zoom(128 // photo.width())
 
         photo_buffer.append(photo)
-        button_frame = ttk.Frame(content_frame, padding=5)
-        button_frame.grid(row=row, column=column, sticky="NSWE", padx=5, pady=5)
-
         button = ttk.Button(
-            button_frame,
+            content_frame,
             text=selection.button_label,
             image=photo,
             compound="top",
             padding=10,
-            width=1,
             command=lambda s=selection.button_label: return_selection(s),
         )
-        button.grid(sticky="NSWE")
+        button.grid(row=row, column=column, sticky="NSWE", padx=5, pady=5)
         button.state(["!disabled"] if selection.button_enable else ["disabled"])
 
         column += 1
         if column >= options_per_row:
             column = 0
             row += 1
-
-    for i in range(options_per_row):
-        content_frame.columnconfigure(i, weight=1)
 
     while window is not None:
         window.update_idletasks()

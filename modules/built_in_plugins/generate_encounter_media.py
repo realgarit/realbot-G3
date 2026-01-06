@@ -87,6 +87,21 @@ class GenerateEncounterMediaPlugin(BotPlugin):
 
         return None
 
+
+    def on_logging_encounter(self, encounter: "EncounterInfo") -> None:
+        self._generate_tcg_card_if_shiny(encounter)
+
+    def _generate_tcg_card_if_shiny(self, encounter: "EncounterInfo") -> None:
+        if context.config.logging.tcg_cards and encounter.value is EncounterValue.Shiny:
+            cards_dir = context.profile.path / "screenshots" / "cards"
+            file_name = get_tcg_card_file_name(encounter.pokemon)
+
+            # Set the TCG card's path so that other plugins can use it.
+            encounter.tcg_card_path = cards_dir / file_name
+
+            location = encounter.map.pretty_name if encounter.map is not None else ""
+            Thread(target=generate_tcg_card, args=(encounter.pokemon.data, location)).start()
+
     def on_wild_encounter_visible(self, encounter: "EncounterInfo") -> Generator | None:
         # Finalise and save encounter GIF
         if self._listener is not None:
@@ -108,15 +123,7 @@ class GenerateEncounterMediaPlugin(BotPlugin):
             self._listener = None
 
         # Generate TCG card
-        if context.config.logging.tcg_cards and encounter.value is EncounterValue.Shiny:
-            cards_dir = context.profile.path / "screenshots" / "cards"
-            file_name = get_tcg_card_file_name(encounter.pokemon)
-
-            # Set the TCG card's path so that other plugins can use it.
-            encounter.tcg_card_path = cards_dir / file_name
-
-            location = encounter.map.pretty_name if encounter.map is not None else ""
-            Thread(target=generate_tcg_card, args=(encounter.pokemon.data, location)).start()
+        self._generate_tcg_card_if_shiny(encounter)
 
         return None
 
@@ -131,4 +138,7 @@ class GenerateEncounterMediaPlugin(BotPlugin):
         return self.on_battle_started(hatching_pokemon)
 
     def on_egg_hatched(self, hatched_pokemon: "EncounterInfo") -> Generator | None:
-        return self.on_wild_encounter_visible(hatched_pokemon)
+        # We can't really generate a GIF for hatched eggs (as we don't have the battle animation)
+        # but we can definitely generate a TCG card.
+        self._generate_tcg_card_if_shiny(hatched_pokemon)
+        return None

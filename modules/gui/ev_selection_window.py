@@ -1,6 +1,7 @@
 # Copyright (c) 2026 realgarit
 import time
-from tkinter import *
+from tkinter import Toplevel
+import ttkbootstrap as ttk
 
 from rich.prompt import IntPrompt
 
@@ -21,7 +22,7 @@ def ask_for_ev_targets(pokemon: "Pokemon") -> StatsValues:
             special_defence=IntPrompt.ask("Choose target Special Defence EVs", default=pokemon.evs.special_defence),
         )
 
-    spinboxes: list[Spinbox] = []
+    spinboxes: list[ttk.Spinbox] = []
     selected_ev_targets: StatsValues | None = None
 
     def remove_window(event=None):
@@ -42,29 +43,48 @@ def ask_for_ev_targets(pokemon: "Pokemon") -> StatsValues:
         window.after(50, remove_window)
 
     window = Toplevel(context.gui.window)
-    window.title("EV goals")
+    window.title("EV Goals")
     window.protocol("WM_DELETE_WINDOW", remove_window)
     window.bind("<Escape>", remove_window)
 
-    Label(window, text=get_party()[0].name).grid(row=1, column=0)
+    # Main container with padding
+    frame = ttk.Frame(window, padding=15)
+    frame.grid(sticky="NSWE")
+    window.rowconfigure(0, weight=1)
+    window.columnconfigure(0, weight=1)
 
-    Label(window, text="HP").grid(row=0, column=1)
-    Label(window, text="Atk").grid(row=0, column=2)
-    Label(window, text="Def").grid(row=0, column=3)
-    Label(window, text="SpA").grid(row=0, column=4)
-    Label(window, text="SpD").grid(row=0, column=5)
-    Label(window, text="Spe").grid(row=0, column=6)
+    # Pokemon name label
+    pokemon_label = ttk.Label(frame, text=get_party()[0].name, font=("TkDefaultFont", 11, "bold"))
+    pokemon_label.grid(row=0, column=0, pady=10, sticky="W")
 
-    for stat in ("hp", "attack", "defence", "special_attack", "special_defence", "speed"):
-        spinbox = Spinbox(window, from_=0, to=252, increment=4, wrap=True, width=8)
-        spinbox.delete(0, last=None)
-        spinbox.insert(0, str(pokemon.evs[stat]))
-        spinbox.grid(row=1, column=len(spinboxes) + 1, padx=10, pady=3)
+    # Stats frame
+    stats_frame = ttk.Frame(frame)
+    stats_frame.grid(row=1, column=0, sticky="EW")
+
+    # Stat labels - symmetric padding
+    stat_names = ["HP", "Atk", "Def", "SpA", "SpD", "Spe"]
+    stat_keys = ["hp", "attack", "defence", "special_attack", "special_defence", "speed"]
+
+    for i, name in enumerate(stat_names):
+        ttk.Label(stats_frame, text=name, anchor="center").grid(row=0, column=i, padx=10, pady=5)
+
+    # Spinboxes - symmetric padding
+    for i, key in enumerate(stat_keys):
+        spinbox = ttk.Spinbox(stats_frame, from_=0, to=252, increment=4, wrap=True, width=6)
+        spinbox.delete(0, "end")
+        spinbox.insert(0, str(pokemon.evs[key]))
+        spinbox.grid(row=1, column=i, padx=10, pady=5)
         spinboxes.append(spinbox)
 
-    Button(window, text="EV Train", width=20, height=1, bg="lightblue", command=return_selection).grid(
-        row=7, column=3, columnspan=2, pady=15
+    # Button - centered with symmetric padding
+    button = ttk.Button(
+        frame,
+        text="Start EV Training",
+        command=return_selection,
+        bootstyle="success",
+        cursor="hand2",
     )
+    button.grid(row=2, column=0, pady=15)
 
     while window is not None:
         window.update_idletasks()
@@ -72,3 +92,4 @@ def ask_for_ev_targets(pokemon: "Pokemon") -> StatsValues:
         time.sleep(1 / 60)
 
     return selected_ev_targets
+

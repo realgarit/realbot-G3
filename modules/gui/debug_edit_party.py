@@ -392,7 +392,7 @@ class PokemonEditFrame:
 
             pp_up_frame.grid(column=0, row=2, sticky="NW")
 
-            move_frame.grid(sticky="NWES", column=0, row=n, pady=(0, 5))
+            move_frame.grid(sticky="NWES", column=0, row=n, pady=5)
 
         stats_list = {
             "hp": "HP",
@@ -428,7 +428,7 @@ class PokemonEditFrame:
         current_hp.grid(sticky="NWES", column=1, row=0)
         self._total_hp_label = ttk.Label(current_hp_frame, text=f"/{self._pokemon.stats.hp}")
         self._total_hp_label.grid(sticky="NWES", column=2, row=0)
-        current_hp_frame.grid(sticky="W", column=0, row=1, padx=5, pady=15)
+        current_hp_frame.grid(sticky="W", column=0, row=1, padx=5, pady=10)
 
         friendship_frame = ttk.Frame(right_box)
         friendship_label = ttk.Label(friendship_frame, text="Friendship: ")
@@ -437,7 +437,7 @@ class PokemonEditFrame:
         friendship.grid(sticky="NWES", column=1, row=0)
         suffix_label = ttk.Label(friendship_frame, text="/255")
         suffix_label.grid(sticky="NWES", column=2, row=0)
-        friendship_frame.grid(sticky="NWES", column=0, row=7, padx=5, pady=(0, 15))
+        friendship_frame.grid(sticky="NWES", column=0, row=7, padx=5, pady=10)
 
         def update_friendship_label(var=None, index=None, mode=None):
             if self._is_egg_var.get():
@@ -454,7 +454,7 @@ class PokemonEditFrame:
         self._status_condition = ttk.Combobox(status_frame, state="readonly", values=list(status_name_map.keys()))
         self._status_condition.current(list(status_name_map.values()).index(self._pokemon.status_condition))
         self._status_condition.grid(sticky="W", column=0, row=1)
-        status_frame.grid(sticky="W", column=0, row=8, padx=5, pady=(0, 5))
+        status_frame.grid(sticky="W", column=0, row=8, padx=5, pady=10)
 
         contest_frame = ttk.Frame(right_box)
         label = ttk.Label(contest_frame, text="Contest Conditions:")
@@ -467,7 +467,7 @@ class PokemonEditFrame:
             )
             condition_field.grid(sticky="W", column=1, row=n, padx=5)
             n += 1
-        contest_frame.grid(sticky="W", column=0, row=9, padx=5, pady=(8, 5))
+        contest_frame.grid(sticky="W", column=0, row=9, padx=5, pady=10)
 
         def recalculate_max_hp(var=None, index=None, mode=None):
             if self._species is None:
@@ -610,14 +610,14 @@ class PokemonEditFrame:
                 return
 
             if var == str(experience):
-                state = str(experience_entry.configure()["state"][4])
+                state = str(experience_entry.cget("state"))
                 if state != "readonly":
                     level_with_this_exp = level_type.get_level_from_total_experience(experience.get())
                     if level_with_this_exp != level.get():
                         level.set(level_with_this_exp)
 
             if var == str(level):
-                state = str(level_entry.configure()["state"][4])
+                state = str(level_entry.cget("state"))
                 if state != "readonly" and 0 < level.get() <= 100:
                     if set_type.get() == "level_end" and level.get() <= 99:
                         experience_value = level_type.get_experience_needed_for_level(level.get() + 1) - 1
@@ -631,13 +631,13 @@ class PokemonEditFrame:
         level.trace_add("write", on_number_change)
 
         first_row = ttk.Frame(frame)
-        first_row.grid(sticky="NW", column=0, row=0, pady=(5, 15), padx=5)
+        first_row.grid(sticky="NW", column=0, row=0, pady=10, padx=5)
 
         label = ttk.Label(first_row, text="Exp.: ")
         label.grid(sticky="W", column=0, row=0)
         max_exp = level_type.get_experience_needed_for_level(100)
         experience_entry = ttk.Spinbox(first_row, from_=0, to=max_exp, width=8, textvariable=experience)
-        experience_entry.grid(sticky="W", column=1, row=0, padx=(0, 15))
+        experience_entry.grid(sticky="W", column=1, row=0, padx=15)
 
         label = ttk.Label(first_row, text="Level: ")
         label.grid(sticky="W", column=2, row=0)
@@ -653,9 +653,9 @@ class PokemonEditFrame:
         radio3 = ttk.Radiobutton(
             frame, text="Set level, with 1 Exp. missing until levelling up", variable=set_type, value="level_end"
         )
-        radio1.grid(sticky="W", column=0, row=2, padx=5)
-        radio2.grid(sticky="W", column=0, row=3, padx=5)
-        radio3.grid(sticky="W", column=0, row=4, padx=5)
+        radio1.grid(sticky="W", column=0, row=2, padx=5, pady=5)
+        radio2.grid(sticky="W", column=0, row=3, padx=5, pady=5)
+        radio3.grid(sticky="W", column=0, row=4, padx=5, pady=5)
 
         def do_save(event=None):
             self._level.set(level.get())
@@ -663,7 +663,8 @@ class PokemonEditFrame:
             exp_window.after(50, remove_window)
 
         save_button = ttk.Button(frame, text="Set Experience", command=do_save)
-        save_button.grid(sticky="W", column=0, row=5, padx=5, pady=(15, 5))
+        save_button = ttk.Button(frame, text="Set Experience", command=do_save)
+        save_button.grid(sticky="W", column=0, row=5, padx=5, pady=10)
 
         while exp_window is not None:
             exp_window.update_idletasks()

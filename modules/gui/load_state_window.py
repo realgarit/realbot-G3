@@ -126,22 +126,19 @@ class LoadStateWindow:
                 photo = PIL.ImageTk.PhotoImage(image=placeholder)
 
             photo_buffer.append(photo)
-            button_frame = ttk.Frame(frame, padding=5)
-            button_frame.rowconfigure(0, weight=1)
-            button_frame.columnconfigure(0, weight=1)
-            button_frame.grid(row=int(row), column=column, sticky="NSWE")
             button = ttk.Button(
-                button_frame,
+                frame,
                 text=state.name,
                 image=photo,
                 compound="top",
-                padding=0,
-                width=1,
+                padding=10,
                 command=lambda s=state: load_state(s),
             )
-            button.grid(sticky="NSWE")
-            column = 1 if column == 0 else 0
-            row += 0.5
+            button.grid(row=row, column=column, sticky="NSWE", padx=5, pady=5)
+            column += 1
+            if column >= 2:
+                column = 0
+                row += 1
 
         while self._load_save_window is not None:
             self._load_save_window.update_idletasks()

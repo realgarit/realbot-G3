@@ -94,11 +94,13 @@ class EmulatorControls:
 
         self.frame = ttk.Frame(self.parent, padding=0)
         self.frame.grid(row=1, sticky="NSWE")
+        self.frame.columnconfigure(0, weight=1)
         self.frame.columnconfigure(1, weight=1)
+        self.frame.columnconfigure(2, weight=1)
         self.frame.rowconfigure(1, weight=1)
 
         self._add_bot_mode_controls(row=0, column=0)
-        self._add_speed_controls(row=0, column=1, sticky="N")
+        self._add_speed_controls(row=0, column=1)
         self._add_settings_controls(row=0, column=2)
 
         self._add_message_area(row=1, column=0, columnspan=3)
@@ -151,7 +153,7 @@ class EmulatorControls:
 
     def _add_bot_mode_controls(self, row: int, column: int):
         group = ttk.Frame(self.frame)
-        group.grid(row=row, column=column, sticky="W")
+        group.grid(row=row, column=column, sticky="NW", pady=10)
 
         def select_bot_mode(mode: str):
             if mode == "Manual":
@@ -240,7 +242,7 @@ class EmulatorControls:
             )
 
         group = ttk.Frame(self.frame)
-        group.grid(row=row, column=column, sticky=sticky, pady=(5, 0))
+        group.grid(row=row, column=column, sticky="N", pady=10)
         group.columnconfigure(3, weight=1)
 
         ttk.Label(group, text="Emulation Speed:", justify="left").grid(row=0, column=0, columnspan=4, sticky="W")
@@ -255,7 +257,7 @@ class EmulatorControls:
 
     def _add_settings_controls(self, row: int, column: int):
         group = ttk.Frame(self.frame)
-        group.grid(row=row, column=column, sticky="W")
+        group.grid(row=row, column=column, sticky="NE", pady=10)
 
         ttk.Label(group, text="Other Settings:").grid(row=0, columnspan=2, sticky="W")
 
